@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="Cache-Control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>ZiGma</title>
+    <title>【JsBox】利用JSBox在朋友圈斗图（二） · ZiGma</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -70,6 +70,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180604 as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <link rel="stylesheet" href= /css/mobile.css?v=20180604 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
@@ -194,12 +196,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >ZiGma</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">【JsBox】利用JSBox在朋友圈斗图（二）</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>ZiGma</a>
 </header>
@@ -213,24 +226,74 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            【JsBox】利用JSBox在朋友圈斗图（二）
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JsBox">JsBox</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">381</span> / Reading time: <span class="post-count">2 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/04/29</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -331,141 +394,73 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/06/22/【JsBox】Days Pro/" >
-            
-                <span>【JsBox】Days Pro</span>
-        </a>
-        <div class="abstract-content">
-            前言之前想填的倒数日的坑终于填了。 仿自”倒数日 Days”。  理论可以计算到无限天数，但是超过5位数的天数背景会错乱（懒得适配）。 
-
-支持主题选择。 
-主应用运行是设置，小组件运行是倒数界面。
-
-截图 
-安装链接Days_Pro
-更新记录2018/6/5 1.0.2· 增加节假日模式、多色彩主题自定义；· Bug修复。2018/6/12 1.0.3· 调整对emoji字符长度识别以优化长度限制；· 调整主题选择；· 调整到达事件当天显示方式。2018/6/22 1.0.4· 修正节假日模式到达假日当天显示方式。
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/06/22</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JsBox">JsBox</a>
-    
-</div>
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>最近继续研究JSBox，并且发现微信似乎不屏蔽七牛云的链接了，所以将之前图片评论的js移植到了七牛云。七牛云上传是要上传凭证的，怎么计算Token花费不少时间，之前做的方案代码过多，运行效率不高，参考了RYAN大的QiniuManager后成功移植。</p>
+<h2 id="安装链接"><a href="#安装链接" class="headerlink" title="安装链接"></a>安装链接</h2><ul>
+<li><a href="http://7rf2ax.com1.z0.glb.clouddn.com/%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA.js" title="安装链接" target="_blank" rel="noopener">安装链接</a></li>
+</ul>
+<h2 id="详细代码"><a href="#详细代码" class="headerlink" title="详细代码"></a>详细代码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CryptoJS = <span class="built_in">require</span>(<span class="string">"crypto-js"</span>)</span><br><span class="line"><span class="built_in">String</span>.prototype.urlsafe = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.replace(<span class="regexp">/\+/g</span>, <span class="string">"-"</span>).replace(<span class="regexp">/\//g</span>, <span class="string">"_"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//计算Token</span></span><br><span class="line"><span class="comment">//你的AK</span></span><br><span class="line"><span class="keyword">var</span> AK = <span class="string">""</span></span><br><span class="line"><span class="comment">//你的SK</span></span><br><span class="line"><span class="keyword">var</span> SK = <span class="string">""</span></span><br><span class="line"><span class="comment">//你的储存空间名</span></span><br><span class="line"><span class="keyword">var</span> bucket = <span class="string">""</span></span><br><span class="line"><span class="comment">//你的储存域名</span></span><br><span class="line"><span class="keyword">var</span> domain = <span class="string">""</span></span><br><span class="line"><span class="keyword">var</span> deadline = <span class="built_in">Math</span>.round(<span class="keyword">new</span> <span class="built_in">Date</span>().getTime() / <span class="number">1000</span>) + <span class="number">1</span> * <span class="number">3600</span></span><br><span class="line"><span class="keyword">var</span> params = &#123;<span class="attr">scope</span>: bucket,<span class="attr">deadline</span>: deadline&#125;</span><br><span class="line"><span class="keyword">var</span> policy = <span class="built_in">JSON</span>.stringify(params)</span><br><span class="line"><span class="keyword">var</span> policyEncoded = $text.base64Encode(policy).urlsafe()</span><br><span class="line"><span class="keyword">var</span> sign = CryptoJS.HmacSHA1(policyEncoded, SK)</span><br><span class="line"><span class="keyword">var</span> signEncoded = sign.toString(CryptoJS.enc.Base64).urlsafe()</span><br><span class="line"><span class="keyword">var</span> token = AK + <span class="string">":"</span> + signEncoded + <span class="string">":"</span> + policyEncoded</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">PickImage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  $photo.pick(&#123;</span><br><span class="line">    format: <span class="string">"image"</span>,</span><br><span class="line">    handler: <span class="function"><span class="keyword">function</span>(<span class="params">resp</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> image = resp.image</span><br><span class="line">      <span class="keyword">if</span> (image) &#123;</span><br><span class="line">        Upload(image)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $ui.loading(<span class="literal">false</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Upload</span>(<span class="params">image</span>) </span>&#123;</span><br><span class="line">  $http.upload(&#123;</span><br><span class="line">    url: <span class="string">"http://upload.qiniu.com/"</span>,</span><br><span class="line">    form: &#123;</span><br><span class="line">      token: token</span><br><span class="line">    &#125;,</span><br><span class="line">    files: [&#123;</span><br><span class="line">      <span class="string">"image"</span>: image,</span><br><span class="line">      <span class="string">"name"</span>: <span class="string">"file"</span>,</span><br><span class="line">      <span class="string">"filename"</span>: <span class="string">"file"</span></span><br><span class="line">    &#125;],</span><br><span class="line">    progress: <span class="function"><span class="keyword">function</span>(<span class="params">percentage</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">    handler: <span class="function"><span class="keyword">function</span>(<span class="params">resp</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> url = domain + resp.data.key</span><br><span class="line">      <span class="keyword">if</span> (url) &#123;</span><br><span class="line">        Shorturl(url)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $ui.alert(<span class="string">"图片上传失败"</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Shorturl</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  $http.shorten(&#123;</span><br><span class="line">    url: url,</span><br><span class="line">    handler: <span class="function"><span class="keyword">function</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (url) &#123;</span><br><span class="line">        $clipboard.text = <span class="string">"图片评论 "</span> + url</span><br><span class="line">        $ui.toast(<span class="string">"复制成功"</span>, <span class="number">2</span>)</span><br><span class="line">        $app.close(<span class="number">2</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> inputImage = $context.image</span><br><span class="line"><span class="keyword">if</span> (inputImage) &#123;</span><br><span class="line">  Upload(inputImage)</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  PickImage()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/05/26/【JsBox】SysInfo Pro/" >
-            
-                <span>【JsBox】SysInfo Pro</span>
-        </a>
-        <div class="abstract-content">
-            根据之前TG群的Netspeed（找不到作者了）和RYAN大佬的Progress按照App——SYS PRO制作。 可以查看当前网速、局域网外网IP、设备名称、iOS版本、磁盘剩余、内存占用等情况。 可以点击界面来切换显示的系统信息和网络信息。 目前已知的问题： 1. 硬盘剩余与实际不符； 2. 内存占用可能也存在同样的情况，但是总体差不多，没1那么夸张； 3. 内存占用的百分比在某些情况下会出现N多位小数。
-说明（三条都不是我的锅），对不起第三条的确是我的锅。 1和2的问题，是JsBox的返回值就是这样，可以自行利用
-1$ui.alert($device.space)
-查看。 3的问题...
+        <div class="license-wrapper">
+            <p>原文作者: <a href="http://www.zigma.cc">ZiGma</a>
+            <p>原文链接: <a href="http://www.zigma.cc/2018/04/29/【JsBox】利用JSBox在朋友圈斗图（二）/">http://www.zigma.cc/2018/04/29/【JsBox】利用JSBox在朋友圈斗图（二）/</a>
+            <p>发表日期: <a href="http://www.zigma.cc/2018/04/29/【JsBox】利用JSBox在朋友圈斗图（二）/">April 29th 2018, 10:20:37 am</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/26</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JsBox">JsBox</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/04/29/【JsBox】利用JSBox在朋友圈斗图（二）/" >
-            
-                <span>【JsBox】利用JSBox在朋友圈斗图（二）</span>
-        </a>
-        <div class="abstract-content">
-            最近继续研究JSBox，并且发现微信似乎不屏蔽七牛云的链接了，所以将之前图片评论的js移植到了七牛云。七牛云上传是要上传凭证的，怎么计算Token花费不少时间，之前做的方案代码过多，运行效率不高，参考了RYAN大的QiniuManager后成功移植。
-安装链接
-安装链接
-
-详细代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879const C...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/29</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JsBox">JsBox</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/02/01/【JsBox】利用JSBox在朋友圈斗图（一）/" >
-            
-                <span>【JsBox】利用JSBox在朋友圈斗图（一）</span>
-        </a>
-        <div class="abstract-content">
-            刷惯了微博，总是想在微信朋友圈里面用因缺思厅的（贱贱的）表情包评论，亦或者在发完朋友圈之后再在评论里面Po出后续。 想了一下，思路不难，只需要将图片通过API接口上传到图床后再通过短链形式发出去即可。 先用了Workflow试水一波，但是自从Workflow被苹果收购以后不得不吐槽一下下降的厉害的软件质量。Get Contents of URL里面填写多个Body值，不是这个无法显示就是那个无法编辑，再加上流程过长修改十分不便，差不多要放弃这个工具App了。 好在之前低价购买了JSBox，虽然还有些功能不是很完善，例如类似Workflow里面的Overlay Image的功能暂时缺失，但...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/02/01</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JsBox">JsBox</a>
-    
-</div>
-            
-        </div>
-    </article>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/05/01/【瞎折腾】frp+Aria2实现远程下载管理/" title= 【瞎折腾】frp+Aria2实现远程下载管理 >
+                    <div class="nextTitle">【瞎折腾】frp+Aria2实现远程下载管理</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/02/02/利用Documents管理云盘文件/" title= 利用Documents管理云盘文件 >
+                    <div class="prevTitle">利用Documents管理云盘文件</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "e7JFHRNqX2T29ebmy4pVCidb-gzGzoHsz",
+        appKey: "Tnys9hubkApQHhifwvUptzdh",
+        placeholder: "",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -539,6 +534,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装链接"><span class="toc-number">1.</span> <span class="toc-text">安装链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#详细代码"><span class="toc-number">2.</span> <span class="toc-text">详细代码</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -957,6 +970,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>

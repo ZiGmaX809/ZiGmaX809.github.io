@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html>
+    <!-- title -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="ZiGma">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="ZiGma">
+    <meta name="keywords" content="ZiGma | ZiGma">
+    <meta name="description" content="">
+    <meta name="Cache-Control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>【VBA】VBA+正则表达式提取标题快速保存归档 · ZiGma</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180604 as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= /css/mobile.css?v=20180604 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >ZiGma</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">【VBA】VBA+正则表达式提取标题快速保存归档</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>ZiGma</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
+
+
+
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            【VBA】VBA+正则表达式提取标题快速保存归档
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "VBA">VBA</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">1,644</span> / Reading time: <span class="post-count">8 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2017/08/26</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>今天快下班了同事找我提了个需求：归档目录太深，每次写完材料归档时需要点很久，且文件夹繁多，保存时要新建文件夹并重命名，Word文档保存时也需要命名。 </p>
+<p>想了一下，可以靠Word宏配合正则表达式解决。 </p>
+<p>思路：利用正则表达式提取正文中的案号，并将该案号作为归档文件夹和文件名。而且正好之前在Excel中试验过类似功能，只不过那个是提取案号后将Word另存为。</p>
+<blockquote>
+<p>注：需要在VBA编辑器工具→引用Microsoft VBScript Regular Expressions 5.5</p>
+</blockquote>
+<h2 id="Word代码如下："><a href="#Word代码如下：" class="headerlink" title="Word代码如下："></a>Word代码如下：</h2><figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> 快速保存()</span><br><span class="line">Path1 = <span class="string">"E:\" "</span>设置文件夹路径</span><br><span class="line">    <span class="keyword">Set</span> objshell = CreateObject(<span class="string">"Shell.Application"</span>) </span><br><span class="line">    <span class="keyword">Set</span> objFolder = objshell.browseForFolder(<span class="number">0</span>, <span class="string">"选择文件夹"</span>, <span class="number">0</span>, Path1)</span><br><span class="line">    <span class="keyword">If</span> <span class="keyword">Not</span> objFolder <span class="keyword">Is</span> <span class="literal">Nothing</span> <span class="keyword">Then</span> FolderPath = Path1 &amp; objFolder</span><br><span class="line"></span><br><span class="line">    <span class="keyword">Dim</span> myExp <span class="keyword">As</span> RegExp</span><br><span class="line">    <span class="keyword">Dim</span> AllContent</span><br><span class="line">    <span class="keyword">Set</span> myExp = <span class="keyword">New</span> RegExp</span><br><span class="line">    AllContent = ActiveDocument.Content</span><br><span class="line">    <span class="keyword">With</span> myExp  <span class="comment">'利用正则表达式提取案号以作为文件夹名和文件名'</span></span><br><span class="line">        .Pattern = <span class="string">"(（2|\(2).+?号"</span></span><br><span class="line">        .<span class="keyword">Global</span> = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">Set</span> myMsg = .Execute(AllContent)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">For</span> <span class="keyword">Each</span> m <span class="keyword">In</span> myMsg</span><br><span class="line">            filename_ = m</span><br><span class="line">        <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">With</span></span><br><span class="line">    <span class="keyword">Set</span> wdApp = <span class="literal">Nothing</span></span><br><span class="line"></span><br><span class="line">    Path2 = FolderPath &amp; <span class="string">"\" &amp; filename_ "</span>判断是否已经存在文件</span><br><span class="line">    <span class="keyword">Set</span> FSO = CreateObject(<span class="string">"Scripting.FileSystemObject"</span>)</span><br><span class="line">    <span class="keyword">If</span> FSO.FolderExists(Path2) = <span class="literal">True</span> <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">If</span> (MsgBox(<span class="string">"已存在该文件，是否覆盖？"</span>, vbYesNo)) = vbNo <span class="keyword">Then</span></span><br><span class="line">            Cancel = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">GoTo</span> k</span><br><span class="line">        <span class="keyword">Else</span></span><br><span class="line">            <span class="keyword">GoTo</span> l</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Else</span></span><br><span class="line">        MkDir (FolderPath &amp; <span class="string">"\" &amp; filename_) "</span>不存在则创建文件夹</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">l:</span><br><span class="line">    ActiveDocument.SaveAs FileName:=FolderPath &amp; <span class="string">"\" &amp; filename_ &amp; "</span>\<span class="string">" &amp; filename_</span></span><br><span class="line"><span class="string">k:</span></span><br><span class="line"><span class="string">End Sub</span></span><br></pre></td></tr></table></figure>
+<p>2018-2-4日更新 进入2018年同事又提出要更改年份文件夹，因此修改了代码，保存到相应案号的年份中。</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> 快速保存()</span><br><span class="line">    <span class="keyword">Dim</span> myExp <span class="keyword">As</span> RegExp <span class="comment">'利用正则表达式提取案号以作为文件夹名和文件名'</span></span><br><span class="line">    <span class="keyword">Dim</span> AllContent</span><br><span class="line">    <span class="keyword">Set</span> myExp = <span class="keyword">New</span> RegExp</span><br><span class="line">    AllContent = ActiveDocument.Content</span><br><span class="line">    <span class="keyword">With</span> myExp</span><br><span class="line">        .Pattern = <span class="string">"(（2|\(2).+?号"</span> <span class="comment">'正则表达式'</span></span><br><span class="line">        .<span class="keyword">Global</span> = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">Set</span> myMsg = .Execute(AllContent)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">For</span> <span class="keyword">Each</span> m <span class="keyword">In</span> myMsg</span><br><span class="line">            fileName_ = m</span><br><span class="line">        <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">With</span></span><br><span class="line"></span><br><span class="line">    Year_ = <span class="keyword">Mid</span>(fileName_, <span class="number">2</span>, <span class="number">4</span>) &amp; <span class="string">"年案件"</span></span><br><span class="line"></span><br><span class="line">    Path1 = <span class="string">"E:\" "</span>设置文件夹路径</span><br><span class="line">    <span class="keyword">Set</span> objshell = CreateObject(<span class="string">"Shell.Application"</span>) <span class="comment">'选择保存路径'</span></span><br><span class="line">    <span class="keyword">Set</span> objFolder = objshell.browseForFolder(<span class="number">0</span>, <span class="string">"选择文件夹"</span>, <span class="number">0</span>, Path1)</span><br><span class="line">    <span class="keyword">If</span> <span class="keyword">Not</span> objFolder <span class="keyword">Is</span> <span class="literal">Nothing</span> <span class="keyword">Then</span> FolderPath = Path1 &amp; objFolder <span class="keyword">Else</span> <span class="keyword">Exit</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line">    Path2 = FolderPath &amp; <span class="string">"\" &amp; Year_ "</span>定义年份及案号命名的文件夹路径</span><br><span class="line">    Path3 = FolderPath &amp; <span class="string">"\" &amp; Year_ &amp; "</span>\<span class="string">" &amp; fileName_</span></span><br><span class="line"><span class="string">    Set FSO = CreateObject("</span>Scripting.FileSystemObject<span class="string">")</span></span><br><span class="line"><span class="string">    If FSO.FolderExists(Path2) = False Then</span></span><br><span class="line"><span class="string">        MkDir (FolderPath &amp; "</span>\<span class="string">" &amp; Year_) "</span>不存在则创建文件夹</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">If</span> FSO.FolderExists(Path3) = <span class="literal">True</span> <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">If</span> (MsgBox(<span class="string">"已存在该文件，是否覆盖？"</span>, vbYesNo)) = vbNo <span class="keyword">Then</span></span><br><span class="line">            Cancel = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">Exit</span> <span class="keyword">Sub</span></span><br><span class="line">        <span class="keyword">Else</span></span><br><span class="line">            <span class="keyword">GoTo</span> l</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Else</span></span><br><span class="line">    MkDir (FolderPath &amp; <span class="string">"\" &amp; Year_ &amp; "</span>\<span class="string">" &amp; fileName_)</span></span><br><span class="line"><span class="string">    End If</span></span><br><span class="line"><span class="string">l:</span></span><br><span class="line"><span class="string">    ActiveDocument.SaveAs FileName:=FolderPath &amp; "</span>\<span class="string">" &amp; Year_ &amp; "</span>\<span class="string">" &amp; fileName_ &amp; "</span>\<span class="string">" &amp; fileName_ "</span>另存为重命名文件</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+<p>2018-2-5日更新 发现每次需要进入宏来修改路径太麻烦，所以又更新了代码，在C盘生成一个保存路径的TXT文件作为配置读取。</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> 设置保存路径()</span><br><span class="line">    <span class="keyword">Dim</span> sFile, sFile_, sOpen <span class="keyword">As</span> <span class="built_in">Object</span>, Fso <span class="keyword">As</span> <span class="built_in">Object</span></span><br><span class="line">    <span class="keyword">Dim</span> FPath <span class="keyword">As</span> <span class="built_in">String</span></span><br><span class="line">    <span class="keyword">Set</span> Fso = CreateObject(<span class="string">"Scripting.FileSystemObject"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">If</span> Fso.FileExists(<span class="string">"C:\AutoSave\AutoSave.txt"</span>) = <span class="literal">False</span> <span class="keyword">Then</span> <span class="string">"判断是否存在设置文件"</span></span><br><span class="line">        MkDir (<span class="string">"C:\AutoSave\") "</span>创建设置文件夹及文件</span><br><span class="line">        <span class="keyword">Set</span> sFile = Fso.CreateTextFile(<span class="string">"C:\AutoSave\AutoSave.txt"</span>, <span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">Set</span> sFile_ = Fso.CreateTextFile(<span class="string">"C:\AutoSave\自动保存宏设置文件夹，勿删.txt"</span>, <span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">Set</span> sFile = <span class="literal">Nothing</span></span><br><span class="line">        <span class="keyword">Set</span> sFile_ = <span class="literal">Nothing</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">Set</span> objshell = CreateObject(<span class="string">"Shell.Application"</span>) <span class="comment">'设置保存路径'</span></span><br><span class="line">    <span class="keyword">Set</span> objFolder = objshell.browseForFolder(<span class="number">0</span>, <span class="string">"请选择保存路径"</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">If</span> <span class="keyword">Not</span> objFolder <span class="keyword">Is</span> <span class="literal">Nothing</span> <span class="keyword">Then</span> FPath = objFolder.self.Path <span class="keyword">Else</span> <span class="keyword">Exit</span> <span class="keyword">Sub</span> <span class="comment">'必要！判断是否取消保存'</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">Set</span> sOpen = Fso.OpenTextFile(<span class="string">"C:\AutoSave\AutoSave.txt"</span>, <span class="number">2</span>, <span class="number">0</span>) <span class="comment">'写入保存的路径'</span></span><br><span class="line">    <span class="keyword">If</span> len(FPath) &lt;= <span class="number">3</span> <span class="keyword">then</span> <span class="comment">'判断是否选取了盘符根目录'</span></span><br><span class="line">        sOpen.Write FPath</span><br><span class="line">    <span class="keyword">Else</span></span><br><span class="line">        sOpen.Write FPath &amp; <span class="string">"\" "</span>写入设置的路径</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">if</span></span><br><span class="line">    sOpen.Close</span><br><span class="line"></span><br><span class="line">    <span class="keyword">Set</span> Fso = <span class="literal">Nothing</span></span><br><span class="line">    <span class="keyword">Set</span> sOpen = <span class="literal">Nothing</span></span><br><span class="line">    <span class="keyword">Set</span> objshell = <span class="literal">Nothing</span></span><br><span class="line">    <span class="keyword">Set</span> objFolder = <span class="literal">Nothing</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Sub</span> 快速保存()</span><br><span class="line">    <span class="keyword">Dim</span> sFile, sFile_, sOpen <span class="keyword">As</span> <span class="built_in">Object</span>, Fso <span class="keyword">As</span> <span class="built_in">Object</span></span><br><span class="line">    <span class="keyword">Dim</span> FPath <span class="keyword">As</span> <span class="built_in">String</span></span><br><span class="line">    <span class="keyword">Dim</span> myExp <span class="keyword">As</span> RegExp <span class="comment">'利用正则表达式提取案号以作为文件夹名和文件名'</span></span><br><span class="line">    <span class="keyword">Dim</span> AllContent</span><br><span class="line"></span><br><span class="line">    <span class="keyword">Set</span> Fso = CreateObject(<span class="string">"Scripting.FileSystemObject"</span>)</span><br><span class="line">    <span class="keyword">Set</span> objshell = CreateObject(<span class="string">"Shell.Application"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">If</span> Fso.FileExists(<span class="string">"C:\AutoSave\AutoSave.txt"</span>) = <span class="literal">False</span> <span class="keyword">Then</span> <span class="comment">'判断是否存在设置文件'</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">If</span> (MsgBox(<span class="string">"未设置归档路径，是否设置？"</span>, vbYesNo)) = vbNo <span class="keyword">Then</span></span><br><span class="line">            Cancel = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">Exit</span> <span class="keyword">Sub</span></span><br><span class="line">        <span class="keyword">Else</span></span><br><span class="line">            <span class="keyword">Set</span> objFolder = objshell.browseForFolder(<span class="number">0</span>, <span class="string">"请选择保存路径"</span>, <span class="number">0</span>, <span class="number">0</span>) <span class="comment">'设置保存路径'</span></span><br><span class="line">            <span class="keyword">If</span> <span class="keyword">Not</span> objFolder <span class="keyword">Is</span> <span class="literal">Nothing</span> <span class="keyword">Then</span> FPath = objFolder.self.Path <span class="keyword">Else</span> <span class="keyword">Exit</span> <span class="keyword">Sub</span> <span class="comment">'必要！判断是否取消设置'</span></span><br><span class="line"></span><br><span class="line">            MkDir (<span class="string">"C:\AutoSave\") "</span>创建设置文件夹及文件</span><br><span class="line">            <span class="keyword">Set</span> sFile = Fso.CreateTextFile(<span class="string">"C:\AutoSave\AutoSave.txt"</span>, <span class="literal">True</span>)</span><br><span class="line">            <span class="keyword">Set</span> sFile_ = Fso.CreateTextFile(<span class="string">"C:\AutoSave\自动保存宏设置文件夹，勿删.txt"</span>, <span class="literal">True</span>)</span><br><span class="line">            <span class="keyword">Set</span> sFile = <span class="literal">Nothing</span></span><br><span class="line">            <span class="keyword">Set</span> sFile_ = <span class="literal">Nothing</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">Set</span> sOpen = Fso.OpenTextFile(<span class="string">"C:\AutoSave\AutoSave.txt"</span>, <span class="number">2</span>, <span class="number">0</span>) </span><br><span class="line">            <span class="keyword">If</span> len(FPath) &lt;= <span class="number">3</span> <span class="keyword">then</span> <span class="comment">'判断是否选取了盘符根目录'</span></span><br><span class="line">                sOpen.Write FPath</span><br><span class="line">            <span class="keyword">Else</span></span><br><span class="line">                sOpen.Write FPath &amp; <span class="string">"\" "</span>写入设置的路径</span><br><span class="line">            <span class="keyword">End</span> <span class="keyword">if</span></span><br><span class="line">            sOpen.Close</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">Set</span> sOpen = <span class="literal">Nothing</span></span><br><span class="line">        <span class="keyword">Set</span> objFolder = <span class="literal">Nothing</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br></pre></td></tr></table></figure>
+<p>​<br><figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">Set</span> myExp = <span class="keyword">New</span> RegExp</span><br><span class="line">    AllContent = ActiveDocument.Content</span><br><span class="line">    <span class="keyword">With</span> myExp</span><br><span class="line">        .Pattern = <span class="string">"(（2|\(2).+?号"</span> <span class="comment">'正则表达式'</span></span><br><span class="line">        .<span class="keyword">Global</span> = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">Set</span> myMsg = .Execute(AllContent)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">For</span> <span class="keyword">Each</span> m <span class="keyword">In</span> myMsg</span><br><span class="line">            fileName_ = m</span><br><span class="line">        <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">With</span></span><br><span class="line"></span><br><span class="line">    Year_ = <span class="keyword">Mid</span>(fileName_, <span class="number">2</span>, <span class="number">4</span>) &amp; <span class="string">"年案件"</span> <span class="comment">'提取年度，并依据年度分类文件'</span></span><br><span class="line"></span><br><span class="line">    Open <span class="string">"C:\AutoSave\AutoSave.txt"</span> <span class="keyword">For</span> Input <span class="keyword">As</span> <span class="meta">#1</span></span><br><span class="line">    Line Input <span class="meta">#1, Path1</span></span><br><span class="line">    Close <span class="meta">#1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">Set</span> objFolder = objshell.browseForFolder(<span class="number">0</span>, <span class="string">"请选择案件类型文件夹"</span>, <span class="number">0</span>, Path1) <span class="comment">'选择保存路径'</span></span><br><span class="line">    <span class="keyword">If</span> <span class="keyword">Not</span> objFolder <span class="keyword">Is</span> <span class="literal">Nothing</span> <span class="keyword">Then</span> FolderPath = objFolder.self.Path <span class="keyword">Else</span> <span class="keyword">Exit</span> <span class="keyword">Sub</span> <span class="comment">'必要！判断是否取消保存'</span></span><br><span class="line"></span><br><span class="line">    Path2 = FolderPath &amp; <span class="string">"\" &amp; Year_ "</span>定义年份及案号命名的文件夹路径</span><br><span class="line">    Path3 = FolderPath &amp; <span class="string">"\" &amp; Year_ &amp; "</span>\<span class="string">" &amp; fileName_</span></span><br><span class="line"><span class="string">    If Fso.FolderExists(Path2) = False Then</span></span><br><span class="line"><span class="string">        MkDir (FolderPath &amp; "</span>\<span class="string">" &amp; Year_) "</span>创建年份的文件夹</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">If</span> Fso.FolderExists(Path3) = <span class="literal">True</span> <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">If</span> (MsgBox(<span class="string">"已存在该文件，是否覆盖？"</span>, vbYesNo)) = vbNo <span class="keyword">Then</span></span><br><span class="line">            Cancel = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">Exit</span> <span class="keyword">Sub</span></span><br><span class="line">        <span class="keyword">Else</span></span><br><span class="line">            <span class="keyword">GoTo</span> l</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Else</span></span><br><span class="line">        MkDir (FolderPath &amp; <span class="string">"\" &amp; Year_ &amp; "</span>\<span class="string">" &amp; fileName_)</span></span><br><span class="line"><span class="string">    End If</span></span><br><span class="line"><span class="string">l:</span></span><br><span class="line"><span class="string">    ActiveDocument.SaveAs FileName:=FolderPath &amp; "</span>\<span class="string">" &amp; Year_ &amp; "</span>\<span class="string">" &amp; fileName_ &amp; "</span>\<span class="string">" &amp; fileName_ "</span>另存为重命名文件</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure></p>
+<p>​<br>​    </p>
+<p>Excel中则需要调用Word.Application，但是思路还是和Word中一样。</p>
+<h2 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h2><figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> test()</span><br><span class="line">    <span class="keyword">Dim</span> wdApp <span class="keyword">As</span> Word.Application</span><br><span class="line">    <span class="keyword">Dim</span> wddocument <span class="keyword">As</span> Word.document</span><br><span class="line">    <span class="keyword">Dim</span> myExp <span class="keyword">As</span> RegExp</span><br><span class="line">    <span class="keyword">Dim</span> AllContent</span><br><span class="line">    <span class="keyword">For</span> k = <span class="number">2</span> <span class="keyword">To</span> Application.CountA(Sheet1.Range(<span class="string">"D:D"</span>))</span><br><span class="line">        file_ = Sheet1.Range(<span class="string">"D"</span> &amp; k)</span><br><span class="line">        <span class="keyword">Set</span> wdApp = <span class="keyword">New</span> Word.Application</span><br><span class="line">        <span class="keyword">Set</span> wddocument = wdApp.Documents.Open(file_)</span><br><span class="line">        <span class="keyword">With</span> wdApp</span><br><span class="line">            <span class="keyword">Set</span> myExp = <span class="keyword">New</span> RegExp</span><br><span class="line">            AllContent = wddocument.Content</span><br><span class="line">            <span class="keyword">With</span> myExp</span><br><span class="line">                .Pattern = Sheet1.Range(<span class="string">"B1"</span>)</span><br><span class="line">                .<span class="keyword">Global</span> = <span class="literal">False</span></span><br><span class="line">                <span class="keyword">Set</span> myMsg = .Execute(AllContent)</span><br><span class="line"></span><br><span class="line">                <span class="keyword">For</span> <span class="keyword">Each</span> m <span class="keyword">In</span> myMsg</span><br><span class="line">                    Sheet1.Range(<span class="string">"E"</span> &amp; k) = m</span><br><span class="line">                <span class="keyword">Next</span></span><br><span class="line">            <span class="keyword">End</span> <span class="keyword">With</span></span><br><span class="line">            .Documents.Close</span><br><span class="line">            .Quit</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">With</span></span><br><span class="line">        <span class="keyword">Set</span> wdApp = <span class="literal">Nothing</span></span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者: <a href="http://www.zigma.cc">ZiGma</a>
+            <p>原文链接: <a href="http://www.zigma.cc/2017/08/26/【VBA】VBA+正则表达式提取标题快速保存归档/">http://www.zigma.cc/2017/08/26/【VBA】VBA+正则表达式提取标题快速保存归档/</a>
+            <p>发表日期: <a href="http://www.zigma.cc/2017/08/26/【VBA】VBA+正则表达式提取标题快速保存归档/">August 26th 2017, 11:05:35 pm</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2017/09/27/【VBA】利用VBA提取内容并生成新文件/" title= 【VBA】利用VBA提取内容并生成新文件 >
+                    <div class="nextTitle">【VBA】利用VBA提取内容并生成新文件</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2017/08/16/民事管辖案件中关于接受货币方的理解/" title= 民事管辖案件中关于接受货币方的理解 >
+                    <div class="prevTitle">民事管辖案件中关于接受货币方的理解</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "e7JFHRNqX2T29ebmy4pVCidb-gzGzoHsz",
+        appKey: "Tnys9hubkApQHhifwvUptzdh",
+        placeholder: "",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:pyrogas7@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/ZiGmaX809" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://weibo.com/u/2032971111?is_all=1" class="iconfont-archer weibo" target="_blank" title=weibo></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Word代码如下："><span class="toc-number">1.</span> <span class="toc-text">Word代码如下：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码如下："><span class="toc-number">2.</span> <span class="toc-text">代码如下：</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 16
+        <!-- search  -->
+        </div>
+            <div class="site-search popup-trigger">
+                <span class="iconfont-archer search-icon">&#xe627;</span>
+            </div>
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/22</span><a class="archive-post-title" href= "/2018/06/22/【JsBox】Days Pro/" >【JsBox】Days Pro</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/26</span><a class="archive-post-title" href= "/2018/05/26/【JsBox】SysInfo Pro/" >【JsBox】SysInfo Pro</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/17</span><a class="archive-post-title" href= "/2018/05/17/【瞎折腾】梅林固件直接安装Aria2/" >【瞎折腾】梅林固件直接安装Aria2</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/01</span><a class="archive-post-title" href= "/2018/05/01/【瞎折腾】frp+Aria2实现远程下载管理/" >【瞎折腾】frp+Aria2实现远程下载管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/29</span><a class="archive-post-title" href= "/2018/04/29/【JsBox】利用JSBox在朋友圈斗图（二）/" >【JsBox】利用JSBox在朋友圈斗图（二）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/02</span><a class="archive-post-title" href= "/2018/02/02/利用Documents管理云盘文件/" >利用Documents管理云盘文件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2018/02/01/【JsBox】利用JSBox在朋友圈斗图（一）/" >【JsBox】利用JSBox在朋友圈斗图（一）</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/09</span><a class="archive-post-title" href= "/2017/12/09/一键移除Win10此电脑中多余文件夹/" >一键移除Win10此电脑中多余文件夹</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/09</span><a class="archive-post-title" href= "/2017/11/09/【VBA】利用VBA提取词库重复值/" >【VBA】利用VBA提取词库重复值</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2017/11/07/自制Potplayer皮肤两例/" >自制Potplayer皮肤两例</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/28</span><a class="archive-post-title" href= "/2017/10/28/落格输入法配置相关/" >落格输入法配置相关</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2017/09/27/【VBA】利用VBA提取内容并生成新文件/" >【VBA】利用VBA提取内容并生成新文件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/26</span><a class="archive-post-title" href= "/2017/08/26/【VBA】VBA+正则表达式提取标题快速保存归档/" >【VBA】VBA+正则表达式提取标题快速保存归档</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/民事管辖案件中关于接受货币方的理解/" >民事管辖案件中关于接受货币方的理解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/WordPress升级优化/" >WordPress升级优化</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/15</span><a class="archive-post-title" href= "/2017/08/15/CentOS监控进程状态并自动重启/" >CentOS监控进程状态并自动重启</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
+    
+        <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
+    
+        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
+    
+        <span class="sidebar-tag-name" data-tags="JsBox"><span class="iconfont-archer">&#xe606;</span>JsBox</span>
+    
+        <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
+    
+        <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
+    
+        <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
+    
+        <span class="sidebar-tag-name" data-tags="合同"><span class="iconfont-archer">&#xe606;</span>合同</span>
+    
+        <span class="sidebar-tag-name" data-tags="民间借贷"><span class="iconfont-archer">&#xe606;</span>民间借贷</span>
+    
+        <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
+    
+        <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="VPS"><span class="iconfont-archer">&#xe60a;</span>VPS</span>
+    
+        <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
+    
+        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
+    
+        <span class="sidebar-category-name" data-categories="App"><span class="iconfont-archer">&#xe60a;</span>App</span>
+    
+        <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
+    
+        <span class="sidebar-category-name" data-categories="瞎折腾"><span class="iconfont-archer">&#xe60a;</span>瞎折腾</span>
+    
+        <span class="sidebar-category-name" data-categories="工作"><span class="iconfont-archer">&#xe60a;</span>工作</span>
+    
+        <span class="sidebar-category-name" data-categories="Potplayer皮肤"><span class="iconfont-archer">&#xe60a;</span>Potplayer皮肤</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "ZiGma"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
