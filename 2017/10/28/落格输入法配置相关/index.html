@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="Cache-Control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>ZiGma</title>
+    <title>落格输入法配置相关 · ZiGma</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -70,6 +70,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180604 as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <link rel="stylesheet" href= /css/mobile.css?v=20180604 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
@@ -194,14 +196,23 @@
 </head>
 
     
-        <body class="home-body">
+        <body class="post-body">
     
     
-<header class="header index-header">
+<header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >ZiGma</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">落格输入法配置相关</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>ZiGma</a>
 </header>
@@ -222,17 +233,17 @@ height:50vh;
     <!-- 主页  -->
     
     
-    <!-- 文章页  -->
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/index-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            ZiGma
-            <!-- 文章页  -->
+            落格输入法配置相关
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
@@ -240,12 +251,43 @@ height:50vh;
             <!-- 主页副标题  -->
             
             
-                记性不好就要记下来
-            
-            <!-- 文章页  -->
+            <!-- 404 -->
             
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">817</span> / Reading time: <span class="post-count">3 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2017/10/28</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -346,395 +388,77 @@ height:50vh;
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/06/22/【JsBox】Days Pro/" >
-            
-                <span>【JsBox】Days Pro</span>
-        </a>
-        <div class="abstract-content">
-            前言之前想填的倒数日的坑终于填了。 仿自”倒数日 Days”。  理论可以计算到无限天数，但是超过5位数的天数背景会错乱（懒得适配）。  支持主题选择。 * 主应用运行是设置，小组件运行是倒数界面。
-截图 
-安装链接Days_Pro
-更新记录2018/6/5 1.0.2 · 增加节假日模式、多色彩主题自定义； · Bug修复。 2018/6/12 1.0.3 · 调整对emoji字符长度识别以优化长度限制； · 调整主题选择； · 调整到达事件当天显示方式。 2018/6/22 1.0.4 · 修正节假日模式到达假日当天显示方式。
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>之前在少数派看了篇介绍双拼输入法的文章，觉得其中一句“学习双拼之前，会觉得卧槽竟然有傻逼用双拼；刚接触，会觉得卧槽还可以；熟悉以后，会觉得卧槽怎么会有傻逼用全拼”（差不多就这么个意思）高度概括了学习双拼前后的变化。 说实话，学习双拼并没有想象中的那么难，在微信小程序里面有一个“双拼练习”的小程序可以帮助你快速熟悉音形码，PC上这类联系工具则更多了。基本一晚上就可以把音形码记得差不多，一周之后就可以熟练使用，而且没有全拼打字的肌肉酸胀感，之前开一天庭，最后手部肌肉会酸痛。 虽然iOS11原生输入法支持了双拼，但是并不能更换双拼方案，而搜狗的空格键、中/英键和发送键挨的太近，导致空格键变短，很容易输入长句后，想要空格上屏却误触中/英切换，又要重新输入一遍。而且也无法像百度输入法一样可以自定义皮肤，这里还要再吐槽一下搜狗，之前做过一个仿锤子手机的键盘皮肤，做完发现上传审核后无法在iOS使用，只能在安卓安装，虽然iOS可以上架但是对于iOS皮肤的审核也是极其麻烦。 为什么不用百度？就是单纯地不想再用他家的任何产品~ 最后我选择了最为接近原生输入法的落格输入法。 在Price Tag里面有一期送了落格输入法的兑换码，说实话个人对这个App主打的拒绝读取权限以保护隐私的宣传点并不是很感冒，因为App的易用性和用户隐私保护有时候在实现目的上还是挺对立的，需要预测输入习惯势必要依赖大数据，但是大数据又包含了你的点点滴滴。 但是，并没有十全十美的App，某些不知名的原因落格终止了和小鹤的合作，不再支持也不允许用户自定义上传小鹤的双拼方案（但是改个名字自定义还是可以的），所以在落格上面使用小鹤的双拼方案也是比较麻烦。 因此写了这篇文章记录一下落格上面使用小鹤的方案。</p>
+<h2 id="1、点划配置以及皮肤"><a href="#1、点划配置以及皮肤" class="headerlink" title="1、点划配置以及皮肤"></a>1、点划配置以及皮肤</h2><p><img src="http://7rf2ax.com1.z0.glb.clouddn.com/Log/Log.jpg" alt=""> 如图，上下划都可以进行操作，基本上向上是中文半角符号，向下是英文半角。 还有自带的宏，就用了中英切换、到行首、到行尾三个，所支持所有的宏<a href="https://v2mm.tech/topic/618/%E6%80%8E%E6%A0%B7%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8%E8%90%BD%E6%A0%BC%E8%BE%93%E5%85%A5%E6%B3%95%E7%9A%84%E7%82%B9%E5%88%92%E5%8A%9F%E8%83%BD" title="点击" target="_blank" rel="noopener">点击</a>。</p>
+<h2 id="2、双拼方案"><a href="#2、双拼方案" class="headerlink" title="2、双拼方案"></a>2、双拼方案</h2><p>改了个名字而已，小鸡双拼，不然在App里面看不到。</p>
+<h2 id="3、词库导入"><a href="#3、词库导入" class="headerlink" title="3、词库导入"></a>3、词库导入</h2><p>论坛有大佬分享词库转换导入的<a href="https://v2mm.tech/topic/1157/%E5%B0%8F%E5%B7%A5%E5%85%B7-%E6%B7%BB%E5%8A%A0%E6%90%9C%E7%8B%97%E7%BB%86%E8%83%9E%E8%AF%8D%E5%BA%93%E5%88%B0%E8%90%BD%E6%A0%BC" title="教程" target="_blank" rel="noopener">教程</a>和工具，但是没有提供小鹤的转换方案，所以一并备份了。</p>
+<h2 id="4、小鸡辅码"><a href="#4、小鸡辅码" class="headerlink" title="4、小鸡辅码"></a>4、小鸡辅码</h2><p>从小鹤外挂词库中提取了单词辅码。</p>
+<h2 id="5、下载地址"><a href="#5、下载地址" class="headerlink" title="5、下载地址"></a>5、下载地址</h2><p><a href="https://pan.baidu.com/s/1g0WJfIP3BfFvdSmzFwQbhg" title="百度网盘" target="_blank" rel="noopener">百度网盘</a></p>
 
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/06/22</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JsBox">JsBox</a>
-    
-</div>
-            
-        </div>
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/05/26/【JsBox】SysInfo Pro/" >
-            
-                <span>【JsBox】SysInfo Pro</span>
-        </a>
-        <div class="abstract-content">
-            根据之前TG群的Netspeed（找不到作者了）和RYAN大佬的Progress按照App——SYS PRO制作。 可以查看当前网速、局域网外网IP、设备名称、iOS版本、磁盘剩余、内存占用等情况。 可以点击界面来切换显示的系统信息和网络信息。 目前已知的问题： 1. 硬盘剩余与实际不符； 2. 内存占用可能也存在同样的情况，但是总体差不多，没1那么夸张； 3. 内存占用的百分比在某些情况下会出现N多位小数。
-说明（三条都不是我的锅），对不起第三条的确是我的锅。 1和2的问题，是JsBox的返回值就是这样，可以自行利用
-$ui.alert($device.space)
-查看。 3的问题仅...
+        <div class="license-wrapper">
+            <p>原文作者: <a href="http://yoursite.com">John Doe</a>
+            <p>原文链接: <a href="http://yoursite.com/2017/10/28/落格输入法配置相关/">http://yoursite.com/2017/10/28/落格输入法配置相关/</a>
+            <p>发表日期: <a href="http://yoursite.com/2017/10/28/落格输入法配置相关/">October 28th 2017, 5:11:26 pm</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/26</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JsBox">JsBox</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/05/17/【瞎折腾】梅林固件直接安装Aria2/" >
-            
-                <span>【瞎折腾】梅林固件直接安装Aria2</span>
-        </a>
-        <div class="abstract-content">
-            前言之前折腾了一下小宝固件软件中心的Aria2，安装是方便了，但是问题也不少。 - Bug不少，经常莫名其妙假死。 - 添加设置需要在面板进行，如果是改conf文件，面板里面一提交，conf就会被重写。 - 第二点就导致了自动更新tarcker列表的脚本无法执行。 - 更新需要等待适配。 今天看论坛有大佬编译了1.34的版本，所以就想舍弃软件中心版，直接自己安装。 虽然看不到了面板那么详细的数据，但是总体还不错。
-步骤自动挂载U盘因为之前直接安装Aria2到路由，运行一段时间重启后会导致opt文件夹软链丢失，造成Aria2无法启动和运行。所以想用其他方法，然后看到了这篇文章，将opt文件...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/17</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "瞎折腾">瞎折腾</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/05/01/【瞎折腾】frp+Aria2实现远程下载管理/" >
-            
-                <span>【瞎折腾】frp+Aria2实现远程下载管理</span>
-        </a>
-        <div class="abstract-content">
-            前言最近在捣鼓Aria2下载，恰值西部世界第二季开播，白天上班，无法在内网管理，所以开始折腾内网穿透的事情。 之前用的方案是华硕第三方梅林——小宝固件的DDNS穿透，但是最近一直不稳，而且已经好几天无法连接，所以自己在VPS搭建了frp穿透服务。
-基本思路
-1、华硕路由搭建Aria2下载环境和frp穿透客户端；
-2、远程VPS搭建frp穿透服务端；
-3、顺便搭建AriaNG网页服务端（可选）。 
-
-客户端配置华硕路由刷第三方梅林固件，这里使用小宝固件，并在软件中心安装Aria2和frp客户端。
-Ari2设置  Aria2常规设置，如果没有速度则添加额外以下Tracker，基本种子都有速度...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/01</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "瞎折腾">瞎折腾</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/04/29/利用JSBox在朋友圈斗图（二）/" >
-            
-                <span>利用JSBox在朋友圈斗图（二）</span>
-        </a>
-        <div class="abstract-content">
-            最近继续研究JSBox，并且发现微信似乎不屏蔽七牛云的链接了，所以将之前图片评论的js移植到了七牛云。七牛云上传是要上传凭证的，怎么计算Token花费不少时间，之前做的方案代码过多，运行效率不高，参考了RYAN大的QiniuManager后成功移植。
-安装链接
-安装链接
-
-详细代码const CryptoJS = require(&quot;crypto-js&quot;)
-String.prototype.urlsafe = function() {
-  return this.replace(/\+/g, &quot;-&quot;).replace(/\//g, &quot;_&q...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/29</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JsBox">JsBox</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/02/02/利用Documents管理云盘文件/" >
-            
-                <span>利用Documents管理云盘文件</span>
-        </a>
-        <div class="abstract-content">
-            前言自从总公司规定内网电脑不能使用U盘以后，内外网数据互通就麻烦了不少，虽然给每人发放了一个光盘刻录机，但是工作质量总感觉退回了上世纪。 好在省公司开发了一个内外网数据互通的云盘，与其说是开发，不如说是剔除了一些功能的ownCloud个人云存储开源解决方案。 虽然脱离了上世纪的办公环境，但是工作效率还是停留在本世纪初，数据流通依旧十分不方便。有笔记本的同志自然不必说，直接网页操作就可以了，如果是手机用户，则必须要iOS11以上系统支持或者使用iCabMobile等工具才可以使用，但是操作流程十分繁复：比如要将微信内Word转移到内网需要以下步骤，微信内打开Word→跳转保存到“文件”或者...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/02/02</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/02/01/利用JSBox在朋友圈斗图（一）/" >
-            
-                <span>利用JSBox在朋友圈斗图（一）</span>
-        </a>
-        <div class="abstract-content">
-            刷惯了微博，总是想在微信朋友圈里面用因缺思厅的（贱贱的）表情包评论，亦或者在发完朋友圈之后再在评论里面Po出后续。 想了一下，思路不难，只需要将图片通过API接口上传到图床后再通过短链形式发出去即可。 先用了Workflow试水一波，但是自从Workflow被苹果收购以后不得不吐槽一下下降的厉害的软件质量。Get Contents of URL里面填写多个Body值，不是这个无法显示就是那个无法编辑，再加上流程过长修改十分不便，差不多要放弃这个工具App了。 好在之前低价购买了JSBox，虽然还有些功能不是很完善，例如类似Workflow里面的Overlay Image的功能暂时缺失，但...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/02/01</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JsBox">JsBox</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/12/09/一键移除Win10此电脑中多余文件夹/" >
-            
-                <span>一键移除Win10此电脑中多余文件夹</span>
-        </a>
-        <div class="abstract-content">
-            Win10常年更新一些没什么卵用的功能，最近又有一次大更新。可气的是每次更新都会把一些设置重置。比如移除快捷方式的小箭头、已经移除的此电脑里面的各种文件夹。最近的更新还更新了一个3D图像文件夹，普通人肯定用不到，而且用惯了Win7的用户肯定也不习惯原本清爽的计算机里面出现这么多五花八门的文件夹，比如说我，在侧边栏出现那么多繁乱的文件夹都受不了，更何况在主界面。
-利用注册表来移除文件夹所幸能够通过修改注册表来移除这些文件夹，简单便捷无污染，唯一缺点就是每次更新后需要重新运行一次。 每次在注册表查找键值太麻烦，所以弄成了注册表注册文件。 新建记事本后复制粘贴以下代码，保存后将txt后缀改为r...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/09</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/11/09/利用VBA提取词库重复值/" >
-            
-                <span>利用VBA提取词库重复值</span>
-        </a>
-        <div class="abstract-content">
-            之前提取过一个小鹤的辅码表，但是在使用过程中很容易和词库的常用词撞车，为了输入效率只能在自定义编码中固定常用词的候选次序，所以想从主码表内提取容易和常用词重复的辅码，并且固定辅码位置，虽然最后发现了辅码表内并不能设置辅码的位置，只能将自定义编码内的词往前移，顶掉辅码。 主码表内有56000多条记录，手动操作标记肯定是不可能的，边用边在App中自定义编码标记虽然可行，但是效率太低，而且有时候多打几个字就会忘了哪个词需要标记，所以还是用手头的Excel来提取数据。
-Excel自带的标记重复值虽然EXCEL有标记重复值的功能，但是也仅仅是标记，并不会写到数据里面。 比如说自定义标记重复值的背景...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/11/09</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "VBA">VBA</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/11/07/自制Potplayer皮肤两例/" >
-            
-                <span>自制Potplayer皮肤两例</span>
-        </a>
-        <div class="abstract-content">
-            以前留存的两例Potplayer皮肤，仅仅是简单的外观，不支持复杂功能（因为会有BUG，又懒得改）。
-1.Ti
-2.BotPlayer素材提取自iOS应用TweetBot。  
-3.下载Ti Botplayer
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/11/07</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "PotPlayer">PotPlayer</a>
-    
-</div>
-            
-        </div>
-    </article>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2017/11/07/自制Potplayer皮肤两例/" title= 自制Potplayer皮肤两例 >
+                    <div class="nextTitle">自制Potplayer皮肤两例</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2017/09/27/利用VBA提取内容并生成新文件/" title= 利用VBA提取内容并生成新文件 >
+                    <div class="prevTitle">利用VBA提取内容并生成新文件</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
-    <nav class="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">NEXT &#62;</a>
-    </nav>
     
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "e7JFHRNqX2T29ebmy4pVCidb-gzGzoHsz",
+        appKey: "Tnys9hubkApQHhifwvUptzdh",
+        placeholder: "",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
-            
-            <div class="profile">
-    <img class="profile-avatar" src= /avatar/ft.jpg >
-    <div class="profile-name">ZiGma</div>
-    
-    <div class="profile-signature">
-        一条怠惰的老咸鱼
-    </div>
-    
-    
-    <div class="profile-social">
-        
-    
-        
-            
-                <a href="mailto:pyrogas7@gmail.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="//github.com/ZiGmaX809" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-
-    </div>
-    
-    
-        <div class="friends">
-            <div>FRIENDS</div>
-            
-                
-            
-                
-            
-                
-            
-        </div>
-    
-    
-        <div class="about-me">
-            <a href = "/about" >ABOUT ME</a>
-        </div>
-    
-</div>
             
         </div>
         <footer class="footer footer-unloaded">
@@ -802,6 +526,24 @@ Excel自带的标记重复值虽然EXCEL有标记重复值的功能，但是也�
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、点划配置以及皮肤"><span class="toc-number">1.</span> <span class="toc-text">1、点划配置以及皮肤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、双拼方案"><span class="toc-number">2.</span> <span class="toc-text">2、双拼方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、词库导入"><span class="toc-number">3.</span> <span class="toc-text">3、词库导入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、小鸡辅码"><span class="toc-number">4.</span> <span class="toc-text">4、小鸡辅码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、下载地址"><span class="toc-number">5.</span> <span class="toc-text">5、下载地址</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1212,6 +954,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>

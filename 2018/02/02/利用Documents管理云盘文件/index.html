@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="Cache-Control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>ZiGma</title>
+    <title>利用Documents管理云盘文件 · ZiGma</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -70,6 +70,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180604 as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <link rel="stylesheet" href= /css/mobile.css?v=20180604 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
@@ -194,14 +196,23 @@
 </head>
 
     
-        <body class="home-body">
+        <body class="post-body">
     
     
-<header class="header index-header">
+<header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >ZiGma</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">利用Documents管理云盘文件</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>ZiGma</a>
 </header>
@@ -222,17 +233,17 @@ height:50vh;
     <!-- 主页  -->
     
     
-    <!-- 文章页  -->
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/index-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            ZiGma
-            <!-- 文章页  -->
+            利用Documents管理云盘文件
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
@@ -240,12 +251,43 @@ height:50vh;
             <!-- 主页副标题  -->
             
             
-                记性不好就要记下来
-            
-            <!-- 文章页  -->
+            <!-- 404 -->
             
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">1,310</span> / Reading time: <span class="post-count">5 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/02/02</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -346,395 +388,83 @@ height:50vh;
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/06/22/【JsBox】Days Pro/" >
-            
-                <span>【JsBox】Days Pro</span>
-        </a>
-        <div class="abstract-content">
-            前言之前想填的倒数日的坑终于填了。 仿自”倒数日 Days”。  理论可以计算到无限天数，但是超过5位数的天数背景会错乱（懒得适配）。  支持主题选择。 * 主应用运行是设置，小组件运行是倒数界面。
-截图 
-安装链接Days_Pro
-更新记录2018/6/5 1.0.2 · 增加节假日模式、多色彩主题自定义； · Bug修复。 2018/6/12 1.0.3 · 调整对emoji字符长度识别以优化长度限制； · 调整主题选择； · 调整到达事件当天显示方式。 2018/6/22 1.0.4 · 修正节假日模式到达假日当天显示方式。
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>自从总公司规定内网电脑不能使用U盘以后，内外网数据互通就麻烦了不少，虽然给每人发放了一个光盘刻录机，但是工作质量总感觉退回了上世纪。 好在省公司开发了一个内外网数据互通的云盘，与其说是开发，不如说是剔除了一些功能的ownCloud个人云存储开源解决方案。 虽然脱离了上世纪的办公环境，但是工作效率还是停留在本世纪初，数据流通依旧十分不方便。有笔记本的同志自然不必说，直接网页操作就可以了，如果是手机用户，则必须要iOS11以上系统支持或者使用iCabMobile等工具才可以使用，但是操作流程十分繁复：比如要将微信内Word转移到内网需要以下步骤，微信内打开Word→跳转保存到“文件”或者iCabMobile等App→浏览器打开网盘地址并登陆→点击上传按钮选择文件上传。 可喜的是，今天例行帮小伙伴转移文件后，查看了一下网盘的源代码，发现了这么一段代码</p>
+<pre><code>&lt;div id=&quot;app-settings-content&quot;&gt; 
+        &lt;label for=&quot;webdavurl&quot;&gt;WebDAV&lt;/label&gt;
+        &lt;input id=&quot;webdavurl&quot; type=&quot;text&quot; readonly=&quot;readonly&quot; value=&quot;http://60.191.98.250/remote.php/webdav/&quot; /&gt;
+        &lt;em&gt;使用这个地址 &lt;a href=&quot;https://doc.owncloud.org/server/9.0/go.php?to=user-webdav&quot; target=&quot;_blank&quot;&gt;通过 WebDAV 访问您的文件&lt;/a&gt;&lt;/em&gt;
+&lt;/div&gt;
+</code></pre><p>就是说云盘是支持webDAV协议的，利用手机App即可进行文件管理，虽然在云盘操作界面没有显示这段话。这样的话，分享文件就变得十分简单了，只需要在微信中将文件打开，点击分享按钮，找到拷贝到具体App中即可跳转直接保存到网盘，同理从内网转移到外网只需要将流程翻转即可。</p>
+<h2 id="横向评测支持webDAV的App"><a href="#横向评测支持webDAV的App" class="headerlink" title="横向评测支持webDAV的App"></a>横向评测支持webDAV的App</h2><p>方向有了，就很好办了，在App Store中搜索关键词webDAV就可以找到不少App，但是大部分需要收费，因此以下评测了3款免费软件：FileExploer、WPS Office、Documents。</p>
+<h3 id="FileExploer"><a href="#FileExploer" class="headerlink" title="FileExploer"></a>FileExploer</h3><p>如图进行设置，HOST Url填写<a href="http://60.191.98.250/remote.php/webdav/" target="_blank" rel="noopener">http://60.191.98.250/remote.php/webdav/</a> 用户名及密码与内网一致。 <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/1.jpg" alt="FileExploer设置" title="FileExploer设置"> <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/2.jpg" alt="FileExploer设置" title="FileExploer设置"> 这款App是第一个下的，如果没有发现Documents这款App的话，日常使用也足够了，并且支持图片、文件等多类型文件上传与下载。 值得一提的是，微信中点击分享→点击拷贝到“FileExploer”后直接会让你选择保存位置，你只需要选择云盘即可直接保存入盘，十分方便。 唯一美中不足的是，因为是免费软件，所以时常会跳出升级到专业版的提示，如果能够接受30元的价格，升级支持一下国产软件也是可以的。 推荐指数：★★★☆☆</p>
+<h3 id="WPS-Office"><a href="#WPS-Office" class="headerlink" title="WPS Office"></a>WPS Office</h3><p>是的，你没有看错，WPS手机版也是支持webDAV协议的，如图进行设置，输入内容与前一款一致。 <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/3.jpg" alt="WPS Office设置" title="WPS Office设置"> <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/41.jpg" alt="WPS Office设置" title="WPS Office设置"> WPS的优点在于可以对文档直接进行编辑然后分享，大厂出品自然不会夹带广告，但是也有模板之类的收费内容。 WPS的缺点也十分明显，它并不支持图片等格式上传，只支持Word、Excel、PowerPoint三款办公软件文档上传。而且上传方式十分麻烦，需要先保存到WPS中，再在网盘页面右上角按钮处点击进行文档上传。 推荐需要直接编辑，对文件支持类型要求不大的用户使用。 推荐指数：★★☆☆☆</p>
+<h3 id="Documents"><a href="#Documents" class="headerlink" title="Documents"></a>Documents</h3><p>Documents全称是Documents 6或者Documents By Readdle，可能是因为叫Documents的太多了吧。 需要注意的是，软件默认是屏蔽第三方输入法的，如果有需要第三方输入法，则需要在主界面的设置→通用关闭对第三方输入法的屏蔽。 <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/5.jpg" alt="Documents设置" title="Documents设置"> 其他设置与其他软件一致。 <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/61.jpg" alt="Documents设置" title="Documents设置"> 此外Documents还支持双向同步，十分方便。 <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/7.jpg" alt="Documents设置" title="Documents设置"> <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/8.jpg" alt="Documents设置" title="Documents设置"> 上传的风格与WPS类似。 Documents可以说是三款App中功能最为强大的，不仅支持多文件格式，还支持文件夹同步。 电脑端上传以后，马上可以在手机中查看、分享，并且支持URL Scheme，可以直接将文档Url在App中打开，并且没有广告。 唯一的短板就是不支持拷贝到App后直接选择文件，但是瑕不掩瑜，这款App值得作为主力工具使用。 推荐指数：★★★★☆</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>至此，三款App已经评测完毕，如果还是有不明白的，可以留言，视情况录制视频。 此外，文件管理器大多雷同，因此这里也不再评测其他软件。 至于安卓用户，系统比iOS开放许多，只需要安装类似支持webDAV协议的文件管理器即可，使用习惯也是大同小异。 说句题外话，今天小伙伴没法下载损坏的Word文档所以还研究了一下利用Wireshark直接抓包档案系统的扫描图片，并利用ABBYY的ORC转换为Word，下次有空再写教程。</p>
 
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/06/22</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JsBox">JsBox</a>
-    
-</div>
-            
-        </div>
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/05/26/【JsBox】SysInfo Pro/" >
-            
-                <span>【JsBox】SysInfo Pro</span>
-        </a>
-        <div class="abstract-content">
-            根据之前TG群的Netspeed（找不到作者了）和RYAN大佬的Progress按照App——SYS PRO制作。 可以查看当前网速、局域网外网IP、设备名称、iOS版本、磁盘剩余、内存占用等情况。 可以点击界面来切换显示的系统信息和网络信息。 目前已知的问题： 1. 硬盘剩余与实际不符； 2. 内存占用可能也存在同样的情况，但是总体差不多，没1那么夸张； 3. 内存占用的百分比在某些情况下会出现N多位小数。
-说明（三条都不是我的锅），对不起第三条的确是我的锅。 1和2的问题，是JsBox的返回值就是这样，可以自行利用
-$ui.alert($device.space)
-查看。 3的问题仅...
+        <div class="license-wrapper">
+            <p>原文作者: <a href="http://yoursite.com">John Doe</a>
+            <p>原文链接: <a href="http://yoursite.com/2018/02/02/利用Documents管理云盘文件/">http://yoursite.com/2018/02/02/利用Documents管理云盘文件/</a>
+            <p>发表日期: <a href="http://yoursite.com/2018/02/02/利用Documents管理云盘文件/">February 2nd 2018, 7:48:28 pm</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/26</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JsBox">JsBox</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/05/17/【瞎折腾】梅林固件直接安装Aria2/" >
-            
-                <span>【瞎折腾】梅林固件直接安装Aria2</span>
-        </a>
-        <div class="abstract-content">
-            前言之前折腾了一下小宝固件软件中心的Aria2，安装是方便了，但是问题也不少。 - Bug不少，经常莫名其妙假死。 - 添加设置需要在面板进行，如果是改conf文件，面板里面一提交，conf就会被重写。 - 第二点就导致了自动更新tarcker列表的脚本无法执行。 - 更新需要等待适配。 今天看论坛有大佬编译了1.34的版本，所以就想舍弃软件中心版，直接自己安装。 虽然看不到了面板那么详细的数据，但是总体还不错。
-步骤自动挂载U盘因为之前直接安装Aria2到路由，运行一段时间重启后会导致opt文件夹软链丢失，造成Aria2无法启动和运行。所以想用其他方法，然后看到了这篇文章，将opt文件...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/17</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "瞎折腾">瞎折腾</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/05/01/【瞎折腾】frp+Aria2实现远程下载管理/" >
-            
-                <span>【瞎折腾】frp+Aria2实现远程下载管理</span>
-        </a>
-        <div class="abstract-content">
-            前言最近在捣鼓Aria2下载，恰值西部世界第二季开播，白天上班，无法在内网管理，所以开始折腾内网穿透的事情。 之前用的方案是华硕第三方梅林——小宝固件的DDNS穿透，但是最近一直不稳，而且已经好几天无法连接，所以自己在VPS搭建了frp穿透服务。
-基本思路
-1、华硕路由搭建Aria2下载环境和frp穿透客户端；
-2、远程VPS搭建frp穿透服务端；
-3、顺便搭建AriaNG网页服务端（可选）。 
-
-客户端配置华硕路由刷第三方梅林固件，这里使用小宝固件，并在软件中心安装Aria2和frp客户端。
-Ari2设置  Aria2常规设置，如果没有速度则添加额外以下Tracker，基本种子都有速度...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/01</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "瞎折腾">瞎折腾</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/04/29/利用JSBox在朋友圈斗图（二）/" >
-            
-                <span>利用JSBox在朋友圈斗图（二）</span>
-        </a>
-        <div class="abstract-content">
-            最近继续研究JSBox，并且发现微信似乎不屏蔽七牛云的链接了，所以将之前图片评论的js移植到了七牛云。七牛云上传是要上传凭证的，怎么计算Token花费不少时间，之前做的方案代码过多，运行效率不高，参考了RYAN大的QiniuManager后成功移植。
-安装链接
-安装链接
-
-详细代码const CryptoJS = require(&quot;crypto-js&quot;)
-String.prototype.urlsafe = function() {
-  return this.replace(/\+/g, &quot;-&quot;).replace(/\//g, &quot;_&q...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/29</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JsBox">JsBox</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/02/02/利用Documents管理云盘文件/" >
-            
-                <span>利用Documents管理云盘文件</span>
-        </a>
-        <div class="abstract-content">
-            前言自从总公司规定内网电脑不能使用U盘以后，内外网数据互通就麻烦了不少，虽然给每人发放了一个光盘刻录机，但是工作质量总感觉退回了上世纪。 好在省公司开发了一个内外网数据互通的云盘，与其说是开发，不如说是剔除了一些功能的ownCloud个人云存储开源解决方案。 虽然脱离了上世纪的办公环境，但是工作效率还是停留在本世纪初，数据流通依旧十分不方便。有笔记本的同志自然不必说，直接网页操作就可以了，如果是手机用户，则必须要iOS11以上系统支持或者使用iCabMobile等工具才可以使用，但是操作流程十分繁复：比如要将微信内Word转移到内网需要以下步骤，微信内打开Word→跳转保存到“文件”或者...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/02/02</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/02/01/利用JSBox在朋友圈斗图（一）/" >
-            
-                <span>利用JSBox在朋友圈斗图（一）</span>
-        </a>
-        <div class="abstract-content">
-            刷惯了微博，总是想在微信朋友圈里面用因缺思厅的（贱贱的）表情包评论，亦或者在发完朋友圈之后再在评论里面Po出后续。 想了一下，思路不难，只需要将图片通过API接口上传到图床后再通过短链形式发出去即可。 先用了Workflow试水一波，但是自从Workflow被苹果收购以后不得不吐槽一下下降的厉害的软件质量。Get Contents of URL里面填写多个Body值，不是这个无法显示就是那个无法编辑，再加上流程过长修改十分不便，差不多要放弃这个工具App了。 好在之前低价购买了JSBox，虽然还有些功能不是很完善，例如类似Workflow里面的Overlay Image的功能暂时缺失，但...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/02/01</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JsBox">JsBox</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/12/09/一键移除Win10此电脑中多余文件夹/" >
-            
-                <span>一键移除Win10此电脑中多余文件夹</span>
-        </a>
-        <div class="abstract-content">
-            Win10常年更新一些没什么卵用的功能，最近又有一次大更新。可气的是每次更新都会把一些设置重置。比如移除快捷方式的小箭头、已经移除的此电脑里面的各种文件夹。最近的更新还更新了一个3D图像文件夹，普通人肯定用不到，而且用惯了Win7的用户肯定也不习惯原本清爽的计算机里面出现这么多五花八门的文件夹，比如说我，在侧边栏出现那么多繁乱的文件夹都受不了，更何况在主界面。
-利用注册表来移除文件夹所幸能够通过修改注册表来移除这些文件夹，简单便捷无污染，唯一缺点就是每次更新后需要重新运行一次。 每次在注册表查找键值太麻烦，所以弄成了注册表注册文件。 新建记事本后复制粘贴以下代码，保存后将txt后缀改为r...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/09</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/11/09/利用VBA提取词库重复值/" >
-            
-                <span>利用VBA提取词库重复值</span>
-        </a>
-        <div class="abstract-content">
-            之前提取过一个小鹤的辅码表，但是在使用过程中很容易和词库的常用词撞车，为了输入效率只能在自定义编码中固定常用词的候选次序，所以想从主码表内提取容易和常用词重复的辅码，并且固定辅码位置，虽然最后发现了辅码表内并不能设置辅码的位置，只能将自定义编码内的词往前移，顶掉辅码。 主码表内有56000多条记录，手动操作标记肯定是不可能的，边用边在App中自定义编码标记虽然可行，但是效率太低，而且有时候多打几个字就会忘了哪个词需要标记，所以还是用手头的Excel来提取数据。
-Excel自带的标记重复值虽然EXCEL有标记重复值的功能，但是也仅仅是标记，并不会写到数据里面。 比如说自定义标记重复值的背景...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/11/09</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "VBA">VBA</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/11/07/自制Potplayer皮肤两例/" >
-            
-                <span>自制Potplayer皮肤两例</span>
-        </a>
-        <div class="abstract-content">
-            以前留存的两例Potplayer皮肤，仅仅是简单的外观，不支持复杂功能（因为会有BUG，又懒得改）。
-1.Ti
-2.BotPlayer素材提取自iOS应用TweetBot。  
-3.下载Ti Botplayer
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/11/07</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "PotPlayer">PotPlayer</a>
-    
-</div>
-            
-        </div>
-    </article>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/04/29/利用JSBox在朋友圈斗图（二）/" title= 利用JSBox在朋友圈斗图（二） >
+                    <div class="nextTitle">利用JSBox在朋友圈斗图（二）</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/02/01/利用JSBox在朋友圈斗图（一）/" title= 利用JSBox在朋友圈斗图（一） >
+                    <div class="prevTitle">利用JSBox在朋友圈斗图（一）</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
-    <nav class="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">NEXT &#62;</a>
-    </nav>
     
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "e7JFHRNqX2T29ebmy4pVCidb-gzGzoHsz",
+        appKey: "Tnys9hubkApQHhifwvUptzdh",
+        placeholder: "",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
-            
-            <div class="profile">
-    <img class="profile-avatar" src= /avatar/ft.jpg >
-    <div class="profile-name">ZiGma</div>
-    
-    <div class="profile-signature">
-        一条怠惰的老咸鱼
-    </div>
-    
-    
-    <div class="profile-social">
-        
-    
-        
-            
-                <a href="mailto:pyrogas7@gmail.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="//github.com/ZiGmaX809" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-
-    </div>
-    
-    
-        <div class="friends">
-            <div>FRIENDS</div>
-            
-                
-            
-                
-            
-                
-            
-        </div>
-    
-    
-        <div class="about-me">
-            <a href = "/about" >ABOUT ME</a>
-        </div>
-    
-</div>
             
         </div>
         <footer class="footer footer-unloaded">
@@ -802,6 +532,24 @@ Excel自带的标记重复值虽然EXCEL有标记重复值的功能，但是也�
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#横向评测支持webDAV的App"><span class="toc-number">2.</span> <span class="toc-text">横向评测支持webDAV的App</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FileExploer"><span class="toc-number">2.1.</span> <span class="toc-text">FileExploer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WPS-Office"><span class="toc-number">2.2.</span> <span class="toc-text">WPS Office</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Documents"><span class="toc-number">2.3.</span> <span class="toc-text">Documents</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后记"><span class="toc-number">3.</span> <span class="toc-text">后记</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1212,6 +960,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
