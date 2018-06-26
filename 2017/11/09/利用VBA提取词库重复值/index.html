@@ -267,7 +267,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">451</span> / Reading time: <span class="post-count">2 min</span></span>
+                        <span>Word count: <span class="post-count">462</span> / Reading time: <span class="post-count">2 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -399,18 +399,7 @@ height:50vh;
         <p>之前提取过一个小鹤的辅码表，但是在使用过程中很容易和词库的常用词撞车，为了输入效率只能在自定义编码中固定常用词的候选次序，所以想从主码表内提取容易和常用词重复的辅码，并且固定辅码位置，虽然最后发现了辅码表内并不能设置辅码的位置，只能将自定义编码内的词往前移，顶掉辅码。 主码表内有56000多条记录，手动操作标记肯定是不可能的，边用边在App中自定义编码标记虽然可行，但是效率太低，而且有时候多打几个字就会忘了哪个词需要标记，所以还是用手头的Excel来提取数据。</p>
 <h2 id="Excel自带的标记重复值"><a href="#Excel自带的标记重复值" class="headerlink" title="Excel自带的标记重复值"></a>Excel自带的标记重复值</h2><p>虽然EXCEL有标记重复值的功能，但是也仅仅是标记，并不会写到数据里面。 比如说自定义标记重复值的背景为红色，但是利用Get.Cell公式读取还是原来的背景色。所以想要利用标记重复值，再进行VBA通过背景色删除是无法实现的。</p>
 <h2 id="VBA提取"><a href="#VBA提取" class="headerlink" title="VBA提取"></a>VBA提取</h2><p>绕了太远果然容易扯着蛋，转念一想利用一个简简单单的For循环和If条件判断就实现了。 逐个匹配判断与下一个的值，重复则输出本行与下一行，再利用代码删除未输出的行，即判断输出列的单元格是否是空白，是则删除整行即可。</p>
-<pre><code>Sub Test()
-    With Sheet1
-    For i = 1 to 45000
-        If .Range(&quot;A&quot;&amp;i) = .Range(&quot;A&quot;&amp;i+1) Then
-            .Range(&quot;B&quot;&amp;i)=.Range(&quot;A&quot;&amp;i)
-            .Range(&quot;B&quot;&amp;i+1)=.Range(&quot;A&quot;&amp;i+1)
-        End If
-    Next
-    .Range(&quot;B:B&quot;).SpecialCells(xlCellTypeBlanks).EntireRow.Delete
-    End With
-End Sub
-</code></pre>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> Test()</span><br><span class="line">    <span class="keyword">With</span> Sheet1</span><br><span class="line">    <span class="keyword">For</span> i = <span class="number">1</span> <span class="keyword">to</span> <span class="number">45000</span></span><br><span class="line">        <span class="keyword">If</span> .Range(<span class="string">"A"</span>&amp;i) = .Range(<span class="string">"A"</span>&amp;i+<span class="number">1</span>) <span class="keyword">Then</span></span><br><span class="line">            .Range(<span class="string">"B"</span>&amp;i)=.Range(<span class="string">"A"</span>&amp;i)</span><br><span class="line">            .Range(<span class="string">"B"</span>&amp;i+<span class="number">1</span>)=.Range(<span class="string">"A"</span>&amp;i+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line">    .Range(<span class="string">"B:B"</span>).SpecialCells(xlCellTypeBlanks).EntireRow.Delete</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">With</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
     </article>
     <!-- license  -->
     
@@ -751,6 +740,8 @@ top:50vh;
     
     
     
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 16
@@ -845,7 +836,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/wordpress-e5-8d-87-e7-ba-a7-e4-bc-98-e5-8c-96/" >WordPress升级优化</a>
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/WordPress升级优化/" >WordPress升级优化</a>
         </li>
     
     
@@ -863,13 +854,27 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
+    
+        <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
+    
         <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
+    
+        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
         <span class="sidebar-tag-name" data-tags="JsBox"><span class="iconfont-archer">&#xe606;</span>JsBox</span>
     
         <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
+        <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
+    
+        <span class="sidebar-tag-name" data-tags="合同"><span class="iconfont-archer">&#xe606;</span>合同</span>
+    
+        <span class="sidebar-tag-name" data-tags="民间借贷"><span class="iconfont-archer">&#xe606;</span>民间借贷</span>
+    
         <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
+    
+        <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -908,9 +913,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
     
-        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
-    
         <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
+    
+        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
     
         <span class="sidebar-category-name" data-categories="瞎折腾"><span class="iconfont-archer">&#xe60a;</span>瞎折腾</span>
     

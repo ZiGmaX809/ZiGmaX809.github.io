@@ -267,7 +267,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,319</span> / Reading time: <span class="post-count">6 min</span></span>
+                        <span>Word count: <span class="post-count">1,320</span> / Reading time: <span class="post-count">6 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -398,11 +398,16 @@ height:50vh;
     <article class="article-entry">
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前折腾了一下小宝固件软件中心的Aria2，安装是方便了，但是问题也不少。</p>
 <ul>
-<li>Bug不少，经常莫名其妙假死。</li>
-<li>添加设置需要在面板进行，如果是改conf文件，面板里面一提交，conf就会被重写。 </li>
-<li>第二点就导致了自动更新tarcker列表的脚本无法执行。 </li>
-<li>更新需要等待适配。 今天看论坛有大佬编译了1.34的版本，所以就想舍弃软件中心版，直接自己安装。 虽然看不到了面板那么详细的数据，但是总体还不错。</li>
+<li><p>Bug不少，经常莫名其妙假死。</p>
+</li>
+<li><p>添加设置需要在面板进行，如果是改conf文件，面板里面一提交，conf就会被重写。 </p>
+</li>
+<li><p>第二点就导致了自动更新tarcker列表的脚本无法执行。 </p>
+</li>
+<li><p>更新需要等待适配。 </p>
+</li>
 </ul>
+<p>今天看论坛有大佬编译了1.34的版本，所以就想舍弃软件中心版，直接自己安装。 虽然看不到了面板那么详细的数据，但是总体还不错。</p>
 <h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h2 id="自动挂载U盘"><a href="#自动挂载U盘" class="headerlink" title="自动挂载U盘"></a>自动挂载U盘</h2><p>因为之前直接安装Aria2到路由，运行一段时间重启后会导致opt文件夹软链丢失，造成Aria2无法启动和运行。所以想用其他方法，然后看到了<a href="https://blog.bluerain.io/p/AsusWrt-Merlin.html" title="这篇文章" target="_blank" rel="noopener">这篇文章</a>，将opt文件夹链接到U盘，运行了一天十分稳定，重启后也不会丢失opt文件夹。 插上U盘，执行 df 命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ZiGma@RT-AC86U-8450:/tmp/home/root# df</span><br><span class="line">Filesystem           1K-blocks      Used Available Use% Mounted on</span><br><span class="line">ubi:rootfs_ubifs         79016     56648     22368  72% /</span><br><span class="line">mtd:bootfs                4480      3348      1132  75% /bootfs</span><br><span class="line">mtd:data                  8192       624      7568   8% /data</span><br><span class="line">/dev/mtdblock8           49152     18256     30896  37% /jffs</span><br><span class="line">/dev/sda1              7315130         5   6920322   0% /tmp/mnt/sda1</span><br><span class="line">/dev/sda             488384508 100183552 388200956  21% /tmp/mnt/Disk</span><br></pre></td></tr></table></figure>
 <p>可以看到U盘路径是/tmp/mnt/sda1。 所以直接运行以下代码进行挂载。</p>
@@ -449,8 +454,8 @@ height:50vh;
 <p>那么利用</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /opt/var/aria2/trackers-list-aria2.sh</span><br></pre></td></tr></table></figure>
 <p>删除每行最后所有的^M后保存即可。（具体如何在Linux编辑请百度） 最后将下面定时运行这个脚本命令写入/jffs/scripts/post-mount文件，每天凌晨4点更新Tracker。</p>
-<pre><code>cru a trackersupdate &quot;0 4 * * * /bin/sh /opt/var/aria2/trackers-list-aria2.sh&quot;
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cru a trackersupdate "0 4 * * * /bin/sh /opt/var/aria2/trackers-list-aria2.sh"</span><br></pre></td></tr></table></figure>
+
     </article>
     <!-- license  -->
     
@@ -791,6 +796,8 @@ top:50vh;
     
     
     
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 16
@@ -885,7 +892,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/wordpress-e5-8d-87-e7-ba-a7-e4-bc-98-e5-8c-96/" >WordPress升级优化</a>
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/WordPress升级优化/" >WordPress升级优化</a>
         </li>
     
     
@@ -903,13 +910,27 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
+    
+        <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
+    
         <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
+    
+        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
         <span class="sidebar-tag-name" data-tags="JsBox"><span class="iconfont-archer">&#xe606;</span>JsBox</span>
     
         <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
+        <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
+    
+        <span class="sidebar-tag-name" data-tags="合同"><span class="iconfont-archer">&#xe606;</span>合同</span>
+    
+        <span class="sidebar-tag-name" data-tags="民间借贷"><span class="iconfont-archer">&#xe606;</span>民间借贷</span>
+    
         <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
+    
+        <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -948,9 +969,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
     
-        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
-    
         <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
+    
+        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
     
         <span class="sidebar-category-name" data-categories="瞎折腾"><span class="iconfont-archer">&#xe60a;</span>瞎折腾</span>
     

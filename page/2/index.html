@@ -359,7 +359,9 @@ height:50vh;
                 <span>落格输入法配置相关</span>
         </a>
         <div class="abstract-content">
-            之前在少数派看了篇介绍双拼输入法的文章，觉得其中一句“学习双拼之前，会觉得卧槽竟然有傻逼用双拼；刚接触，会觉得卧槽还可以；熟悉以后，会觉得卧槽怎么会有傻逼用全拼”（差不多就这么个意思）高度概括了学习双拼前后的变化。 说实话，学习双拼并没有想象中的那么难，在微信小程序里面有一个“双拼练习”的小程序可以帮助你快速熟悉音形码，PC上这类联系工具则更多了。基本一晚上就可以把音形码记得差不多，一周之后就可以熟练使用，而且没有全拼打字的肌肉酸胀感，之前开一天庭，最后手部肌肉会酸痛。 虽然iOS11原生输入法支持了双拼，但是并不能更换双拼方案，而搜狗的空格键、中/英键和发送键挨的太近，导致空格键变短，...
+            之前在少数派看了篇介绍双拼输入法的文章，觉得其中一句“学习双拼之前，会觉得卧槽竟然有傻逼用双拼；刚接触，会觉得卧槽还可以；熟悉以后，会觉得卧槽怎么会有傻逼用全拼”（差不多就这么个意思）高度概括了学习双拼前后的变化。
+ 说实话，学习双拼并没有想象中的那么难，在微信小程序里面有一个“双拼练习”的小程序可以帮助你快速熟悉音形码，PC上这类联系工具则更多了。基本一晚上就可以把音形码记得差不多，一周之后就可以熟练使用，而且没有全拼打字的肌肉酸胀感，之前开一天庭，最后手部肌肉会酸痛。 
+虽然iOS11原生输入法支持了双拼，但是并不能更换双拼方案，而搜狗的空格键、中/英键和发送键挨的太近，导致空格键变...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -367,6 +369,12 @@ height:50vh;
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/10/28</span>
             </div>
             <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "落格">落格</a>
+    
+</div>
             
         </div>
     </article>
@@ -384,9 +392,7 @@ height:50vh;
         <div class="abstract-content">
             前言工作中一直需要根据一个Word文件内的内容提取后放到其他Word模板中整合为一个新的文件，数量一多就很烦，所以利用VBA写了一个工具，利用正则表达式来提取指定文件的内容并根据既定的模板生成新文件。
 Excel各项目布局 B列为正则表达式，根据不同的提取部位进行编辑。 C列为模板文档位置。 D列为需要提取文件的目录。 E、F、G、H、I列为提取的内容。
-代码如下：获取需要提取的文件路径Sub getfile()
-    Dim Myname, Dic, Did, i, t, F, MyFileName
-    Set objshell = CreateObject(&quot;Shel...
+代码如下：获取需要提取的文件路径123456789101112131415161718192021222324252627282930313233343536373839Sub getfile()    Dim Myname, Dic,...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -415,13 +421,13 @@ Excel各项目布局 B列为正则表达式，根据不同的提取部位进行�
                 <span>VBA+正则表达式提取标题快速保存归档</span>
         </a>
         <div class="abstract-content">
-            今天快下班了同事找我提了个需求：归档目录太深，每次写完材料归档时需要点很久，且文件夹繁多，保存时要新建文件夹并重命名，Word文档保存时也需要命名。 想了一下，可以靠Word宏配合正则表达式解决。 思路：利用正则表达式提取正文中的案号，并将该案号作为归档文件夹和文件名。而且正好之前在Excel中试验过类似功能，只不过那个是提取案号后将Word另存为。
+            今天快下班了同事找我提了个需求：归档目录太深，每次写完材料归档时需要点很久，且文件夹繁多，保存时要新建文件夹并重命名，Word文档保存时也需要命名。 
+想了一下，可以靠Word宏配合正则表达式解决。 
+思路：利用正则表达式提取正文中的案号，并将该案号作为归档文件夹和文件名。而且正好之前在Excel中试验过类似功能，只不过那个是提取案号后将Word另存为。
 
 注：需要在VBA编辑器工具→引用Microsoft VBScript Regular Expressions 5.5
 
-Word代码如下：Sub 快速保存()
-Path1 = &quot;E:\&quot; &quot;设置文件夹路径
- ...
+Word代码如下：123456789101112131415161718192021222324252627282...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -450,7 +456,10 @@ Path1 = &quot;E:\&quot; &quot;设置文件夹路径
                 <span>民事管辖案件中关于接受货币方的理解</span>
         </a>
         <div class="abstract-content">
-            今天校对文书时，发现一审中原告因民间借贷纠纷起诉被告，要求被告履行还款义务，被告提起管辖异议，被驳回后又提起管辖异议上诉。本院进行审查后，裁定驳回了上诉人的上诉申请，维持原裁定，理由是双方没有约定借款合同履行地，而根据《最高人民法院关于适用&lt;中华人民共和国民事诉讼法&gt;的解释》第十八条之规定被上诉人作为接受货币的一方，被上诉人所在地法院拥有管辖权。令人不解的是，民间借贷中拥有两个不同时段、互相对立的接受货币方，那么如何进行确定哪一个接受货币方所在辖区法院进行管辖？ 1、借贷合同作为诺成性合同，在出借方未履行出借义务之前，借款人作为接受货币方，理应由借款人所在地法院进行管辖。 2...
+            今天校对文书时，发现一审中原告因民间借贷纠纷起诉被告，要求被告履行还款义务，被告提起管辖异议，被驳回后又提起管辖异议上诉。 
+本院进行审查后，裁定驳回了上诉人的上诉申请，维持原裁定，理由是双方没有约定借款合同履行地，而根据《最高人民法院关于适用&lt;中华人民共和国民事诉讼法&gt;的解释》第十八条之规定被上诉人作为接受货币的一方，被上诉人所在地法院拥有管辖权。 
+令人不解的是，民间借贷中拥有两个不同时段、互相对立的接受货币方，那么如何进行确定哪一个接受货币方所在辖区法院进行管辖？ 
+1、借贷合同作为诺成性合同，在出借方未履行出借义务之前，借款人作为接受货币方，理应由借款人所在地法院进行...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -458,6 +467,14 @@ Path1 = &quot;E:\&quot; &quot;设置文件夹路径
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/08/16</span>
             </div>
             <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "合同">合同</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "民间借贷">民间借贷</a>
+    
+</div>
             
         </div>
     </article>
@@ -468,20 +485,18 @@ Path1 = &quot;E:\&quot; &quot;设置文件夹路径
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2017/08/16/wordpress-e5-8d-87-e7-ba-a7-e4-bc-98-e5-8c-96/" >
+        <a class="abstract-title" href = "/2017/08/16/WordPress升级优化/" >
             
                 <span>WordPress升级优化</span>
         </a>
         <div class="abstract-content">
             1、禁用修订版本功能在wp-config.php中插入
-define(&apos;WP_POST_REVISIONS&apos;,false);
+1define('WP_POST_REVISIONS',false);
 如果在最后插入是无效的。
 2、首页阅读全文功能编辑主题文件夹中index.php 将
-&lt;?php the_content(); ?&gt;
+1&lt;?php the_content(); ?&gt;
 修改为
-&lt;?php the_excerpt() ?&gt;
-&lt;a href=&quot;&lt;?php the_permalink(); ?&gt;&quot;&gt;阅读全文…&lt;/a&gt;
-
+12&lt;?php the_excerpt() ?&gt;&lt;a href="&lt;?php the_permalink(); ?&gt;"&gt;阅读全文…&lt;/a&gt;
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -489,6 +504,12 @@ define(&apos;WP_POST_REVISIONS&apos;,false);
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/08/16</span>
             </div>
             <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Wordpress">Wordpress</a>
+    
+</div>
             
         </div>
     </article>
@@ -505,13 +526,9 @@ define(&apos;WP_POST_REVISIONS&apos;,false);
         </a>
         <div class="abstract-content">
             在CentOS系统中利用Crontab监控进程是否被结束并自动重启。 附加每天凌晨4点自动重启服务器。
-1. 编辑Crontabcrontab -e
-2. 按i进行编辑*/1 * * * * /root/monitor.sh     # 每分钟运行一遍monitor.sh脚本
-0 5 * * * /sbin/reboot           # 每天凌晨5点自动重启服务器
-3. root文件夹下创建monitor.sh脚本#! /bin/sh
-
-host_dir=`echo ~`                         # 当前用户根目录  
-proc_name=&quot;ne...
+1. 编辑Crontab1crontab -e
+2. 按i进行编辑12*/1 * * * * /root/monitor.sh     # 每分钟运行一遍monitor.sh脚本0 5 * * * /sbin/reboot           # 每天凌晨5点自动重启服务器
+3. root文件夹下创建monitor.sh脚本1234567891011121314151617181920212223242526#! /bin/shhost_dir=`echo ~`            ...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -519,6 +536,14 @@ proc_name=&quot;ne...
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/08/15</span>
             </div>
             <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CentOS">CentOS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "VPS">VPS</a>
+    
+</div>
             
         </div>
     </article>
@@ -869,6 +894,8 @@ proc_name=&quot;ne...
     
     
     
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 16
@@ -963,7 +990,7 @@ proc_name=&quot;ne...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/wordpress-e5-8d-87-e7-ba-a7-e4-bc-98-e5-8c-96/" >WordPress升级优化</a>
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/WordPress升级优化/" >WordPress升级优化</a>
         </li>
     
     
@@ -981,13 +1008,27 @@ proc_name=&quot;ne...
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
+    
+        <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
+    
         <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
+    
+        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
         <span class="sidebar-tag-name" data-tags="JsBox"><span class="iconfont-archer">&#xe606;</span>JsBox</span>
     
         <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
+        <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
+    
+        <span class="sidebar-tag-name" data-tags="合同"><span class="iconfont-archer">&#xe606;</span>合同</span>
+    
+        <span class="sidebar-tag-name" data-tags="民间借贷"><span class="iconfont-archer">&#xe606;</span>民间借贷</span>
+    
         <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
+    
+        <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1026,9 +1067,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
     
-        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
-    
         <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
+    
+        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
     
         <span class="sidebar-category-name" data-categories="瞎折腾"><span class="iconfont-archer">&#xe60a;</span>瞎折腾</span>
     

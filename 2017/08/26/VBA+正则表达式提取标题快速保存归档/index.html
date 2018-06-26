@@ -267,7 +267,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,431</span> / Reading time: <span class="post-count">7 min</span></span>
+                        <span>Word count: <span class="post-count">1,644</span> / Reading time: <span class="post-count">8 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -396,229 +396,21 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>今天快下班了同事找我提了个需求：归档目录太深，每次写完材料归档时需要点很久，且文件夹繁多，保存时要新建文件夹并重命名，Word文档保存时也需要命名。 想了一下，可以靠Word宏配合正则表达式解决。 思路：利用正则表达式提取正文中的案号，并将该案号作为归档文件夹和文件名。而且正好之前在Excel中试验过类似功能，只不过那个是提取案号后将Word另存为。</p>
+        <p>今天快下班了同事找我提了个需求：归档目录太深，每次写完材料归档时需要点很久，且文件夹繁多，保存时要新建文件夹并重命名，Word文档保存时也需要命名。 </p>
+<p>想了一下，可以靠Word宏配合正则表达式解决。 </p>
+<p>思路：利用正则表达式提取正文中的案号，并将该案号作为归档文件夹和文件名。而且正好之前在Excel中试验过类似功能，只不过那个是提取案号后将Word另存为。</p>
 <blockquote>
 <p>注：需要在VBA编辑器工具→引用Microsoft VBScript Regular Expressions 5.5</p>
 </blockquote>
-<h2 id="Word代码如下："><a href="#Word代码如下：" class="headerlink" title="Word代码如下："></a>Word代码如下：</h2><pre><code>Sub 快速保存()
-Path1 = &quot;E:\&quot; &quot;设置文件夹路径
-    Set objshell = CreateObject(&quot;Shell.Application&quot;) 
-    Set objFolder = objshell.browseForFolder(0, &quot;选择文件夹&quot;, 0, Path1)
-    If Not objFolder Is Nothing Then FolderPath = Path1 &amp; objFolder
-
-    Dim myExp As RegExp
-    Dim AllContent
-    Set myExp = New RegExp
-    AllContent = ActiveDocument.Content
-    With myExp  &apos;利用正则表达式提取案号以作为文件夹名和文件名&apos;
-        .Pattern = &quot;(（2|\(2).+?号&quot;
-        .Global = False
-        Set myMsg = .Execute(AllContent)
-
-        For Each m In myMsg
-            filename_ = m
-        Next
-    End With
-    Set wdApp = Nothing
-
-    Path2 = FolderPath &amp; &quot;\&quot; &amp; filename_ &quot;判断是否已经存在文件
-    Set FSO = CreateObject(&quot;Scripting.FileSystemObject&quot;)
-    If FSO.FolderExists(Path2) = True Then
-        If (MsgBox(&quot;已存在该文件，是否覆盖？&quot;, vbYesNo)) = vbNo Then
-            Cancel = True
-            GoTo k
-        Else
-            GoTo l
-        End If
-    Else
-        MkDir (FolderPath &amp; &quot;\&quot; &amp; filename_) &quot;不存在则创建文件夹
-    End If
-l:
-    ActiveDocument.SaveAs FileName:=FolderPath &amp; &quot;\&quot; &amp; filename_ &amp; &quot;\&quot; &amp; filename_
-k:
-End Sub
-</code></pre><p>2018-2-4日更新 进入2018年同事又提出要更改年份文件夹，因此修改了代码，保存到相应案号的年份中。</p>
-<pre><code>Sub 快速保存()
-    Dim myExp As RegExp &apos;利用正则表达式提取案号以作为文件夹名和文件名&apos;
-    Dim AllContent
-    Set myExp = New RegExp
-    AllContent = ActiveDocument.Content
-    With myExp
-        .Pattern = &quot;(（2|\(2).+?号&quot; &apos;正则表达式&apos;
-        .Global = False
-        Set myMsg = .Execute(AllContent)
-
-        For Each m In myMsg
-            fileName_ = m
-        Next
-    End With
-
-    Year_ = Mid(fileName_, 2, 4) &amp; &quot;年案件&quot;
-
-    Path1 = &quot;E:\&quot; &quot;设置文件夹路径
-    Set objshell = CreateObject(&quot;Shell.Application&quot;) &apos;选择保存路径&apos;
-    Set objFolder = objshell.browseForFolder(0, &quot;选择文件夹&quot;, 0, Path1)
-    If Not objFolder Is Nothing Then FolderPath = Path1 &amp; objFolder Else Exit Sub
-
-    Path2 = FolderPath &amp; &quot;\&quot; &amp; Year_ &quot;定义年份及案号命名的文件夹路径
-    Path3 = FolderPath &amp; &quot;\&quot; &amp; Year_ &amp; &quot;\&quot; &amp; fileName_
-    Set FSO = CreateObject(&quot;Scripting.FileSystemObject&quot;)
-    If FSO.FolderExists(Path2) = False Then
-        MkDir (FolderPath &amp; &quot;\&quot; &amp; Year_) &quot;不存在则创建文件夹
-    End If
-
-    If FSO.FolderExists(Path3) = True Then
-        If (MsgBox(&quot;已存在该文件，是否覆盖？&quot;, vbYesNo)) = vbNo Then
-            Cancel = True
-            Exit Sub
-        Else
-            GoTo l
-        End If
-    Else
-    MkDir (FolderPath &amp; &quot;\&quot; &amp; Year_ &amp; &quot;\&quot; &amp; fileName_)
-    End If
-l:
-    ActiveDocument.SaveAs FileName:=FolderPath &amp; &quot;\&quot; &amp; Year_ &amp; &quot;\&quot; &amp; fileName_ &amp; &quot;\&quot; &amp; fileName_ &quot;另存为重命名文件
-End Sub
-</code></pre><p>2018-2-5日更新 发现每次需要进入宏来修改路径太麻烦，所以又更新了代码，在C盘生成一个保存路径的TXT文件作为配置读取。</p>
-<pre><code>Sub 设置保存路径()
-    Dim sFile, sFile_, sOpen As Object, Fso As Object
-    Dim FPath As String
-    Set Fso = CreateObject(&quot;Scripting.FileSystemObject&quot;)
-
-    If Fso.FileExists(&quot;C:\AutoSave\AutoSave.txt&quot;) = False Then &quot;判断是否存在设置文件&quot;
-        MkDir (&quot;C:\AutoSave\&quot;) &quot;创建设置文件夹及文件
-        Set sFile = Fso.CreateTextFile(&quot;C:\AutoSave\AutoSave.txt&quot;, True)
-        Set sFile_ = Fso.CreateTextFile(&quot;C:\AutoSave\自动保存宏设置文件夹，勿删.txt&quot;, True)
-        Set sFile = Nothing
-        Set sFile_ = Nothing
-    End If
-
-    Set objshell = CreateObject(&quot;Shell.Application&quot;) &apos;设置保存路径&apos;
-    Set objFolder = objshell.browseForFolder(0, &quot;请选择保存路径&quot;, 0, 0)
-    If Not objFolder Is Nothing Then FPath = objFolder.self.Path Else Exit Sub &apos;必要！判断是否取消保存&apos;
-
-    Set sOpen = Fso.OpenTextFile(&quot;C:\AutoSave\AutoSave.txt&quot;, 2, 0) &apos;写入保存的路径&apos;
-    If len(FPath) &lt;= 3 then &apos;判断是否选取了盘符根目录&apos;
-        sOpen.Write FPath
-    Else
-        sOpen.Write FPath &amp; &quot;\&quot; &quot;写入设置的路径
-    End if
-    sOpen.Close
-
-    Set Fso = Nothing
-    Set sOpen = Nothing
-    Set objshell = Nothing
-    Set objFolder = Nothing
-End Sub
-
-Sub 快速保存()
-    Dim sFile, sFile_, sOpen As Object, Fso As Object
-    Dim FPath As String
-    Dim myExp As RegExp &apos;利用正则表达式提取案号以作为文件夹名和文件名&apos;
-    Dim AllContent
-
-    Set Fso = CreateObject(&quot;Scripting.FileSystemObject&quot;)
-    Set objshell = CreateObject(&quot;Shell.Application&quot;)
-
-    If Fso.FileExists(&quot;C:\AutoSave\AutoSave.txt&quot;) = False Then &apos;判断是否存在设置文件&apos;
-
-        If (MsgBox(&quot;未设置归档路径，是否设置？&quot;, vbYesNo)) = vbNo Then
-            Cancel = True
-            Exit Sub
-        Else
-            Set objFolder = objshell.browseForFolder(0, &quot;请选择保存路径&quot;, 0, 0) &apos;设置保存路径&apos;
-            If Not objFolder Is Nothing Then FPath = objFolder.self.Path Else Exit Sub &apos;必要！判断是否取消设置&apos;
-
-            MkDir (&quot;C:\AutoSave\&quot;) &quot;创建设置文件夹及文件
-            Set sFile = Fso.CreateTextFile(&quot;C:\AutoSave\AutoSave.txt&quot;, True)
-            Set sFile_ = Fso.CreateTextFile(&quot;C:\AutoSave\自动保存宏设置文件夹，勿删.txt&quot;, True)
-            Set sFile = Nothing
-            Set sFile_ = Nothing
-
-            Set sOpen = Fso.OpenTextFile(&quot;C:\AutoSave\AutoSave.txt&quot;, 2, 0) 
-            If len(FPath) &lt;= 3 then &apos;判断是否选取了盘符根目录&apos;
-                sOpen.Write FPath
-            Else
-                sOpen.Write FPath &amp; &quot;\&quot; &quot;写入设置的路径
-            End if
-            sOpen.Close
-        End If
-
-        Set sOpen = Nothing
-        Set objFolder = Nothing
-    End If
-
-
-    Set myExp = New RegExp
-    AllContent = ActiveDocument.Content
-    With myExp
-        .Pattern = &quot;(（2|\(2).+?号&quot; &apos;正则表达式&apos;
-        .Global = False
-        Set myMsg = .Execute(AllContent)
-
-        For Each m In myMsg
-            fileName_ = m
-        Next
-    End With
-
-    Year_ = Mid(fileName_, 2, 4) &amp; &quot;年案件&quot; &apos;提取年度，并依据年度分类文件&apos;
-
-    Open &quot;C:\AutoSave\AutoSave.txt&quot; For Input As #1
-    Line Input #1, Path1
-    Close #1
-
-    Set objFolder = objshell.browseForFolder(0, &quot;请选择案件类型文件夹&quot;, 0, Path1) &apos;选择保存路径&apos;
-    If Not objFolder Is Nothing Then FolderPath = objFolder.self.Path Else Exit Sub &apos;必要！判断是否取消保存&apos;
-
-    Path2 = FolderPath &amp; &quot;\&quot; &amp; Year_ &quot;定义年份及案号命名的文件夹路径
-    Path3 = FolderPath &amp; &quot;\&quot; &amp; Year_ &amp; &quot;\&quot; &amp; fileName_
-    If Fso.FolderExists(Path2) = False Then
-        MkDir (FolderPath &amp; &quot;\&quot; &amp; Year_) &quot;创建年份的文件夹
-    End If
-
-    If Fso.FolderExists(Path3) = True Then
-        If (MsgBox(&quot;已存在该文件，是否覆盖？&quot;, vbYesNo)) = vbNo Then
-            Cancel = True
-            Exit Sub
-        Else
-            GoTo l
-        End If
-    Else
-        MkDir (FolderPath &amp; &quot;\&quot; &amp; Year_ &amp; &quot;\&quot; &amp; fileName_)
-    End If
-l:
-    ActiveDocument.SaveAs FileName:=FolderPath &amp; &quot;\&quot; &amp; Year_ &amp; &quot;\&quot; &amp; fileName_ &amp; &quot;\&quot; &amp; fileName_ &quot;另存为重命名文件
-End Sub
-</code></pre><p>Excel中则需要调用Word.Application，但是思路还是和Word中一样。</p>
-<h2 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h2><pre><code>Sub test()
-    Dim wdApp As Word.Application
-    Dim wddocument As Word.document
-    Dim myExp As RegExp
-    Dim AllContent
-    For k = 2 To Application.CountA(Sheet1.Range(&quot;D:D&quot;))
-        file_ = Sheet1.Range(&quot;D&quot; &amp; k)
-        Set wdApp = New Word.Application
-        Set wddocument = wdApp.Documents.Open(file_)
-        With wdApp
-            Set myExp = New RegExp
-            AllContent = wddocument.Content
-            With myExp
-                .Pattern = Sheet1.Range(&quot;B1&quot;)
-                .Global = False
-                Set myMsg = .Execute(AllContent)
-
-                For Each m In myMsg
-                    Sheet1.Range(&quot;E&quot; &amp; k) = m
-                Next
-            End With
-            .Documents.Close
-            .Quit
-        End With
-        Set wdApp = Nothing
-    Next
-End Sub
-</code></pre>
+<h2 id="Word代码如下："><a href="#Word代码如下：" class="headerlink" title="Word代码如下："></a>Word代码如下：</h2><figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> 快速保存()</span><br><span class="line">Path1 = <span class="string">"E:\"</span> <span class="string">"设置文件夹路径</span></span><br><span class="line"><span class="string">    Set objshell = CreateObject("</span>Shell.Application<span class="string">") </span></span><br><span class="line"><span class="string">    Set objFolder = objshell.browseForFolder(0, "</span>选择文件夹<span class="string">", 0, Path1)</span></span><br><span class="line"><span class="string">    If Not objFolder Is Nothing Then FolderPath = Path1 &amp; objFolder</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Dim myExp As RegExp</span></span><br><span class="line"><span class="string">    Dim AllContent</span></span><br><span class="line"><span class="string">    Set myExp = New RegExp</span></span><br><span class="line"><span class="string">    AllContent = ActiveDocument.Content</span></span><br><span class="line"><span class="string">    With myExp  '利用正则表达式提取案号以作为文件夹名和文件名'</span></span><br><span class="line"><span class="string">        .Pattern = "</span>(（<span class="number">2</span>|\(<span class="number">2</span>).+?号<span class="string">"</span></span><br><span class="line"><span class="string">        .Global = False</span></span><br><span class="line"><span class="string">        Set myMsg = .Execute(AllContent)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        For Each m In myMsg</span></span><br><span class="line"><span class="string">            filename_ = m</span></span><br><span class="line"><span class="string">        Next</span></span><br><span class="line"><span class="string">    End With</span></span><br><span class="line"><span class="string">    Set wdApp = Nothing</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Path2 = FolderPath &amp; "</span>\<span class="string">" &amp; filename_ "</span>判断是否已经存在文件</span><br><span class="line">    <span class="keyword">Set</span> FSO = CreateObject(<span class="string">"Scripting.FileSystemObject"</span>)</span><br><span class="line">    <span class="keyword">If</span> FSO.FolderExists(Path2) = <span class="literal">True</span> <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">If</span> (MsgBox(<span class="string">"已存在该文件，是否覆盖？"</span>, vbYesNo)) = vbNo <span class="keyword">Then</span></span><br><span class="line">            Cancel = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">GoTo</span> k</span><br><span class="line">        <span class="keyword">Else</span></span><br><span class="line">            <span class="keyword">GoTo</span> l</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Else</span></span><br><span class="line">        MkDir (FolderPath &amp; <span class="string">"\"</span> &amp; filename_) <span class="string">"不存在则创建文件夹</span></span><br><span class="line"><span class="string">    End If</span></span><br><span class="line"><span class="string">l:</span></span><br><span class="line"><span class="string">    ActiveDocument.SaveAs FileName:=FolderPath &amp; "</span>\<span class="string">" &amp; filename_ &amp; "</span>\<span class="string">" &amp; filename_</span></span><br><span class="line"><span class="string">k:</span></span><br><span class="line"><span class="string">End Sub</span></span><br></pre></td></tr></table></figure>
+<p>2018-2-4日更新 进入2018年同事又提出要更改年份文件夹，因此修改了代码，保存到相应案号的年份中。</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> 快速保存()</span><br><span class="line">    <span class="keyword">Dim</span> myExp <span class="keyword">As</span> RegExp <span class="comment">'利用正则表达式提取案号以作为文件夹名和文件名'</span></span><br><span class="line">    <span class="keyword">Dim</span> AllContent</span><br><span class="line">    <span class="keyword">Set</span> myExp = <span class="keyword">New</span> RegExp</span><br><span class="line">    AllContent = ActiveDocument.Content</span><br><span class="line">    <span class="keyword">With</span> myExp</span><br><span class="line">        .Pattern = <span class="string">"(（2|\(2).+?号"</span> <span class="comment">'正则表达式'</span></span><br><span class="line">        .<span class="keyword">Global</span> = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">Set</span> myMsg = .Execute(AllContent)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">For</span> <span class="keyword">Each</span> m <span class="keyword">In</span> myMsg</span><br><span class="line">            fileName_ = m</span><br><span class="line">        <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">With</span></span><br><span class="line"></span><br><span class="line">    Year_ = <span class="keyword">Mid</span>(fileName_, <span class="number">2</span>, <span class="number">4</span>) &amp; <span class="string">"年案件"</span></span><br><span class="line"></span><br><span class="line">    Path1 = <span class="string">"E:\"</span> <span class="string">"设置文件夹路径</span></span><br><span class="line"><span class="string">    Set objshell = CreateObject("</span>Shell.Application<span class="string">") '选择保存路径'</span></span><br><span class="line"><span class="string">    Set objFolder = objshell.browseForFolder(0, "</span>选择文件夹<span class="string">", 0, Path1)</span></span><br><span class="line"><span class="string">    If Not objFolder Is Nothing Then FolderPath = Path1 &amp; objFolder Else Exit Sub</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Path2 = FolderPath &amp; "</span>\<span class="string">" &amp; Year_ "</span>定义年份及案号命名的文件夹路径</span><br><span class="line">    Path3 = FolderPath &amp; <span class="string">"\"</span> &amp; Year_ &amp; <span class="string">"\"</span> &amp; fileName_</span><br><span class="line">    <span class="keyword">Set</span> FSO = CreateObject(<span class="string">"Scripting.FileSystemObject"</span>)</span><br><span class="line">    <span class="keyword">If</span> FSO.FolderExists(Path2) = <span class="literal">False</span> <span class="keyword">Then</span></span><br><span class="line">        MkDir (FolderPath &amp; <span class="string">"\"</span> &amp; Year_) <span class="string">"不存在则创建文件夹</span></span><br><span class="line"><span class="string">    End If</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    If FSO.FolderExists(Path3) = True Then</span></span><br><span class="line"><span class="string">        If (MsgBox("</span>已存在该文件，是否覆盖？<span class="string">", vbYesNo)) = vbNo Then</span></span><br><span class="line"><span class="string">            Cancel = True</span></span><br><span class="line"><span class="string">            Exit Sub</span></span><br><span class="line"><span class="string">        Else</span></span><br><span class="line"><span class="string">            GoTo l</span></span><br><span class="line"><span class="string">        End If</span></span><br><span class="line"><span class="string">    Else</span></span><br><span class="line"><span class="string">    MkDir (FolderPath &amp; "</span>\<span class="string">" &amp; Year_ &amp; "</span>\<span class="string">" &amp; fileName_)</span></span><br><span class="line"><span class="string">    End If</span></span><br><span class="line"><span class="string">l:</span></span><br><span class="line"><span class="string">    ActiveDocument.SaveAs FileName:=FolderPath &amp; "</span>\<span class="string">" &amp; Year_ &amp; "</span>\<span class="string">" &amp; fileName_ &amp; "</span>\<span class="string">" &amp; fileName_ "</span>另存为重命名文件</span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
+<p>2018-2-5日更新 发现每次需要进入宏来修改路径太麻烦，所以又更新了代码，在C盘生成一个保存路径的TXT文件作为配置读取。</p>
+<figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> 设置保存路径()</span><br><span class="line">    <span class="keyword">Dim</span> sFile, sFile_, sOpen <span class="keyword">As</span> <span class="built_in">Object</span>, Fso <span class="keyword">As</span> <span class="built_in">Object</span></span><br><span class="line">    <span class="keyword">Dim</span> FPath <span class="keyword">As</span> <span class="built_in">String</span></span><br><span class="line">    <span class="keyword">Set</span> Fso = CreateObject(<span class="string">"Scripting.FileSystemObject"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">If</span> Fso.FileExists(<span class="string">"C:\AutoSave\AutoSave.txt"</span>) = <span class="literal">False</span> <span class="keyword">Then</span> <span class="string">"判断是否存在设置文件"</span></span><br><span class="line">        MkDir (<span class="string">"C:\AutoSave\"</span>) <span class="string">"创建设置文件夹及文件</span></span><br><span class="line"><span class="string">        Set sFile = Fso.CreateTextFile("</span>C:\AutoSave\AutoSave.txt<span class="string">", True)</span></span><br><span class="line"><span class="string">        Set sFile_ = Fso.CreateTextFile("</span>C:\AutoSave\自动保存宏设置文件夹，勿删.txt<span class="string">", True)</span></span><br><span class="line"><span class="string">        Set sFile = Nothing</span></span><br><span class="line"><span class="string">        Set sFile_ = Nothing</span></span><br><span class="line"><span class="string">    End If</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Set objshell = CreateObject("</span>Shell.Application<span class="string">") '设置保存路径'</span></span><br><span class="line"><span class="string">    Set objFolder = objshell.browseForFolder(0, "</span>请选择保存路径<span class="string">", 0, 0)</span></span><br><span class="line"><span class="string">    If Not objFolder Is Nothing Then FPath = objFolder.self.Path Else Exit Sub '必要！判断是否取消保存'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Set sOpen = Fso.OpenTextFile("</span>C:\AutoSave\AutoSave.txt<span class="string">", 2, 0) '写入保存的路径'</span></span><br><span class="line"><span class="string">    If len(FPath) &lt;= 3 then '判断是否选取了盘符根目录'</span></span><br><span class="line"><span class="string">        sOpen.Write FPath</span></span><br><span class="line"><span class="string">    Else</span></span><br><span class="line"><span class="string">        sOpen.Write FPath &amp; "</span>\<span class="string">" "</span>写入设置的路径</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">if</span></span><br><span class="line">    sOpen.Close</span><br><span class="line"></span><br><span class="line">    <span class="keyword">Set</span> Fso = <span class="literal">Nothing</span></span><br><span class="line">    <span class="keyword">Set</span> sOpen = <span class="literal">Nothing</span></span><br><span class="line">    <span class="keyword">Set</span> objshell = <span class="literal">Nothing</span></span><br><span class="line">    <span class="keyword">Set</span> objFolder = <span class="literal">Nothing</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Sub</span> 快速保存()</span><br><span class="line">    <span class="keyword">Dim</span> sFile, sFile_, sOpen <span class="keyword">As</span> <span class="built_in">Object</span>, Fso <span class="keyword">As</span> <span class="built_in">Object</span></span><br><span class="line">    <span class="keyword">Dim</span> FPath <span class="keyword">As</span> <span class="built_in">String</span></span><br><span class="line">    <span class="keyword">Dim</span> myExp <span class="keyword">As</span> RegExp <span class="comment">'利用正则表达式提取案号以作为文件夹名和文件名'</span></span><br><span class="line">    <span class="keyword">Dim</span> AllContent</span><br><span class="line"></span><br><span class="line">    <span class="keyword">Set</span> Fso = CreateObject(<span class="string">"Scripting.FileSystemObject"</span>)</span><br><span class="line">    <span class="keyword">Set</span> objshell = CreateObject(<span class="string">"Shell.Application"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">If</span> Fso.FileExists(<span class="string">"C:\AutoSave\AutoSave.txt"</span>) = <span class="literal">False</span> <span class="keyword">Then</span> <span class="comment">'判断是否存在设置文件'</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">If</span> (MsgBox(<span class="string">"未设置归档路径，是否设置？"</span>, vbYesNo)) = vbNo <span class="keyword">Then</span></span><br><span class="line">            Cancel = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">Exit</span> <span class="keyword">Sub</span></span><br><span class="line">        <span class="keyword">Else</span></span><br><span class="line">            <span class="keyword">Set</span> objFolder = objshell.browseForFolder(<span class="number">0</span>, <span class="string">"请选择保存路径"</span>, <span class="number">0</span>, <span class="number">0</span>) <span class="comment">'设置保存路径'</span></span><br><span class="line">            <span class="keyword">If</span> <span class="keyword">Not</span> objFolder <span class="keyword">Is</span> <span class="literal">Nothing</span> <span class="keyword">Then</span> FPath = objFolder.self.Path <span class="keyword">Else</span> <span class="keyword">Exit</span> <span class="keyword">Sub</span> <span class="comment">'必要！判断是否取消设置'</span></span><br><span class="line"></span><br><span class="line">            MkDir (<span class="string">"C:\AutoSave\"</span>) <span class="string">"创建设置文件夹及文件</span></span><br><span class="line"><span class="string">            Set sFile = Fso.CreateTextFile("</span>C:\AutoSave\AutoSave.txt<span class="string">", True)</span></span><br><span class="line"><span class="string">            Set sFile_ = Fso.CreateTextFile("</span>C:\AutoSave\自动保存宏设置文件夹，勿删.txt<span class="string">", True)</span></span><br><span class="line"><span class="string">            Set sFile = Nothing</span></span><br><span class="line"><span class="string">            Set sFile_ = Nothing</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            Set sOpen = Fso.OpenTextFile("</span>C:\AutoSave\AutoSave.txt<span class="string">", 2, 0) </span></span><br><span class="line"><span class="string">            If len(FPath) &lt;= 3 then '判断是否选取了盘符根目录'</span></span><br><span class="line"><span class="string">                sOpen.Write FPath</span></span><br><span class="line"><span class="string">            Else</span></span><br><span class="line"><span class="string">                sOpen.Write FPath &amp; "</span>\<span class="string">" "</span>写入设置的路径</span><br><span class="line">            <span class="keyword">End</span> <span class="keyword">if</span></span><br><span class="line">            sOpen.Close</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">Set</span> sOpen = <span class="literal">Nothing</span></span><br><span class="line">        <span class="keyword">Set</span> objFolder = <span class="literal">Nothing</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br></pre></td></tr></table></figure>
+<p>​<br><figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">Set</span> myExp = <span class="keyword">New</span> RegExp</span><br><span class="line">    AllContent = ActiveDocument.Content</span><br><span class="line">    <span class="keyword">With</span> myExp</span><br><span class="line">        .Pattern = <span class="string">"(（2|\(2).+?号"</span> <span class="comment">'正则表达式'</span></span><br><span class="line">        .<span class="keyword">Global</span> = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">Set</span> myMsg = .Execute(AllContent)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">For</span> <span class="keyword">Each</span> m <span class="keyword">In</span> myMsg</span><br><span class="line">            fileName_ = m</span><br><span class="line">        <span class="keyword">Next</span></span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">With</span></span><br><span class="line"></span><br><span class="line">    Year_ = <span class="keyword">Mid</span>(fileName_, <span class="number">2</span>, <span class="number">4</span>) &amp; <span class="string">"年案件"</span> <span class="comment">'提取年度，并依据年度分类文件'</span></span><br><span class="line"></span><br><span class="line">    Open <span class="string">"C:\AutoSave\AutoSave.txt"</span> <span class="keyword">For</span> Input <span class="keyword">As</span> <span class="meta">#1</span></span><br><span class="line">    Line Input <span class="meta">#1, Path1</span></span><br><span class="line">    Close <span class="meta">#1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">Set</span> objFolder = objshell.browseForFolder(<span class="number">0</span>, <span class="string">"请选择案件类型文件夹"</span>, <span class="number">0</span>, Path1) <span class="comment">'选择保存路径'</span></span><br><span class="line">    <span class="keyword">If</span> <span class="keyword">Not</span> objFolder <span class="keyword">Is</span> <span class="literal">Nothing</span> <span class="keyword">Then</span> FolderPath = objFolder.self.Path <span class="keyword">Else</span> <span class="keyword">Exit</span> <span class="keyword">Sub</span> <span class="comment">'必要！判断是否取消保存'</span></span><br><span class="line"></span><br><span class="line">    Path2 = FolderPath &amp; <span class="string">"\"</span> &amp; Year_ <span class="string">"定义年份及案号命名的文件夹路径</span></span><br><span class="line"><span class="string">    Path3 = FolderPath &amp; "</span>\<span class="string">" &amp; Year_ &amp; "</span>\<span class="string">" &amp; fileName_</span></span><br><span class="line"><span class="string">    If Fso.FolderExists(Path2) = False Then</span></span><br><span class="line"><span class="string">        MkDir (FolderPath &amp; "</span>\<span class="string">" &amp; Year_) "</span>创建年份的文件夹</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">If</span> Fso.FolderExists(Path3) = <span class="literal">True</span> <span class="keyword">Then</span></span><br><span class="line">        <span class="keyword">If</span> (MsgBox(<span class="string">"已存在该文件，是否覆盖？"</span>, vbYesNo)) = vbNo <span class="keyword">Then</span></span><br><span class="line">            Cancel = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">Exit</span> <span class="keyword">Sub</span></span><br><span class="line">        <span class="keyword">Else</span></span><br><span class="line">            <span class="keyword">GoTo</span> l</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Else</span></span><br><span class="line">        MkDir (FolderPath &amp; <span class="string">"\"</span> &amp; Year_ &amp; <span class="string">"\"</span> &amp; fileName_)</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">l:</span><br><span class="line">    ActiveDocument.SaveAs FileName:=FolderPath &amp; <span class="string">"\"</span> &amp; Year_ &amp; <span class="string">"\"</span> &amp; fileName_ &amp; <span class="string">"\"</span> &amp; fileName_ <span class="string">"另存为重命名文件</span></span><br><span class="line"><span class="string">End Sub</span></span><br></pre></td></tr></table></figure></p>
+<p>​<br>​    </p>
+<p>Excel中则需要调用Word.Application，但是思路还是和Word中一样。</p>
+<h2 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h2><figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> test()</span><br><span class="line">    <span class="keyword">Dim</span> wdApp <span class="keyword">As</span> Word.Application</span><br><span class="line">    <span class="keyword">Dim</span> wddocument <span class="keyword">As</span> Word.document</span><br><span class="line">    <span class="keyword">Dim</span> myExp <span class="keyword">As</span> RegExp</span><br><span class="line">    <span class="keyword">Dim</span> AllContent</span><br><span class="line">    <span class="keyword">For</span> k = <span class="number">2</span> <span class="keyword">To</span> Application.CountA(Sheet1.Range(<span class="string">"D:D"</span>))</span><br><span class="line">        file_ = Sheet1.Range(<span class="string">"D"</span> &amp; k)</span><br><span class="line">        <span class="keyword">Set</span> wdApp = <span class="keyword">New</span> Word.Application</span><br><span class="line">        <span class="keyword">Set</span> wddocument = wdApp.Documents.Open(file_)</span><br><span class="line">        <span class="keyword">With</span> wdApp</span><br><span class="line">            <span class="keyword">Set</span> myExp = <span class="keyword">New</span> RegExp</span><br><span class="line">            AllContent = wddocument.Content</span><br><span class="line">            <span class="keyword">With</span> myExp</span><br><span class="line">                .Pattern = Sheet1.Range(<span class="string">"B1"</span>)</span><br><span class="line">                .<span class="keyword">Global</span> = <span class="literal">False</span></span><br><span class="line">                <span class="keyword">Set</span> myMsg = .Execute(AllContent)</span><br><span class="line"></span><br><span class="line">                <span class="keyword">For</span> <span class="keyword">Each</span> m <span class="keyword">In</span> myMsg</span><br><span class="line">                    Sheet1.Range(<span class="string">"E"</span> &amp; k) = m</span><br><span class="line">                <span class="keyword">Next</span></span><br><span class="line">            <span class="keyword">End</span> <span class="keyword">With</span></span><br><span class="line">            .Documents.Close</span><br><span class="line">            .Quit</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">With</span></span><br><span class="line">        <span class="keyword">Set</span> wdApp = <span class="literal">Nothing</span></span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>
     </article>
     <!-- license  -->
     
@@ -959,6 +751,8 @@ top:50vh;
     
     
     
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 16
@@ -1053,7 +847,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/wordpress-e5-8d-87-e7-ba-a7-e4-bc-98-e5-8c-96/" >WordPress升级优化</a>
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/WordPress升级优化/" >WordPress升级优化</a>
         </li>
     
     
@@ -1071,13 +865,27 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
+    
+        <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
+    
         <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
+    
+        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
         <span class="sidebar-tag-name" data-tags="JsBox"><span class="iconfont-archer">&#xe606;</span>JsBox</span>
     
         <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
+        <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
+    
+        <span class="sidebar-tag-name" data-tags="合同"><span class="iconfont-archer">&#xe606;</span>合同</span>
+    
+        <span class="sidebar-tag-name" data-tags="民间借贷"><span class="iconfont-archer">&#xe606;</span>民间借贷</span>
+    
         <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
+    
+        <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1116,9 +924,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
     
-        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
-    
         <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
+    
+        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
     
         <span class="sidebar-category-name" data-categories="瞎折腾"><span class="iconfont-archer">&#xe60a;</span>瞎折腾</span>
     

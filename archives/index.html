@@ -383,8 +383,8 @@
         <div class="abstract-content">
             根据之前TG群的Netspeed（找不到作者了）和RYAN大佬的Progress按照App——SYS PRO制作。 可以查看当前网速、局域网外网IP、设备名称、iOS版本、磁盘剩余、内存占用等情况。 可以点击界面来切换显示的系统信息和网络信息。 目前已知的问题： 1. 硬盘剩余与实际不符； 2. 内存占用可能也存在同样的情况，但是总体差不多，没1那么夸张； 3. 内存占用的百分比在某些情况下会出现N多位小数。
 说明（三条都不是我的锅），对不起第三条的确是我的锅。 1和2的问题，是JsBox的返回值就是这样，可以自行利用
-$ui.alert($device.space)
-查看。 3的问题仅...
+1$ui.alert($device.space)
+查看。 3的问题...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -416,11 +416,16 @@ $ui.alert($device.space)
             前言之前折腾了一下小宝固件软件中心的Aria2，安装是方便了，但是问题也不少。
 
 Bug不少，经常莫名其妙假死。
-添加设置需要在面板进行，如果是改conf文件，面板里面一提交，conf就会被重写。 
-第二点就导致了自动更新tarcker列表的脚本无法执行。 
-更新需要等待适配。 今天看论坛有大佬编译了1.34的版本，所以就想舍弃软件中心版，直接自己安装。 虽然看不到了面板那么详细的数据，但是总体还不错。
 
-步骤自动挂载U盘因为之前直接安装Aria2到路由，运行一段时间重启后会导致opt文件夹软链丢失，造成Aria2无法启动和运行。所以想用其他方法，然后看到了这篇文章，将opt文件夹链接到...
+添加设置需要在面板进行，如果是改conf文件，面板里面一提交，conf就会被重写。 
+
+第二点就导致了自动更新tarcker列表的脚本无法执行。 
+
+更新需要等待适配。 
+
+
+今天看论坛有大佬编译了1.34的版本，所以就想舍弃软件中心版，直接自己安装。 虽然看不到了面板那么详细的数据，但是总体还不错。
+步骤自动挂载U盘因为之前直接安装Aria2到路由，运行一段时间重启后会导致opt文件夹软链丢失，造成Aria2无法启动和运行。所以想用其他方法，然后看到了这篇文章，将opt文...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -451,12 +456,12 @@ Bug不少，经常莫名其妙假死。
         <div class="abstract-content">
             前言最近在捣鼓Aria2下载，恰值西部世界第二季开播，白天上班，无法在内网管理，所以开始折腾内网穿透的事情。 之前用的方案是华硕第三方梅林——小宝固件的DDNS穿透，但是最近一直不稳，而且已经好几天无法连接，所以自己在VPS搭建了frp穿透服务。
 基本思路
-1、华硕路由搭建Aria2下载环境和frp穿透客户端；
-2、远程VPS搭建frp穿透服务端；
-3、顺便搭建AriaNG网页服务端（可选）。 
+华硕路由搭建Aria2下载环境和frp穿透客户端；
+远程VPS搭建frp穿透服务端；
+顺便搭建AriaNG网页服务端（可选）。
 
 客户端配置华硕路由刷第三方梅林固件，这里使用小宝固件，并在软件中心安装Aria2和frp客户端。
-Ari2设置  Aria2常规设置，如果没有速度则添加额外以下Tracker，基本种子都有速度...
+Ari2设置  Aria2常规设置，如果没有速度则添加额外以下Tracker，基本种子都有速度，而且连接速度...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -489,9 +494,7 @@ Ari2设置  Aria2常规设置，如果没有速度则添加额外以下Tracker�
 安装链接
 安装链接
 
-详细代码const CryptoJS = require(&quot;crypto-js&quot;)
-String.prototype.urlsafe = function() {
-  return this.replace(/\+/g, &quot;-&quot;).replace(/\//g, &quot;_&q...
+详细代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879const C...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -582,6 +585,12 @@ String.prototype.urlsafe = function() {
             </div>
             <!-- tags  -->
             
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "WIN10">WIN10</a>
+    
+</div>
+            
         </div>
     </article>
     
@@ -629,7 +638,8 @@ Excel自带的标记重复值虽然EXCEL有标记重复值的功能，但是也�
             以前留存的两例Potplayer皮肤，仅仅是简单的外观，不支持复杂功能（因为会有BUG，又懒得改）。
 1.Ti
 2.BotPlayer素材提取自iOS应用TweetBot。  
-3.下载Ti Botplayer
+3.下载Ti
+Botplayer
 
         </div>
         <div class="abstract-post-meta">
@@ -916,6 +926,8 @@ Excel自带的标记重复值虽然EXCEL有标记重复值的功能，但是也�
     
     
     
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 16
@@ -1010,7 +1022,7 @@ Excel自带的标记重复值虽然EXCEL有标记重复值的功能，但是也�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/wordpress-e5-8d-87-e7-ba-a7-e4-bc-98-e5-8c-96/" >WordPress升级优化</a>
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/WordPress升级优化/" >WordPress升级优化</a>
         </li>
     
     
@@ -1028,13 +1040,27 @@ Excel自带的标记重复值虽然EXCEL有标记重复值的功能，但是也�
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
+    
+        <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
+    
         <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
+    
+        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
         <span class="sidebar-tag-name" data-tags="JsBox"><span class="iconfont-archer">&#xe606;</span>JsBox</span>
     
         <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
+        <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
+    
+        <span class="sidebar-tag-name" data-tags="合同"><span class="iconfont-archer">&#xe606;</span>合同</span>
+    
+        <span class="sidebar-tag-name" data-tags="民间借贷"><span class="iconfont-archer">&#xe606;</span>民间借贷</span>
+    
         <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
+    
+        <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1073,9 +1099,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
     
-        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
-    
         <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
+    
+        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
     
         <span class="sidebar-category-name" data-categories="瞎折腾"><span class="iconfont-archer">&#xe60a;</span>瞎折腾</span>
     

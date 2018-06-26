@@ -261,7 +261,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,310</span> / Reading time: <span class="post-count">5 min</span></span>
+                        <span>Word count: <span class="post-count">1,315</span> / Reading time: <span class="post-count">5 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -391,12 +391,8 @@ height:50vh;
             <main class="main post-page">
     <article class="article-entry">
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>自从总公司规定内网电脑不能使用U盘以后，内外网数据互通就麻烦了不少，虽然给每人发放了一个光盘刻录机，但是工作质量总感觉退回了上世纪。 好在省公司开发了一个内外网数据互通的云盘，与其说是开发，不如说是剔除了一些功能的ownCloud个人云存储开源解决方案。 虽然脱离了上世纪的办公环境，但是工作效率还是停留在本世纪初，数据流通依旧十分不方便。有笔记本的同志自然不必说，直接网页操作就可以了，如果是手机用户，则必须要iOS11以上系统支持或者使用iCabMobile等工具才可以使用，但是操作流程十分繁复：比如要将微信内Word转移到内网需要以下步骤，微信内打开Word→跳转保存到“文件”或者iCabMobile等App→浏览器打开网盘地址并登陆→点击上传按钮选择文件上传。 可喜的是，今天例行帮小伙伴转移文件后，查看了一下网盘的源代码，发现了这么一段代码</p>
-<pre><code>&lt;div id=&quot;app-settings-content&quot;&gt; 
-        &lt;label for=&quot;webdavurl&quot;&gt;WebDAV&lt;/label&gt;
-        &lt;input id=&quot;webdavurl&quot; type=&quot;text&quot; readonly=&quot;readonly&quot; value=&quot;http://60.191.98.250/remote.php/webdav/&quot; /&gt;
-        &lt;em&gt;使用这个地址 &lt;a href=&quot;https://doc.owncloud.org/server/9.0/go.php?to=user-webdav&quot; target=&quot;_blank&quot;&gt;通过 WebDAV 访问您的文件&lt;/a&gt;&lt;/em&gt;
-&lt;/div&gt;
-</code></pre><p>就是说云盘是支持webDAV协议的，利用手机App即可进行文件管理，虽然在云盘操作界面没有显示这段话。这样的话，分享文件就变得十分简单了，只需要在微信中将文件打开，点击分享按钮，找到拷贝到具体App中即可跳转直接保存到网盘，同理从内网转移到外网只需要将流程翻转即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app-settings-content&quot;&gt; </span><br><span class="line">        &lt;label for=&quot;webdavurl&quot;&gt;WebDAV&lt;/label&gt;</span><br><span class="line">        &lt;input id=&quot;webdavurl&quot; type=&quot;text&quot; readonly=&quot;readonly&quot; value=&quot;http://60.191.98.250/remote.php/webdav/&quot; /&gt;</span><br><span class="line">        &lt;em&gt;使用这个地址 &lt;a href=&quot;https://doc.owncloud.org/server/9.0/go.php?to=user-webdav&quot; target=&quot;_blank&quot;&gt;通过 WebDAV 访问您的文件&lt;/a&gt;&lt;/em&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>就是说云盘是支持webDAV协议的，利用手机App即可进行文件管理，虽然在云盘操作界面没有显示这段话。这样的话，分享文件就变得十分简单了，只需要在微信中将文件打开，点击分享按钮，找到拷贝到具体App中即可跳转直接保存到网盘，同理从内网转移到外网只需要将流程翻转即可。</p>
 <h2 id="横向评测支持webDAV的App"><a href="#横向评测支持webDAV的App" class="headerlink" title="横向评测支持webDAV的App"></a>横向评测支持webDAV的App</h2><p>方向有了，就很好办了，在App Store中搜索关键词webDAV就可以找到不少App，但是大部分需要收费，因此以下评测了3款免费软件：FileExploer、WPS Office、Documents。</p>
 <h3 id="FileExploer"><a href="#FileExploer" class="headerlink" title="FileExploer"></a>FileExploer</h3><p>如图进行设置，HOST Url填写<a href="http://60.191.98.250/remote.php/webdav/" target="_blank" rel="noopener">http://60.191.98.250/remote.php/webdav/</a> 用户名及密码与内网一致。 <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/1.jpg" alt="FileExploer设置" title="FileExploer设置"> <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/2.jpg" alt="FileExploer设置" title="FileExploer设置"> 这款App是第一个下的，如果没有发现Documents这款App的话，日常使用也足够了，并且支持图片、文件等多类型文件上传与下载。 值得一提的是，微信中点击分享→点击拷贝到“FileExploer”后直接会让你选择保存位置，你只需要选择云盘即可直接保存入盘，十分方便。 唯一美中不足的是，因为是免费软件，所以时常会跳出升级到专业版的提示，如果能够接受30元的价格，升级支持一下国产软件也是可以的。 推荐指数：★★★☆☆</p>
 <h3 id="WPS-Office"><a href="#WPS-Office" class="headerlink" title="WPS Office"></a>WPS Office</h3><p>是的，你没有看错，WPS手机版也是支持webDAV协议的，如图进行设置，输入内容与前一款一致。 <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/3.jpg" alt="WPS Office设置" title="WPS Office设置"> <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/41.jpg" alt="WPS Office设置" title="WPS Office设置"> WPS的优点在于可以对文档直接进行编辑然后分享，大厂出品自然不会夹带广告，但是也有模板之类的收费内容。 WPS的缺点也十分明显，它并不支持图片等格式上传，只支持Word、Excel、PowerPoint三款办公软件文档上传。而且上传方式十分麻烦，需要先保存到WPS中，再在网盘页面右上角按钮处点击进行文档上传。 推荐需要直接编辑，对文件支持类型要求不大的用户使用。 推荐指数：★★☆☆☆</p>
@@ -743,6 +739,8 @@ top:50vh;
     
     
     
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 16
@@ -837,7 +835,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/wordpress-e5-8d-87-e7-ba-a7-e4-bc-98-e5-8c-96/" >WordPress升级优化</a>
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/WordPress升级优化/" >WordPress升级优化</a>
         </li>
     
     
@@ -855,13 +853,27 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
+    
+        <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
+    
         <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
+    
+        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
         <span class="sidebar-tag-name" data-tags="JsBox"><span class="iconfont-archer">&#xe606;</span>JsBox</span>
     
         <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
+        <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
+    
+        <span class="sidebar-tag-name" data-tags="合同"><span class="iconfont-archer">&#xe606;</span>合同</span>
+    
+        <span class="sidebar-tag-name" data-tags="民间借贷"><span class="iconfont-archer">&#xe606;</span>民间借贷</span>
+    
         <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
+    
+        <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -900,9 +912,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
     
-        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
-    
         <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
+    
+        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
     
         <span class="sidebar-category-name" data-categories="瞎折腾"><span class="iconfont-archer">&#xe60a;</span>瞎折腾</span>
     

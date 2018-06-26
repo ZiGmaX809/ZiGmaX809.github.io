@@ -267,7 +267,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">850</span> / Reading time: <span class="post-count">3 min</span></span>
+                        <span>Word count: <span class="post-count">913</span> / Reading time: <span class="post-count">4 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -400,70 +400,8 @@ height:50vh;
 <h2 id="关于图床"><a href="#关于图床" class="headerlink" title="关于图床"></a>关于图床</h2><p>在微信里面使用图床，最为关键的要看马爸爸有没有屏蔽，在试过几个主流图床后，使用效果如下。 - 贴图库，勉强能用，如果用Workflow无损上传PNG的话40%会被屏蔽，利用JSBox压缩成jpg基本不会； - sm.ms，全站被屏蔽； - 七牛云，会提示跳转，需多余操作，体验效果不佳； - 微博，新浪已更改API接口，无法使用。 因此在图床上面还是选择贴图库比较妥当，需要注意的是普通用户上传图片7日后会删除，并且频率也会有一定限制。</p>
 <h2 id="关于短链转换"><a href="#关于短链转换" class="headerlink" title="关于短链转换"></a>关于短链转换</h2><p>虽然JSBox有现成的短链转换函数，但是在Workflow上面还是折腾比较久。因为懒得申请微博API，所以先是在百度找了一个不知名的小站做转换，实际效果是在微信中跳转时要求关注公众号，所以枪毙了。之后在Workflow里面找到一个转短链的流程，里面留了个公用Token，试了试也可以用，而且微信不屏蔽也不需要关注公众号。但是这样用人家的Token始终有些膈应，因此把Workflow流程搬到了JSBox中。</p>
 <h2 id="JSBox代码"><a href="#JSBox代码" class="headerlink" title="JSBox代码"></a>JSBox代码</h2><p>第一次接触JavaScript，好在有官方文档可以查看。脚本流程原理也很简单，选取相册图片或者直接在相册选取图片以后利用Upload函数上传到图床，并将返回链接转换为短链，并拷贝到粘贴板。 代码如下：添加ID和Token即可食用，配合JSBox里的斗图啦脚本风味更加。</p>
-<pre><code>function PickImage() {
-  $photo.pick({
-    format: &quot;image&quot;,
-    handler: function(resp) {
-      var image = resp.image
-      if (image) {
-        Upload(image.jpg(1, 0))
-      } else {
-        $ui.loading(false)
-      }
-    }
-  })
-}
-
-function Upload(data) {
-  $ui.loading(true)
-  $http.upload({
-    url: &quot;http://up.imgapi.com/&quot;,
-    form: {
-      from: &quot;file&quot;,
-      aid: &quot;你的相册ID&quot;,
-      Token: &quot;你的Token&quot;
-    },
-    files: [{
-      &quot;data&quot;: data,
-      &quot;name&quot;: &quot;file&quot;
-    }],
-    handler: function(resp) {
-      $ui.loading(false)
-      var url = resp.data.linkurl
-      if (url) {
-        Shorturl(url)
-      } else {
-        $ui.alert(&quot;图片上传失败&quot;)
-      }
-    }
-  })
-}
-
-function Shorturl(url) {
-  $http.shorten({
-    url: url,
-    handler: function(url) {
-      if (url) {
-        $clipboard.text = &quot;图片评论 &quot; + url
-        $ui.toast(&quot;复制成功&quot;, 2)
-        $app.close(2)
-      }
-
-    }
-  })
-}
-
-var inputData = $context.data
-var inputLink = $context.link
-
-if (inputData) {
-  Upload(inputData)
-} else if (inputLink) {
-  Shorturl(inputLink)
-} else {
-  PickImage()
-}
-</code></pre><h2 id="朋友圈效果"><a href="#朋友圈效果" class="headerlink" title="朋友圈效果"></a>朋友圈效果</h2><p><img src="http://7rf2ax.com1.z0.glb.clouddn.com/JSBox/JSBox1.jpg" alt="JSBox" title="JSBox"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">PickImage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  $photo.pick(&#123;</span><br><span class="line">    format: <span class="string">"image"</span>,</span><br><span class="line">    handler: <span class="function"><span class="keyword">function</span>(<span class="params">resp</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> image = resp.image</span><br><span class="line">      <span class="keyword">if</span> (image) &#123;</span><br><span class="line">        Upload(image.jpg(<span class="number">1</span>, <span class="number">0</span>))</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $ui.loading(<span class="literal">false</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Upload</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  $ui.loading(<span class="literal">true</span>)</span><br><span class="line">  $http.upload(&#123;</span><br><span class="line">    url: <span class="string">"http://up.imgapi.com/"</span>,</span><br><span class="line">    form: &#123;</span><br><span class="line">      <span class="keyword">from</span>: <span class="string">"file"</span>,</span><br><span class="line">      aid: <span class="string">"你的相册ID"</span>,</span><br><span class="line">      Token: <span class="string">"你的Token"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    files: [&#123;</span><br><span class="line">      <span class="string">"data"</span>: data,</span><br><span class="line">      <span class="string">"name"</span>: <span class="string">"file"</span></span><br><span class="line">    &#125;],</span><br><span class="line">    handler: <span class="function"><span class="keyword">function</span>(<span class="params">resp</span>) </span>&#123;</span><br><span class="line">      $ui.loading(<span class="literal">false</span>)</span><br><span class="line">      <span class="keyword">var</span> url = resp.data.linkurl</span><br><span class="line">      <span class="keyword">if</span> (url) &#123;</span><br><span class="line">        Shorturl(url)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $ui.alert(<span class="string">"图片上传失败"</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Shorturl</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  $http.shorten(&#123;</span><br><span class="line">    url: url,</span><br><span class="line">    handler: <span class="function"><span class="keyword">function</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (url) &#123;</span><br><span class="line">        $clipboard.text = <span class="string">"图片评论 "</span> + url</span><br><span class="line">        $ui.toast(<span class="string">"复制成功"</span>, <span class="number">2</span>)</span><br><span class="line">        $app.close(<span class="number">2</span>)</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> inputData = $context.data</span><br><span class="line"><span class="keyword">var</span> inputLink = $context.link</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (inputData) &#123;</span><br><span class="line">  Upload(inputData)</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (inputLink) &#123;</span><br><span class="line">  Shorturl(inputLink)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  PickImage()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="朋友圈效果"><a href="#朋友圈效果" class="headerlink" title="朋友圈效果"></a>朋友圈效果</h2><p><img src="http://7rf2ax.com1.z0.glb.clouddn.com/JSBox/JSBox1.jpg" alt="JSBox" title="JSBox"></p>
 
     </article>
     <!-- license  -->
@@ -805,6 +743,8 @@ top:50vh;
     
     
     
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 16
@@ -899,7 +839,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/wordpress-e5-8d-87-e7-ba-a7-e4-bc-98-e5-8c-96/" >WordPress升级优化</a>
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/WordPress升级优化/" >WordPress升级优化</a>
         </li>
     
     
@@ -917,13 +857,27 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
+    
+        <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
+    
         <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
+    
+        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
         <span class="sidebar-tag-name" data-tags="JsBox"><span class="iconfont-archer">&#xe606;</span>JsBox</span>
     
         <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
+        <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
+    
+        <span class="sidebar-tag-name" data-tags="合同"><span class="iconfont-archer">&#xe606;</span>合同</span>
+    
+        <span class="sidebar-tag-name" data-tags="民间借贷"><span class="iconfont-archer">&#xe606;</span>民间借贷</span>
+    
         <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
+    
+        <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -962,9 +916,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
     
-        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
-    
         <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
+    
+        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
     
         <span class="sidebar-category-name" data-categories="瞎折腾"><span class="iconfont-archer">&#xe60a;</span>瞎折腾</span>
     

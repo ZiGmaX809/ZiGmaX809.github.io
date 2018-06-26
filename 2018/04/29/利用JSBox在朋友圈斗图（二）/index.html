@@ -267,7 +267,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">302</span> / Reading time: <span class="post-count">1 min</span></span>
+                        <span>Word count: <span class="post-count">381</span> / Reading time: <span class="post-count">2 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -400,86 +400,7 @@ height:50vh;
 <h2 id="安装链接"><a href="#安装链接" class="headerlink" title="安装链接"></a>安装链接</h2><ul>
 <li><a href="http://7rf2ax.com1.z0.glb.clouddn.com/%E5%9B%BE%E7%89%87%E8%AF%84%E8%AE%BA.js" title="安装链接" target="_blank" rel="noopener">安装链接</a></li>
 </ul>
-<h2 id="详细代码"><a href="#详细代码" class="headerlink" title="详细代码"></a>详细代码</h2><pre><code>const CryptoJS = require(&quot;crypto-js&quot;)
-String.prototype.urlsafe = function() {
-  return this.replace(/\+/g, &quot;-&quot;).replace(/\//g, &quot;_&quot;)
-}
-//计算Token
-//你的AK
-var AK = &quot;&quot;
-//你的SK
-var SK = &quot;&quot;
-//你的储存空间名
-var bucket = &quot;&quot;
-//你的储存域名
-var domain = &quot;&quot;
-var deadline = Math.round(new Date().getTime() / 1000) + 1 * 3600
-var params = {scope: bucket,deadline: deadline}
-var policy = JSON.stringify(params)
-var policyEncoded = $text.base64Encode(policy).urlsafe()
-var sign = CryptoJS.HmacSHA1(policyEncoded, SK)
-var signEncoded = sign.toString(CryptoJS.enc.Base64).urlsafe()
-var token = AK + &quot;:&quot; + signEncoded + &quot;:&quot; + policyEncoded
-
-function PickImage() {
-  $photo.pick({
-    format: &quot;image&quot;,
-    handler: function(resp) {
-      var image = resp.image
-      if (image) {
-        Upload(image)
-      } else {
-        $ui.loading(false)
-      }
-    }
-  })
-}
-
-function Upload(image) {
-  $http.upload({
-    url: &quot;http://upload.qiniu.com/&quot;,
-    form: {
-      token: token
-    },
-    files: [{
-      &quot;image&quot;: image,
-      &quot;name&quot;: &quot;file&quot;,
-      &quot;filename&quot;: &quot;file&quot;
-    }],
-    progress: function(percentage) {
-
-    },
-    handler: function(resp) {
-      var url = domain + resp.data.key
-      if (url) {
-        Shorturl(url)
-      } else {
-        $ui.alert(&quot;图片上传失败&quot;)
-      }
-    }
-  })
-}
-
-function Shorturl(url) {
-  $http.shorten({
-    url: url,
-    handler: function(url) {
-      if (url) {
-        $clipboard.text = &quot;图片评论 &quot; + url
-        $ui.toast(&quot;复制成功&quot;, 2)
-        $app.close(2)
-      }
-    }
-  })
-}
-
-var inputImage = $context.image
-if (inputImage) {
-  Upload(inputImage)
-}else{
-  PickImage()
-}
-</code></pre>
+<h2 id="详细代码"><a href="#详细代码" class="headerlink" title="详细代码"></a>详细代码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CryptoJS = <span class="built_in">require</span>(<span class="string">"crypto-js"</span>)</span><br><span class="line"><span class="built_in">String</span>.prototype.urlsafe = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.replace(<span class="regexp">/\+/g</span>, <span class="string">"-"</span>).replace(<span class="regexp">/\//g</span>, <span class="string">"_"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//计算Token</span></span><br><span class="line"><span class="comment">//你的AK</span></span><br><span class="line"><span class="keyword">var</span> AK = <span class="string">""</span></span><br><span class="line"><span class="comment">//你的SK</span></span><br><span class="line"><span class="keyword">var</span> SK = <span class="string">""</span></span><br><span class="line"><span class="comment">//你的储存空间名</span></span><br><span class="line"><span class="keyword">var</span> bucket = <span class="string">""</span></span><br><span class="line"><span class="comment">//你的储存域名</span></span><br><span class="line"><span class="keyword">var</span> domain = <span class="string">""</span></span><br><span class="line"><span class="keyword">var</span> deadline = <span class="built_in">Math</span>.round(<span class="keyword">new</span> <span class="built_in">Date</span>().getTime() / <span class="number">1000</span>) + <span class="number">1</span> * <span class="number">3600</span></span><br><span class="line"><span class="keyword">var</span> params = &#123;<span class="attr">scope</span>: bucket,<span class="attr">deadline</span>: deadline&#125;</span><br><span class="line"><span class="keyword">var</span> policy = <span class="built_in">JSON</span>.stringify(params)</span><br><span class="line"><span class="keyword">var</span> policyEncoded = $text.base64Encode(policy).urlsafe()</span><br><span class="line"><span class="keyword">var</span> sign = CryptoJS.HmacSHA1(policyEncoded, SK)</span><br><span class="line"><span class="keyword">var</span> signEncoded = sign.toString(CryptoJS.enc.Base64).urlsafe()</span><br><span class="line"><span class="keyword">var</span> token = AK + <span class="string">":"</span> + signEncoded + <span class="string">":"</span> + policyEncoded</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">PickImage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  $photo.pick(&#123;</span><br><span class="line">    format: <span class="string">"image"</span>,</span><br><span class="line">    handler: <span class="function"><span class="keyword">function</span>(<span class="params">resp</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> image = resp.image</span><br><span class="line">      <span class="keyword">if</span> (image) &#123;</span><br><span class="line">        Upload(image)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $ui.loading(<span class="literal">false</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Upload</span>(<span class="params">image</span>) </span>&#123;</span><br><span class="line">  $http.upload(&#123;</span><br><span class="line">    url: <span class="string">"http://upload.qiniu.com/"</span>,</span><br><span class="line">    form: &#123;</span><br><span class="line">      token: token</span><br><span class="line">    &#125;,</span><br><span class="line">    files: [&#123;</span><br><span class="line">      <span class="string">"image"</span>: image,</span><br><span class="line">      <span class="string">"name"</span>: <span class="string">"file"</span>,</span><br><span class="line">      <span class="string">"filename"</span>: <span class="string">"file"</span></span><br><span class="line">    &#125;],</span><br><span class="line">    progress: <span class="function"><span class="keyword">function</span>(<span class="params">percentage</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">    handler: <span class="function"><span class="keyword">function</span>(<span class="params">resp</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> url = domain + resp.data.key</span><br><span class="line">      <span class="keyword">if</span> (url) &#123;</span><br><span class="line">        Shorturl(url)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $ui.alert(<span class="string">"图片上传失败"</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Shorturl</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  $http.shorten(&#123;</span><br><span class="line">    url: url,</span><br><span class="line">    handler: <span class="function"><span class="keyword">function</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (url) &#123;</span><br><span class="line">        $clipboard.text = <span class="string">"图片评论 "</span> + url</span><br><span class="line">        $ui.toast(<span class="string">"复制成功"</span>, <span class="number">2</span>)</span><br><span class="line">        $app.close(<span class="number">2</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> inputImage = $context.image</span><br><span class="line"><span class="keyword">if</span> (inputImage) &#123;</span><br><span class="line">  Upload(inputImage)</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  PickImage()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </article>
     <!-- license  -->
     
@@ -820,6 +741,8 @@ top:50vh;
     
     
     
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 16
@@ -914,7 +837,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/wordpress-e5-8d-87-e7-ba-a7-e4-bc-98-e5-8c-96/" >WordPress升级优化</a>
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/WordPress升级优化/" >WordPress升级优化</a>
         </li>
     
     
@@ -932,13 +855,27 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
+    
+        <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
+    
         <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
+    
+        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
         <span class="sidebar-tag-name" data-tags="JsBox"><span class="iconfont-archer">&#xe606;</span>JsBox</span>
     
         <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
+        <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
+    
+        <span class="sidebar-tag-name" data-tags="合同"><span class="iconfont-archer">&#xe606;</span>合同</span>
+    
+        <span class="sidebar-tag-name" data-tags="民间借贷"><span class="iconfont-archer">&#xe606;</span>民间借贷</span>
+    
         <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
+    
+        <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -977,9 +914,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
     
-        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
-    
         <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
+    
+        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
     
         <span class="sidebar-category-name" data-categories="瞎折腾"><span class="iconfont-archer">&#xe60a;</span>瞎折腾</span>
     
