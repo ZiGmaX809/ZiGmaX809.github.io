@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.zigma.cc/"/>
-  <updated>2018-06-26T15:07:03.741Z</updated>
+  <updated>2018-06-26T13:53:25.569Z</updated>
   <id>http://www.zigma.cc/</id>
   
   <author>
@@ -15,33 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>【Hexo】从Wordpress转Hexo的那些深坑</title>
-    <link href="http://www.zigma.cc/2018/06/26/%E3%80%90Hexo%E3%80%91%E4%BB%8EWordpress%E8%BD%ACHexo%E7%9A%84%E9%82%A3%E4%BA%9B%E6%B7%B1%E5%9D%91/"/>
-    <id>http://www.zigma.cc/2018/06/26/【Hexo】从Wordpress转Hexo的那些深坑/</id>
-    <published>2018-06-26T14:44:12.000Z</published>
-    <updated>2018-06-26T15:07:03.741Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>昨天作死开始了从wp到Hexo的迁移之旅，网上大部分Hexo搭建教程都还停留在2017年甚至2016年，所以整个迁移过程历尽深坑不断。</p><p>因此我觉得有必要记录一下自己所踩过的那些深坑。</p><p>具体有以下几点：</p><ul><li>搬瓦工ssh端口；</li><li>ssh公钥和秘钥问题；</li><li>VPS文件/文件夹权限问题；</li><li>post-receive钩子无法正常执行的问题；</li></ul><p>主要参考：</p><p><a href="http://skyhacks.org/2017/07/21/UseHexoToBuildBlog/" target="_blank" rel="noopener">Hexo环境搭建个人博客</a></p><p><a href="https://calton007.github.io/2018/05/08/n-deploy-vps/" target="_blank" rel="noopener">使用 Git Hook 自动部署 Hexo 到个人 VPS </a></p><h1 id="填坑开始"><a href="#填坑开始" class="headerlink" title="填坑开始"></a>填坑开始</h1><p>Hexo的基本运行逻辑就是本地编写Markdown文档——利用Git生成html页面——利用Git推送到VPS——VPS再通过Git钩子发布到Nignx配置文件夹成网页发布。</p><h2 id="本地环境搭建"><a href="#本地环境搭建" class="headerlink" title="本地环境搭建"></a>本地环境搭建</h2><h3 id=""><a href="#" class="headerlink" title=" "></a> </h3>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;昨天作死开始了从wp到Hexo的迁移之旅，网上大部分Hexo搭建教程都还停留在2017年甚至2016年，所以整个迁移过程历尽深坑不断。&lt;/p
-      
-    
-    </summary>
-    
-    
-      <category term="VPS" scheme="http://www.zigma.cc/tags/VPS/"/>
-    
-      <category term="Hexo" scheme="http://www.zigma.cc/tags/Hexo/"/>
-    
-      <category term="搬瓦工" scheme="http://www.zigma.cc/tags/%E6%90%AC%E7%93%A6%E5%B7%A5/"/>
-    
-  </entry>
   
   <entry>
     <title>【JsBox】Days Pro</title>
