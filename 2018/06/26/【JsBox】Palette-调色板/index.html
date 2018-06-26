@@ -396,7 +396,9 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>之前写Days Pro时想要找几个配色，在App Store找了一圈相关的App，但是这类工具数量少的可怜，并且交互十分不友好，比如无法复制HEX、RGB值，再或者界面并未适配7P。所以就按照其中比较好的一款写了个脚本，并且支持了直接复制颜色值，之前设计是想要支持查看历史记录的，但是在实际实现过程中，发现这个功能并不常用。而且如果实现这个比较鸡肋的功能，还要增加大量计算，权衡之下放弃了这个功能，当然也有可能是我水平不够，数据传导结构没做好。按照目前来看，现有日常使用已经绰绰有余。<br>选取图片颜色因为JsBox现在暂时还不支持触摸的动作，本人能力也有限，所以本项目不在考虑范围内。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前写Days Pro时想要找几个配色，在App Store找了一圈相关的App，但是这类工具数量少的可怜，并且交互十分不友好，比如无法复制HEX、RGB值，再或者界面并未适配7P。</p>
+<p>所以就按照其中比较好的一款写了个脚本，并且支持了直接复制颜色值，之前设计是想要支持查看历史记录的，但是在实际实现过程中，发现这个功能并不常用。而且如果实现这个比较鸡肋的功能，还要增加大量计算，权衡之下放弃了这个功能，当然也有可能是我水平不够，数据传导结构没做好。按照目前来看，现有日常使用已经绰绰有余。</p>
+<p>选取图片颜色因为JsBox现在暂时还不支持触摸的动作，本人能力也有限，所以本项目不在考虑范围内。</p>
 <h1 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h1><p>· 点击HEX和RGB值可以直接复制所显示的内容，包括#和()；<br>· 各条Slider都会随着数据变化而变化，因此RGB标签页想要查看颜色更加直观。</p>
 <h1 id="安装链接"><a href="#安装链接" class="headerlink" title="安装链接"></a>安装链接</h1><p><a href="https://xteko.com/redir?name=Palette&amp;url=https%3A%2F%2Fraw.githubusercontent.com%2FZiGmaX809%2FJsBoxLib%2Fmaster%2FPalette%2FPalette.box" target="_blank" rel="noopener">Palette</a></p>
 <h1 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h1><p><img src="http://p3f4nvcby.bkt.clouddn.com//palette/IMG_5840.png" alt="1" title="1"><br><img src="http://p3f4nvcby.bkt.clouddn.com//palette/IMG_5841.png" alt="2" title="2"><br><img src="http://p3f4nvcby.bkt.clouddn.com//palette/IMG_5842.png" alt="3" title="3"></p>
@@ -415,6 +417,11 @@ height:50vh;
     <!-- paginator  -->
     <ul class="post-paginator">
         <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/06/26/【JsBox】超轻量级Aria2客户端/" title= 【JsBox】超轻量级Aria2客户端 >
+                    <div class="nextTitle">【JsBox】超轻量级Aria2客户端</div>
+                </a>
             
         </li>
         <li class="previous">
@@ -550,7 +557,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#说明"><span class="toc-number">1.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用说明"><span class="toc-number">2.</span> <span class="toc-text">使用说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装链接"><span class="toc-number">3.</span> <span class="toc-text">安装链接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#截图"><span class="toc-number">4.</span> <span class="toc-text">截图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更新记录"><span class="toc-number">5.</span> <span class="toc-text">更新记录</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用说明"><span class="toc-number">2.</span> <span class="toc-text">使用说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装链接"><span class="toc-number">3.</span> <span class="toc-text">安装链接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#截图"><span class="toc-number">4.</span> <span class="toc-text">截图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更新记录"><span class="toc-number">5.</span> <span class="toc-text">更新记录</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -775,9 +782,40 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 18
+        Total : 19
         <!-- search  -->
         </div>
             <div class="site-search popup-trigger">
@@ -796,6 +834,11 @@ top:50vh;
     
         <li class="archive-post-item">
             <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】Palette-调色板/" >【JsBox】Palette 调色板</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】超轻量级Aria2客户端/" >【JsBox】超轻量级Aria2客户端</a>
         </li>
     
     
@@ -901,9 +944,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
     
-        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
-    
         <span class="sidebar-tag-name" data-tags="JsBox"><span class="iconfont-archer">&#xe606;</span>JsBox</span>
+    
+        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
         <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
     
@@ -954,17 +997,17 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="VPS"><span class="iconfont-archer">&#xe60a;</span>VPS</span>
     
-        <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
-    
         <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
     
-        <span class="sidebar-category-name" data-categories="App"><span class="iconfont-archer">&#xe60a;</span>App</span>
+        <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
     
         <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
     
         <span class="sidebar-category-name" data-categories="瞎折腾"><span class="iconfont-archer">&#xe60a;</span>瞎折腾</span>
     
         <span class="sidebar-category-name" data-categories="工作"><span class="iconfont-archer">&#xe60a;</span>工作</span>
+    
+        <span class="sidebar-category-name" data-categories="App"><span class="iconfont-archer">&#xe60a;</span>App</span>
     
         <span class="sidebar-category-name" data-categories="Potplayer皮肤"><span class="iconfont-archer">&#xe60a;</span>Potplayer皮肤</span>
     
