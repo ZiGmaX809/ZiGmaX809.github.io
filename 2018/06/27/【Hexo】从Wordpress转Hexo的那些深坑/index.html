@@ -271,7 +271,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,616</span> / Reading time: <span class="post-count">7 min</span></span>
+                        <span>Word count: <span class="post-count">1,621</span> / Reading time: <span class="post-count">7 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -415,7 +415,7 @@ height:50vh;
 <h1 id="填坑开始"><a href="#填坑开始" class="headerlink" title="填坑开始"></a>填坑开始</h1><p>Hexo的基本运行逻辑就是本地编写Markdown文档——利用Git生成html页面——利用Git推送到VPS——VPS再通过Git钩子发布到Nignx配置文件夹发布。</p>
 <h2 id="一、本地环境搭建"><a href="#一、本地环境搭建" class="headerlink" title="一、本地环境搭建"></a>一、本地环境搭建</h2><h3 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3><p>在<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">Node.js</a>官网下载对应版本一路next安装即可。</p>
 <h3 id="安装Git环境"><a href="#安装Git环境" class="headerlink" title="安装Git环境"></a>安装Git环境</h3><p>同样在<a href="https://git-scm.com/download/win" target="_blank" rel="noopener">Git For Windows</a>下载后一路next安装。</p>
-<p>根据前述参考文章是需要<a href="http://www.brafox.com/post/2015/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/git-%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE.html" target="_blank" rel="noopener">配置环境变量</a>的，但是我本地的Git是因为VS Code才安装的，并没有设置环境变量。虽然也能用但是无法排除本文所提的深坑是因此而出现。</p>
+<p>根据前述参考文章是需要<a href="http://www.brafox.com/post/2015/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/git-%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE.html" target="_blank" rel="noopener">配置环境变量</a>的，但是我本地的Git是因为VS Code才安装的，并没有设置环境变量。虽然也能用但是无法排除本文所提的深坑是因此而出现，所以还是建议配置一下。</p>
 <p>安装完Git，需要生成ssh密钥，但是我们先要设置Git用户名，从开始菜单中运行Git Bash。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name "你的用户名"</span><br><span class="line">git config --global user.email "你的邮箱地址"</span><br></pre></td></tr></table></figure>
 <p>设置完成后继续生成ssh密钥</p>
@@ -445,9 +445,7 @@ height:50vh;
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 440 /etc/sudoers</span><br></pre></td></tr></table></figure>
 <h3 id="4、配置ssh登录"><a href="#4、配置ssh登录" class="headerlink" title="4、配置ssh登录"></a>4、配置ssh登录</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su git</span><br></pre></td></tr></table></figure>
 <p>切换为git用户</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br></pre></td></tr></table></figure>
-<p>回到根目录</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir .ssh &amp;&amp; cd .ssh</span><br><span class="line">touch authorized_keys</span><br><span class="line">vi authorized_keys // 在这个文件中粘贴进刚刚Winodws下申请的key（在id_rsa.pub文件中）</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">mkdir .ssh &amp;&amp; cd .ssh</span><br><span class="line">touch authorized_keys</span><br><span class="line">vi authorized_keys // 在这个文件中粘贴进刚刚Winodws下申请的key（在id_rsa.pub文件中）</span><br></pre></td></tr></table></figure>
 <p>因为搬瓦工的ssh端口是随机的，但是git默认使用22端口，我测试在本地修改config文件更换git通讯端口，但是效果并不好，所以我们需要将搬瓦工的ssh端口改回22，并且打开免密登录。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/ssh/sshd.config</span><br></pre></td></tr></table></figure>
 <p>删除以下代码前#。</p>
@@ -864,24 +862,6 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 19
@@ -907,12 +887,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】超轻量级Aria2客户端/" >【JsBox】超轻量级Aria2客户端</a>
+            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】Palette-调色板/" >【JsBox】Palette 调色板</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】Palette-调色板/" >【JsBox】Palette 调色板</a>
+            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】超轻量级Aria2客户端/" >【JsBox】超轻量级Aria2客户端</a>
         </li>
     
     
@@ -1009,11 +989,11 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
-    
         <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
     
         <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
+    
+        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
         <span class="sidebar-tag-name" data-tags="JsBox"><span class="iconfont-archer">&#xe606;</span>JsBox</span>
     
@@ -1031,9 +1011,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="民间借贷"><span class="iconfont-archer">&#xe606;</span>民间借贷</span>
     
-        <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
-    
         <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
+    
+        <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1068,9 +1048,9 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
-    
         <span class="sidebar-category-name" data-categories="VPS"><span class="iconfont-archer">&#xe60a;</span>VPS</span>
+    
+        <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
     
         <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
     
@@ -1080,9 +1060,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="工作"><span class="iconfont-archer">&#xe60a;</span>工作</span>
     
-        <span class="sidebar-category-name" data-categories="Potplayer皮肤"><span class="iconfont-archer">&#xe60a;</span>Potplayer皮肤</span>
-    
         <span class="sidebar-category-name" data-categories="App"><span class="iconfont-archer">&#xe60a;</span>App</span>
+    
+        <span class="sidebar-category-name" data-categories="Potplayer皮肤"><span class="iconfont-archer">&#xe60a;</span>Potplayer皮肤</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
