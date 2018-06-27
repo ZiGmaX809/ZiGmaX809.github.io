@@ -267,7 +267,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">1,038</span> / Reading time: <span class="post-count">4 min</span></span>
+                        <span>Word count: <span class="post-count">994</span> / Reading time: <span class="post-count">4 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -407,8 +407,14 @@ height:50vh;
 <blockquote>
 <p>udp://9.rarbg.com:2790/announce,udp://9.rarbg.to:2790/announce,udp://inferno.demonoid.pw:3418/announce,udp://bt.aoeex.com:8000/announce,udp://tracker.internetwarriors.net:1337/announce,udp://tracker.swateam.org.uk:2710/announce,udp://tracker.zer0day.to:1337/announce,udp://p4p.arenabg.com:1337/announce,<a href="https://open.kickasstracker.com:443/announce,udp://tracker.coppersurfer.tk:6969,http://torrentsmd.com:8080/announce,udp://tracker.pirateparty.gr:6969/announce,udp://tracker.coppersurfer.tk:6969/announce,udp://tracker4.itzmx.com:2710/announce,udp://tracker.uw0.xyz:6969/announce,udp://tracker.cypherpunks.ru:6969/announce,udp://open.stealth.si:80/announce,http://retracker.telecom.by:80/announce,udp://191.96.249.23:6969/announce,udp://78.142.19.42:1337/announce,udp://123.249.16.65:2710/announce,udp://185.82.217.160:1337/announce,udp://163.172.81.35:1337/announce,https://zer0day.000webhostapp.com:443/announce,udp://public.popcorn-tracker.org:6969/announce,https://linetorrent.xyz:443/announce,udp://tracker.leechers-paradise.org:6969/announce,https://open.acgnxtracker.com:443/announce,http://bt2.54new.com:8080/announce,http://bt1.54new.com:65533/announce,http://ipv6.54new.com:8080/announce,http://tracker.trackerfix.com/announce,udp://tracker.trackerfix.com:80/announce" target="_blank" rel="noopener">https://open.kickasstracker.com:443/announce,udp://tracker.coppersurfer.tk:6969,http://torrentsmd.com:8080/announce,udp://tracker.pirateparty.gr:6969/announce,udp://tracker.coppersurfer.tk:6969/announce,udp://tracker4.itzmx.com:2710/announce,udp://tracker.uw0.xyz:6969/announce,udp://tracker.cypherpunks.ru:6969/announce,udp://open.stealth.si:80/announce,http://retracker.telecom.by:80/announce,udp://191.96.249.23:6969/announce,udp://78.142.19.42:1337/announce,udp://123.249.16.65:2710/announce,udp://185.82.217.160:1337/announce,udp://163.172.81.35:1337/announce,https://zer0day.000webhostapp.com:443/announce,udp://public.popcorn-tracker.org:6969/announce,https://linetorrent.xyz:443/announce,udp://tracker.leechers-paradise.org:6969/announce,https://open.acgnxtracker.com:443/announce,http://bt2.54new.com:8080/announce,http://bt1.54new.com:65533/announce,http://ipv6.54new.com:8080/announce,http://tracker.trackerfix.com/announce,udp://tracker.trackerfix.com:80/announce</a></p>
 </blockquote>
-<p>需要注意的是，BT下载还是勾选LDP和DHT以及勾去强制加密。网上说的不勾选都是PT下载，和BT下载还是有很大区别的，PT下载的都是小众资源，而且PT种子都是加密的，论坛也都是采取邀请制，如果不是混迹这个圈的没有必要使用PT下载。勾去强制加密是为了提升下载速度。至于端口设置，默认的就行端口转发也没有必要，至少按照上面的设置在我玩Aria2的一周多内下载了几十部电影电视剧。</p>
-<h3 id="frp客户端设置"><a href="#frp客户端设置" class="headerlink" title="frp客户端设置"></a>frp客户端设置</h3><p>按照道理是应该先配置服务端再配置客户端，为了排版好看先放在这里吧。 只列出需要修改的设置，其他均为默认设置。 服务器——frp服务端的服务器地址； 端口——frp服务器监听frp服务的端口，并非访问frp面板的端口； Token——搭建服务端时所填写的Token； HTTP/HTTPS——如果像我一样在服务端还搭建了网页，就需要更改成其他端口； Frpc用户名称——登录frp面板的用户名； 穿透服务协议——需要在域名解析中新增二级域名，比如test.zigma.cc对应远程主机端口就是上面的HTTP端口8001，192.168.2.1和6800则是本地路由地址和Aria2端口。 <img src="http://zigma.qiniudn.com/aria2_frp/3.jpg" alt="frp设置" title="frp设置"></p>
+<p>需要注意的是，BT下载还是勾选LDP和DHT以及勾去强制加密。关于PT下载，以我的理解，不混迹PT论坛、不下载PT资源、只下载热门资源是没有必要去伪装PT客户端的。勾去强制加密是为了提升下载速度。至于端口设置，默认的就行端口转发也没有必要，至少我两层路由下载也一直没有问题。</p>
+<h3 id="frp客户端设置"><a href="#frp客户端设置" class="headerlink" title="frp客户端设置"></a>frp客户端设置</h3><p>按照道理是应该先配置服务端再配置客户端，为了排版好看先放在这里吧。 只列出需要修改的设置，其他均为默认设置。 </p>
+<p>服务器——frp服务端的服务器地址； </p>
+<p>端口——frp服务器监听frp服务的端口，并非访问frp面板的端口； </p>
+<p>Token——搭建服务端时所填写的Token；</p>
+<p>HTTP/HTTPS——如果像我一样在服务端还搭建了网页，就需要更改成其他端口；</p>
+<p>Frpc用户名称——登录frp面板的用户名； </p>
+<p>穿透服务协议——需要在域名解析中新增二级域名，比如test.zigma.cc对应远程主机端口就是上面的HTTP端口8001，192.168.2.1和6800则是本地路由地址和Aria2端口。 <img src="http://zigma.qiniudn.com/aria2_frp/3.jpg" alt="frp设置" title="frp设置"></p>
 <h2 id="服务端配额制"><a href="#服务端配额制" class="headerlink" title="服务端配额制"></a>服务端配额制</h2><p>利用Koolshare社区提供的一键安装包进行安装，安装过程均有提示，这里就不重复造轮子了。 <a href="http://koolshare.cn/thread-65379-1-1.html" title="具体教程链接" target="_blank" rel="noopener">具体教程链接</a></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://raw.githubusercontent.com/clangcn/onekey-install-shell/master/frps/install-frps.sh -O ./install-frps.sh</span><br><span class="line">chmod 700 ./install-frps.sh</span><br><span class="line">./install-frps.sh install</span><br></pre></td></tr></table></figure>
 <h2 id="配置AriaNG服务端"><a href="#配置AriaNG服务端" class="headerlink" title="配置AriaNG服务端"></a>配置AriaNG服务端</h2><p>其实这个就是个静态网页，网上的资源还是挺多的，不过自己还有个64M小鸡闲着也是闲着，挂这个UI刚好，配置Nginx后将AriaNG的<a href="https://github.com/mayswind/AriaNg" title="Github项目" target="_blank" rel="noopener">Github项目</a>内容上传到服务器，而且这个项目都是基本请求一次后一直可以在本地缓存中使用，对于Aria2下载状态也是增量请求数据，因此带宽使用很少。 然后在AriaNG设置界面添加RPC地址为解析的二级域名test.zigma.cc，端口对应8001，填写完Token即可，AriaNG自适应移动端，界面友好，在手机端也可以很方便地管理。</p>
@@ -779,26 +785,9 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 19
+        Total : 18
         <!-- search  -->
         </div>
             <div class="site-search popup-trigger">
@@ -860,11 +849,6 @@ top:50vh;
         </li>
     
     
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2018/02/01/利用JSBox在朋友圈斗图（一）/" >【JsBox】利用JSBox在朋友圈斗图（一）</a>
-        </li>
-    
-    
     
     
     
@@ -905,12 +889,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/WordPress升级优化/" >WordPress升级优化</a>
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/民事管辖案件中关于接受货币方的理解/" >民事管辖案件中关于接受货币方的理解</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/民事管辖案件中关于接受货币方的理解/" >民事管辖案件中关于接受货币方的理解</a>
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/WordPress升级优化/" >WordPress升级优化</a>
         </li>
     
     
@@ -927,9 +911,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
     
-        <span class="sidebar-tag-name" data-tags="JsBox"><span class="iconfont-archer">&#xe606;</span>JsBox</span>
-    
         <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
+    
+        <span class="sidebar-tag-name" data-tags="JsBox"><span class="iconfont-archer">&#xe606;</span>JsBox</span>
     
         <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
     
@@ -980,9 +964,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="VPS"><span class="iconfont-archer">&#xe60a;</span>VPS</span>
     
-        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
-    
         <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
+    
+        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
     
         <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
     
@@ -990,9 +974,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="工作"><span class="iconfont-archer">&#xe60a;</span>工作</span>
     
-        <span class="sidebar-category-name" data-categories="App"><span class="iconfont-archer">&#xe60a;</span>App</span>
-    
         <span class="sidebar-category-name" data-categories="Potplayer皮肤"><span class="iconfont-archer">&#xe60a;</span>Potplayer皮肤</span>
+    
+        <span class="sidebar-category-name" data-categories="App"><span class="iconfont-archer">&#xe60a;</span>App</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
