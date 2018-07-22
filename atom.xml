@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.zigma.cc/"/>
-  <updated>2018-07-21T15:07:20.213Z</updated>
+  <updated>2018-07-22T01:21:06.105Z</updated>
   <id>http://www.zigma.cc/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://www.zigma.cc/2018/07/21/%E3%80%90JsBox%E3%80%91Light-Store%E7%AC%AC%E4%B8%89%E6%96%B9%E8%BD%BB%E9%87%8F%E5%95%86%E5%BA%97/"/>
     <id>http://www.zigma.cc/2018/07/21/【JsBox】Light-Store第三方轻量商店/</id>
     <published>2018-07-20T17:11:35.000Z</published>
-    <updated>2018-07-21T15:07:20.213Z</updated>
+    <updated>2018-07-22T01:21:06.105Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>JsBox脚本分发有点麻烦，除了TG群分享和社区发帖似乎没有别的途径，所以最近断断续续写了一个JsBox的三方轻量商店。（虽然还没写完的时候，钟大开始推出了官方商店投稿）</p><p>这是第一个测试版，仅在7/7P机型上测试，X和SE等机型还未测试，欢迎反馈。</p><ul><li>如果报错”未找到变量”，请关闭严格模式。</li></ul><h1 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h1><p>此项目收录的脚本，除了一些自己写的，其余均来自与社区或者TG群，亦会标注原作者及原帖地址，如果脚本作者认为有版权或者其他问题的，请及时联系我们进行删除。</p><h1 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h1><p><img src="http://zigma.qiniudn.com//lightstore/ls1.jpg" alt="1"></p><p><img src="http://zigma.qiniudn.com//lightstore/ls2.jpg" alt="2"></p><p><img src="http://zigma.qiniudn.com//lightstore/ls3.jpg" alt="3"></p><p><img src="http://zigma.qiniudn.com//lightstore/ls4.jpg" alt="4"></p><p><img src="http://zigma.qiniudn.com//lightstore/ls5.jpg" alt="5"></p><p><img src="http://zigma.qiniudn.com//lightstore/ls6.jpg" alt="6"></p><p><img src="http://zigma.qiniudn.com//lightstore/ls7.jpg" alt="7"></p><p><img src="http://zigma.qiniudn.com//lightstore/ls8.jpg" alt="8"></p><h1 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h1><p><a href="https://xteko.com/redir?name=Light%20Store&amp;url=https%3A%2F%2Fraw.githubusercontent.com%2FZiGmaX809%2FJsBoxLib%2Fmaster%2FLight_Store%2FLight%2520Store.box" target="_blank" rel="noopener">Light Store</a></p><h1 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h1><p>#2018/7/21 </p><p>V1.0.1 更新部分相关更新。</p><p>V1.0.2 增加双击首页回到页首功能；详情页原帖地址按钮底色修改。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>JsBox脚本分发有点麻烦，除了TG群分享和社区发帖似乎没有别的途径，所以最近断断续续写了一个JsBox的三方轻量商店。（虽然还没写完的时候，钟大开始推出了官方商店投稿）</p><p>这是第一个测试版，仅在7/7P机型上测试，X和SE等机型还未测试，欢迎反馈。</p><ul><li>如果报错”未找到变量”，请关闭严格模式。</li></ul><h1 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h1><p>此项目收录的脚本，除了一些自己写的，其余均来自与社区或者TG群，亦会标注原作者及原帖地址，如果脚本作者认为有版权或者其他问题的，请及时联系我们进行删除。</p><h1 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h1><p><img src="http://zigma.qiniudn.com//lightstore/ls1.jpg" alt="1"></p><p><img src="http://zigma.qiniudn.com//lightstore/ls2.jpg" alt="2"></p><p><img src="http://zigma.qiniudn.com//lightstore/ls3.jpg" alt="3"></p><p><img src="http://zigma.qiniudn.com//lightstore/ls4.jpg" alt="4"></p><p><img src="http://zigma.qiniudn.com//lightstore/ls5.jpg" alt="5"></p><p><img src="http://zigma.qiniudn.com//lightstore/ls6.jpg" alt="6"></p><p><img src="http://zigma.qiniudn.com//lightstore/ls7.jpg" alt="7"></p><p><img src="http://zigma.qiniudn.com//lightstore/ls8.jpg" alt="8"></p><h1 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h1><p><a href="https://xteko.com/redir?name=Light%20Store&amp;url=https%3A%2F%2Fraw.githubusercontent.com%2FZiGmaX809%2FJsBoxLib%2Fmaster%2FLight_Store%2FLight%2520Store.box" target="_blank" rel="noopener">Light Store</a></p><h1 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h1><p>#2018/7/21 </p><p>V1.0.1 更新部分相关更新。</p><p>V1.0.2 增加双击首页回到页首功能；详情页原帖地址按钮底色修改。</p><p>#2018/7/22 </p><p>V1.0.3 适配iPhoneX；双击首页回到页首会造成卡顿，暂时取消。 </p>]]></content>
     
     <summary type="html">
     
