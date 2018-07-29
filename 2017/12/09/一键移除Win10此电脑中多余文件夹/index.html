@@ -397,7 +397,7 @@ height:50vh;
             <main class="main post-page">
     <article class="article-entry">
         <p>Win10常年更新一些没什么卵用的功能，最近又有一次大更新。可气的是每次更新都会把一些设置重置。比如移除快捷方式的小箭头、已经移除的此电脑里面的各种文件夹。最近的更新还更新了一个3D图像文件夹，普通人肯定用不到，而且用惯了Win7的用户肯定也不习惯原本清爽的计算机里面出现这么多五花八门的文件夹，比如说我，在侧边栏出现那么多繁乱的文件夹都受不了，更何况在主界面。</p>
-<h2 id="利用注册表来移除文件夹"><a href="#利用注册表来移除文件夹" class="headerlink" title="利用注册表来移除文件夹"></a>利用注册表来移除文件夹</h2><p>所幸能够通过修改注册表来移除这些文件夹，简单便捷无污染，唯一缺点就是每次更新后需要重新运行一次。 每次在注册表查找键值太麻烦，所以弄成了注册表注册文件。 新建记事本后复制粘贴以下代码，保存后将txt后缀改为reg，完成后双击运行即可。</p>
+<h1 id="利用注册表来移除文件夹"><a href="#利用注册表来移除文件夹" class="headerlink" title="利用注册表来移除文件夹"></a>利用注册表来移除文件夹</h1><p>所幸能够通过修改注册表来移除这些文件夹，简单便捷无污染，唯一缺点就是每次更新后需要重新运行一次。 每次在注册表查找键值太麻烦，所以弄成了注册表注册文件。 新建记事本后复制粘贴以下代码，保存后将txt后缀改为reg，完成后双击运行即可。</p>
 <figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Windows Registry Editor Version <span class="number">5.00</span></span><br><span class="line">[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\&#123;f86fa3ab<span class="number">-70</span>d2<span class="number">-4</span>fc7<span class="number">-9</span>c99-fcbf05467f3a&#125;]</span><br><span class="line">[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\&#123;d3162b92<span class="number">-9365</span><span class="number">-467</span>a<span class="number">-956</span>b<span class="number">-92703</span>aca08af&#125;]</span><br><span class="line">[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\&#123;B4BFCC3A-DB2C<span class="number">-424</span>C-B029<span class="number">-7</span>FE99A87C641&#125;]</span><br><span class="line">[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\&#123;<span class="number">3</span>dfdf296-dbec<span class="number">-4</span>fb4<span class="number">-81</span>d1<span class="number">-6</span>a3438bcf4de&#125;]</span><br><span class="line">[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\&#123;<span class="number">088e3905</span><span class="number">-0323</span><span class="number">-4</span>b02<span class="number">-9826</span><span class="number">-5</span>d99428e115f&#125;]</span><br><span class="line">[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\&#123;<span class="number">24</span>ad3ad4-a569<span class="number">-4530</span><span class="number">-98e1</span>-ab02f9417aa8&#125;]</span><br><span class="line">[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\&#123;<span class="number">0</span>DB7E03F-FC29<span class="number">-4</span>DC6<span class="number">-9020</span>-FF41B59E513A&#125;]</span><br></pre></td></tr></table></figure>
 
     </article>
@@ -553,7 +553,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#利用注册表来移除文件夹"><span class="toc-number">1.</span> <span class="toc-text">利用注册表来移除文件夹</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#利用注册表来移除文件夹"><span class="toc-number">1.</span> <span class="toc-text">利用注册表来移除文件夹</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -566,6 +566,8 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
     
     
     
@@ -862,12 +864,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】Palette-调色板/" >【JsBox】Palette 调色板</a>
+            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】超轻量级Aria2客户端/" >【JsBox】超轻量级Aria2客户端</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】超轻量级Aria2客户端/" >【JsBox】超轻量级Aria2客户端</a>
+            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】Palette-调色板/" >【JsBox】Palette 调色板</a>
         </li>
     
     
@@ -946,12 +948,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/WordPress升级优化/" >WordPress升级优化</a>
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/民事管辖案件中关于接受货币方的理解/" >民事管辖案件中关于接受货币方的理解</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/民事管辖案件中关于接受货币方的理解/" >民事管辖案件中关于接受货币方的理解</a>
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/WordPress升级优化/" >WordPress升级优化</a>
         </li>
     
     
@@ -970,21 +972,17 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
-        <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
-    
-        <span class="sidebar-tag-name" data-tags="搬瓦工"><span class="iconfont-archer">&#xe606;</span>搬瓦工</span>
-    
         <span class="sidebar-tag-name" data-tags="JsBox"><span class="iconfont-archer">&#xe606;</span>JsBox</span>
     
         <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
-    
-        <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
         <span class="sidebar-tag-name" data-tags="皮肤"><span class="iconfont-archer">&#xe606;</span>皮肤</span>
     
         <span class="sidebar-tag-name" data-tags="iOS"><span class="iconfont-archer">&#xe606;</span>iOS</span>
     
         <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
+    
+        <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
         <span class="sidebar-tag-name" data-tags="合同"><span class="iconfont-archer">&#xe606;</span>合同</span>
     
@@ -993,6 +991,10 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
     
         <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
+    
+        <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
+    
+        <span class="sidebar-tag-name" data-tags="搬瓦工"><span class="iconfont-archer">&#xe606;</span>搬瓦工</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

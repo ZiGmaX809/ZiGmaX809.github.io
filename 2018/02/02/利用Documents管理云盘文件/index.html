@@ -390,14 +390,14 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>自从总公司规定内网电脑不能使用U盘以后，内外网数据互通就麻烦了不少，虽然给每人发放了一个光盘刻录机，但是工作质量总感觉退回了上世纪。 好在省公司开发了一个内外网数据互通的云盘，与其说是开发，不如说是剔除了一些功能的ownCloud个人云存储开源解决方案。 虽然脱离了上世纪的办公环境，但是工作效率还是停留在本世纪初，数据流通依旧十分不方便。有笔记本的同志自然不必说，直接网页操作就可以了，如果是手机用户，则必须要iOS11以上系统支持或者使用iCabMobile等工具才可以使用，但是操作流程十分繁复：比如要将微信内Word转移到内网需要以下步骤，微信内打开Word→跳转保存到“文件”或者iCabMobile等App→浏览器打开网盘地址并登陆→点击上传按钮选择文件上传。 可喜的是，今天例行帮小伙伴转移文件后，查看了一下网盘的源代码，发现了这么一段代码</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>自从总公司规定内网电脑不能使用U盘以后，内外网数据互通就麻烦了不少，虽然给每人发放了一个光盘刻录机，但是工作质量总感觉退回了上世纪。 好在省公司开发了一个内外网数据互通的云盘，与其说是开发，不如说是剔除了一些功能的ownCloud个人云存储开源解决方案。 虽然脱离了上世纪的办公环境，但是工作效率还是停留在本世纪初，数据流通依旧十分不方便。有笔记本的同志自然不必说，直接网页操作就可以了，如果是手机用户，则必须要iOS11以上系统支持或者使用iCabMobile等工具才可以使用，但是操作流程十分繁复：比如要将微信内Word转移到内网需要以下步骤，微信内打开Word→跳转保存到“文件”或者iCabMobile等App→浏览器打开网盘地址并登陆→点击上传按钮选择文件上传。 可喜的是，今天例行帮小伙伴转移文件后，查看了一下网盘的源代码，发现了这么一段代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app-settings-content&quot;&gt; </span><br><span class="line">        &lt;label for=&quot;webdavurl&quot;&gt;WebDAV&lt;/label&gt;</span><br><span class="line">        &lt;input id=&quot;webdavurl&quot; type=&quot;text&quot; readonly=&quot;readonly&quot; value=&quot;http://60.191.98.250/remote.php/webdav/&quot; /&gt;</span><br><span class="line">        &lt;em&gt;使用这个地址 &lt;a href=&quot;https://doc.owncloud.org/server/9.0/go.php?to=user-webdav&quot; target=&quot;_blank&quot;&gt;通过 WebDAV 访问您的文件&lt;/a&gt;&lt;/em&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <p>就是说云盘是支持webDAV协议的，利用手机App即可进行文件管理，虽然在云盘操作界面没有显示这段话。这样的话，分享文件就变得十分简单了，只需要在微信中将文件打开，点击分享按钮，找到拷贝到具体App中即可跳转直接保存到网盘，同理从内网转移到外网只需要将流程翻转即可。</p>
-<h2 id="横向评测支持webDAV的App"><a href="#横向评测支持webDAV的App" class="headerlink" title="横向评测支持webDAV的App"></a>横向评测支持webDAV的App</h2><p>方向有了，就很好办了，在App Store中搜索关键词webDAV就可以找到不少App，但是大部分需要收费，因此以下评测了3款免费软件：FileExploer、WPS Office、Documents。</p>
+<h1 id="横向评测支持webDAV的App"><a href="#横向评测支持webDAV的App" class="headerlink" title="横向评测支持webDAV的App"></a>横向评测支持webDAV的App</h1><p>方向有了，就很好办了，在App Store中搜索关键词webDAV就可以找到不少App，但是大部分需要收费，因此以下评测了3款免费软件：FileExploer、WPS Office、Documents。</p>
 <h3 id="FileExploer"><a href="#FileExploer" class="headerlink" title="FileExploer"></a>FileExploer</h3><p>如图进行设置，HOST Url填写<a href="http://60.191.98.250/remote.php/webdav/" target="_blank" rel="noopener">http://60.191.98.250/remote.php/webdav/</a> 用户名及密码与内网一致。 <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/1.jpg" alt="FileExploer设置" title="FileExploer设置"> <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/2.jpg" alt="FileExploer设置" title="FileExploer设置"> 这款App是第一个下的，如果没有发现Documents这款App的话，日常使用也足够了，并且支持图片、文件等多类型文件上传与下载。 值得一提的是，微信中点击分享→点击拷贝到“FileExploer”后直接会让你选择保存位置，你只需要选择云盘即可直接保存入盘，十分方便。 唯一美中不足的是，因为是免费软件，所以时常会跳出升级到专业版的提示，如果能够接受30元的价格，升级支持一下国产软件也是可以的。 推荐指数：★★★☆☆</p>
 <h3 id="WPS-Office"><a href="#WPS-Office" class="headerlink" title="WPS Office"></a>WPS Office</h3><p>是的，你没有看错，WPS手机版也是支持webDAV协议的，如图进行设置，输入内容与前一款一致。 <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/3.jpg" alt="WPS Office设置" title="WPS Office设置"> <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/41.jpg" alt="WPS Office设置" title="WPS Office设置"> WPS的优点在于可以对文档直接进行编辑然后分享，大厂出品自然不会夹带广告，但是也有模板之类的收费内容。 WPS的缺点也十分明显，它并不支持图片等格式上传，只支持Word、Excel、PowerPoint三款办公软件文档上传。而且上传方式十分麻烦，需要先保存到WPS中，再在网盘页面右上角按钮处点击进行文档上传。 推荐需要直接编辑，对文件支持类型要求不大的用户使用。 推荐指数：★★☆☆☆</p>
 <h3 id="Documents"><a href="#Documents" class="headerlink" title="Documents"></a>Documents</h3><p>Documents全称是Documents 6或者Documents By Readdle，可能是因为叫Documents的太多了吧。 需要注意的是，软件默认是屏蔽第三方输入法的，如果有需要第三方输入法，则需要在主界面的设置→通用关闭对第三方输入法的屏蔽。 <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/5.jpg" alt="Documents设置" title="Documents设置"> 其他设置与其他软件一致。 <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/61.jpg" alt="Documents设置" title="Documents设置"> 此外Documents还支持双向同步，十分方便。 <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/7.jpg" alt="Documents设置" title="Documents设置"> <img src="http://7rf2ax.com1.z0.glb.clouddn.com/Document/8.jpg" alt="Documents设置" title="Documents设置"> 上传的风格与WPS类似。 Documents可以说是三款App中功能最为强大的，不仅支持多文件格式，还支持文件夹同步。 电脑端上传以后，马上可以在手机中查看、分享，并且支持URL Scheme，可以直接将文档Url在App中打开，并且没有广告。 唯一的短板就是不支持拷贝到App后直接选择文件，但是瑕不掩瑜，这款App值得作为主力工具使用。 推荐指数：★★★★☆</p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>至此，三款App已经评测完毕，如果还是有不明白的，可以留言，视情况录制视频。 此外，文件管理器大多雷同，因此这里也不再评测其他软件。 至于安卓用户，系统比iOS开放许多，只需要安装类似支持webDAV协议的文件管理器即可，使用习惯也是大同小异。 说句题外话，今天小伙伴没法下载损坏的Word文档所以还研究了一下利用Wireshark直接抓包档案系统的扫描图片，并利用ABBYY的ORC转换为Word，下次有空再写教程。</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>至此，三款App已经评测完毕，如果还是有不明白的，可以留言，视情况录制视频。 此外，文件管理器大多雷同，因此这里也不再评测其他软件。 至于安卓用户，系统比iOS开放许多，只需要安装类似支持webDAV协议的文件管理器即可，使用习惯也是大同小异。 说句题外话，今天小伙伴没法下载损坏的Word文档所以还研究了一下利用Wireshark直接抓包档案系统的扫描图片，并利用ABBYY的ORC转换为Word，下次有空再写教程。</p>
 
     </article>
     <!-- license  -->
@@ -552,7 +552,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#横向评测支持webDAV的App"><span class="toc-number">2.</span> <span class="toc-text">横向评测支持webDAV的App</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FileExploer"><span class="toc-number">2.1.</span> <span class="toc-text">FileExploer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WPS-Office"><span class="toc-number">2.2.</span> <span class="toc-text">WPS Office</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Documents"><span class="toc-number">2.3.</span> <span class="toc-text">Documents</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后记"><span class="toc-number">3.</span> <span class="toc-text">后记</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#横向评测支持webDAV的App"><span class="toc-number">2.</span> <span class="toc-text">横向评测支持webDAV的App</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FileExploer"><span class="toc-number">2.0.1.</span> <span class="toc-text">FileExploer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WPS-Office"><span class="toc-number">2.0.2.</span> <span class="toc-text">WPS Office</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Documents"><span class="toc-number">2.0.3.</span> <span class="toc-text">Documents</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#后记"><span class="toc-number">3.</span> <span class="toc-text">后记</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -565,6 +565,8 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
     
     
     
@@ -861,12 +863,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】Palette-调色板/" >【JsBox】Palette 调色板</a>
+            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】超轻量级Aria2客户端/" >【JsBox】超轻量级Aria2客户端</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】超轻量级Aria2客户端/" >【JsBox】超轻量级Aria2客户端</a>
+            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】Palette-调色板/" >【JsBox】Palette 调色板</a>
         </li>
     
     
@@ -945,12 +947,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/WordPress升级优化/" >WordPress升级优化</a>
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/民事管辖案件中关于接受货币方的理解/" >民事管辖案件中关于接受货币方的理解</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/民事管辖案件中关于接受货币方的理解/" >民事管辖案件中关于接受货币方的理解</a>
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/WordPress升级优化/" >WordPress升级优化</a>
         </li>
     
     
@@ -969,21 +971,17 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
-        <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
-    
-        <span class="sidebar-tag-name" data-tags="搬瓦工"><span class="iconfont-archer">&#xe606;</span>搬瓦工</span>
-    
         <span class="sidebar-tag-name" data-tags="JsBox"><span class="iconfont-archer">&#xe606;</span>JsBox</span>
     
         <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
-    
-        <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
         <span class="sidebar-tag-name" data-tags="皮肤"><span class="iconfont-archer">&#xe606;</span>皮肤</span>
     
         <span class="sidebar-tag-name" data-tags="iOS"><span class="iconfont-archer">&#xe606;</span>iOS</span>
     
         <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
+    
+        <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
         <span class="sidebar-tag-name" data-tags="合同"><span class="iconfont-archer">&#xe606;</span>合同</span>
     
@@ -992,6 +990,10 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
     
         <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
+    
+        <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
+    
+        <span class="sidebar-tag-name" data-tags="搬瓦工"><span class="iconfont-archer">&#xe606;</span>搬瓦工</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
