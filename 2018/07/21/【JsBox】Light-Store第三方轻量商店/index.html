@@ -267,7 +267,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">676</span> / Reading time: <span class="post-count">2 min</span></span>
+                        <span>Word count: <span class="post-count">704</span> / Reading time: <span class="post-count">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -411,6 +411,10 @@ height:50vh;
 <p><img src="http://zigma.qiniudn.com//lightstore/ls7.jpg" alt="7"></p>
 <p><img src="http://zigma.qiniudn.com//lightstore/ls8.jpg" alt="8"></p>
 <h1 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h1><p><a href="https://xteko.com/redir?name=Light%20Store&amp;url=https%3A%2F%2Fraw.githubusercontent.com%2FZiGmaX809%2FJsBoxLib%2Fmaster%2FLight_Store%2FLight%2520Store.box" target="_blank" rel="noopener">Light Store</a></p>
+<h1 id="FLAG"><a href="#FLAG" class="headerlink" title="FLAG"></a>FLAG</h1><ul>
+<li><del>增加下载统计</del></li>
+<li><del>增加时下热门排行</del></li>
+</ul>
 <h1 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h1><p>#2018/7/21 </p>
 <p>V1.0.1 更新部分相关更新。</p>
 <p>V1.0.2 增加双击首页回到页首功能；详情页原帖地址按钮底色修改。</p>
@@ -428,10 +432,8 @@ height:50vh;
 <p>V2.0.1 增加炫酷动画；优化标题栏；优化详情页（感谢Josscii老哥支援滑动返回解决方案）；优化排行榜第123名显示方式；尝试适配iPad。</p>
 <p>#2018/7/31</p>
 <p>V2.0.2 修复设置页面卡滑动BUG；修复自定义颜色模式启动动画闪屏的问题；修复商店版侧滑返回失效问题；增强搜索忽略大小写功能；修复IphoneX菜单栏留空不足问题；增加随机到喜欢的颜色，关闭随机颜色（提示重启先取消）后可直接选取当前颜色为自定义颜色的功能；修复相关脚本安装图标错误问题；后台装机信息策略优化；增加缓存清理选项；微调启动动画颜色。</p>
-<h1 id="FLAG"><a href="#FLAG" class="headerlink" title="FLAG"></a>FLAG</h1><ul>
-<li><del>增加下载统计</del></li>
-<li><del>增加时下热门排行</del></li>
-</ul>
+<p>#2018/8/1 </p>
+<p>V2.0.3 启动动画优化；菜单栏优化；无网络下的启动动画优化。 </p>
 
     </article>
     <!-- license  -->
@@ -586,7 +588,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#声明"><span class="toc-number">2.</span> <span class="toc-text">声明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#预览"><span class="toc-number">3.</span> <span class="toc-text">预览</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#下载地址"><span class="toc-number">4.</span> <span class="toc-text">下载地址</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更新记录"><span class="toc-number">5.</span> <span class="toc-text">更新记录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FLAG"><span class="toc-number">6.</span> <span class="toc-text">FLAG</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#声明"><span class="toc-number">2.</span> <span class="toc-text">声明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#预览"><span class="toc-number">3.</span> <span class="toc-text">预览</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#下载地址"><span class="toc-number">4.</span> <span class="toc-text">下载地址</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FLAG"><span class="toc-number">5.</span> <span class="toc-text">FLAG</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更新记录"><span class="toc-number">6.</span> <span class="toc-text">更新记录</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -599,8 +601,6 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
     
     
     
@@ -1003,11 +1003,11 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
-    
         <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
     
         <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
+    
+        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
         <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
     
@@ -1066,9 +1066,9 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
-    
         <span class="sidebar-category-name" data-categories="VPS"><span class="iconfont-archer">&#xe60a;</span>VPS</span>
+    
+        <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
     
         <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
     
