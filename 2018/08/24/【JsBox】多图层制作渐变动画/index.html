@@ -267,7 +267,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">991</span> / Reading time: <span class="post-count">5 min</span></span>
+                        <span>Word count: <span class="post-count">1,023</span> / Reading time: <span class="post-count">5 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -407,20 +407,22 @@ height:50vh;
 <p><img src="http://zigma.qiniudn.com//animation/animation.png" alt="animation"></p>
 <p>接下来就是利用JsBox将动画渐变层的渐变颜色动起来。</p>
 <h1 id="渐变原理"><a href="#渐变原理" class="headerlink" title="渐变原理"></a>渐变原理</h1><p>JsBox之中设置颜色有HEX值和RGB值两种方式，但是归根结底HEX只不过是RGB的十六进制显示方式。</p>
-<p>由于RGB是利用的是一个三维坐标。</p>
+<h2 id="RGB方式"><a href="#RGB方式" class="headerlink" title="RGB方式"></a>RGB方式</h2><p>由于RGB<code>(Red, Green, Blue)</code>是利用的是一个三维坐标。</p>
 <p><img src="http://zigma.qiniudn.com//animation/RGB.png" alt="RGB"></p>
 <p>如果利用RGB来动态变更颜色的话，需要平滑地显示红橙黄绿蓝靛紫红一个周期则需要运用Sin函数。</p>
-<p>利用下面的Demo可以清楚看到颜色渐变过程，仅需改变<code>start</code>的值就可以改变其实颜色。</p>
+<p>利用下面的Demo可以清楚看到颜色渐变过程，仅需改变<code>start</code>的值就可以改变起始颜色。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">$ui.render(&#123;</span><br><span class="line">    layout: $layout.fill,</span><br><span class="line">    props: &#123;</span><br><span class="line">        id: <span class="string">"1"</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> start = <span class="number">1</span></span><br><span class="line">$cache.set(<span class="string">"time"</span>, start)</span><br><span class="line">$timer.schedule(&#123;</span><br><span class="line">    interval: <span class="number">0.01</span>,</span><br><span class="line">    handler: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> i = $cache.get(<span class="string">"time"</span>)</span><br><span class="line">        <span class="keyword">let</span> a_ = i * <span class="number">2</span> * <span class="number">3.141592654</span> / <span class="number">1200</span></span><br><span class="line">        <span class="keyword">let</span> b_ = i * <span class="number">2</span> * <span class="number">3.141592654</span> / <span class="number">1200</span> + <span class="number">2.094395102</span></span><br><span class="line">        <span class="keyword">let</span> c_ = i * <span class="number">2</span> * <span class="number">3.141592654</span> / <span class="number">1200</span> - <span class="number">2.094395102</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> r = (<span class="number">255</span> * (<span class="built_in">Math</span>.sin(c_) + <span class="number">0.5</span>)) &lt; <span class="number">0</span> ? <span class="number">0</span> : ((<span class="number">255</span> * (<span class="built_in">Math</span>.sin(c_) + <span class="number">0.5</span>)) &gt; <span class="number">255</span> ? <span class="number">255</span> : (<span class="number">255</span> * (<span class="built_in">Math</span>.sin(c_) + <span class="number">0.5</span>)))</span><br><span class="line">        <span class="keyword">let</span> g = (<span class="number">255</span> * (<span class="built_in">Math</span>.sin(b_) + <span class="number">0.5</span>)) &lt; <span class="number">0</span> ? <span class="number">0</span> : ((<span class="number">255</span> * (<span class="built_in">Math</span>.sin(b_) + <span class="number">0.5</span>)) &gt; <span class="number">255</span> ? <span class="number">255</span> : (<span class="number">255</span> * (<span class="built_in">Math</span>.sin(b_) + <span class="number">0.5</span>)))</span><br><span class="line">        <span class="keyword">let</span> b = (<span class="number">255</span> * (<span class="built_in">Math</span>.sin(a_) + <span class="number">0.5</span>)) &lt; <span class="number">0</span> ? <span class="number">0</span> : ((<span class="number">255</span> * (<span class="built_in">Math</span>.sin(a_) + <span class="number">0.5</span>)) &gt; <span class="number">255</span> ? <span class="number">255</span> : (<span class="number">255</span> * (<span class="built_in">Math</span>.sin(a_) + <span class="number">0.5</span>)))</span><br><span class="line"></span><br><span class="line">        $(<span class="string">"1"</span>).bgcolor = $rgb(r,g,b)</span><br><span class="line">        <span class="built_in">console</span>.log(r,g,b)</span><br><span class="line">        $cache.set(<span class="string">"time"</span>, i + <span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>相对于此，利用HSV值更加直观，唯一缺点就是需要重新将HSV值转换为HEX值。</p>
+<h2 id="HSV方式"><a href="#HSV方式" class="headerlink" title="HSV方式"></a>HSV方式</h2><p>相对于此，利用HSV值更加直观，唯一缺点就是需要重新将输出的HSV值转换为HEX值。</p>
 <p><img src="http://zigma.qiniudn.com//animation/HSV.jpg" alt="HSV"></p>
 <p>在HSV<code>(Hue, Saturation, Lightness，即色相，饱和度，明度)</code>里，颜色变化更为直观，我们只需要变更H值即可，完成一个周期颜色变化，而且也更为强大。</p>
 <p>同样利用一个Demo，来看一下HSV变化。改变<code>hh</code>为起始颜色，改变<code>ss</code>则是统一饱和，<code>vv</code>则是统一明度。</p>
 <p>唯一缺点就是增加了HEX值封装函数，但是相对于上面的RGB方法，这里可以比较直观地控制饱和度和明度。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">$ui.render(&#123;</span><br><span class="line">    layout: $layout.fill,</span><br><span class="line">    props: &#123;</span><br><span class="line">        id: &quot;1&quot;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">let hh = 0</span><br><span class="line">let ss = 60</span><br><span class="line">let vv = 100</span><br><span class="line"></span><br><span class="line">$cache.set(&quot;time&quot;, hh)</span><br><span class="line">var timer = $timer.schedule(&#123;</span><br><span class="line">  interval: 0.01,</span><br><span class="line">  handler: function() &#123;</span><br><span class="line">    let i = $cache.get(&quot;time&quot;)</span><br><span class="line">    let j = i + 60</span><br><span class="line">    let hex = HSV2HEX(i, ss, vv)</span><br><span class="line">    $(&quot;1&quot;).colors = $color(hex)</span><br><span class="line">    $cache.set(&quot;time&quot;, i &gt; 360 ? 0 : i + 5)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">function HSV2HEX(h, s, v) &#123;</span><br><span class="line">  var h = h &gt; 359 ? 0 : h</span><br><span class="line">  var s = s / 100</span><br><span class="line">  var v = v / 100</span><br><span class="line"></span><br><span class="line">  h1 = Math.floor(h / 60) % 6</span><br><span class="line">  f = h / 60 - h1</span><br><span class="line">  p = v * (1 - s)</span><br><span class="line">  q = v * (1 - f * s)</span><br><span class="line">  t = v * (1 - (1 - f) * s)</span><br><span class="line"></span><br><span class="line">  if (h1 === 0) &#123;</span><br><span class="line">    r = v</span><br><span class="line">    g = t</span><br><span class="line">    b = p</span><br><span class="line">  &#125; else if (h1 === 1) &#123;</span><br><span class="line">    r = q</span><br><span class="line">    g = v</span><br><span class="line">    b = p</span><br><span class="line">  &#125; else if (h1 === 2) &#123;</span><br><span class="line">    r = p</span><br><span class="line">    g = v</span><br><span class="line">    b = t</span><br><span class="line">  &#125; else if (h1 === 3) &#123;</span><br><span class="line">    r = p</span><br><span class="line">    g = q</span><br><span class="line">    b = v</span><br><span class="line">  &#125; else if (h1 === 4) &#123;</span><br><span class="line">    r = t</span><br><span class="line">    g = p</span><br><span class="line">    b = v</span><br><span class="line">  &#125; else if (h1 === 5) &#123;</span><br><span class="line">    r = v</span><br><span class="line">    g = p</span><br><span class="line">    b = q</span><br><span class="line">  &#125;</span><br><span class="line">  r = r * 255</span><br><span class="line">  g = g * 255</span><br><span class="line">  b = b * 255</span><br><span class="line">  RGB = [Math.ceil(r), Math.ceil(g), Math.ceil(b)]</span><br><span class="line">  HEX = &quot;#&quot; + RGB2HEX(r, g, b)</span><br><span class="line"></span><br><span class="line">  return HEX</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function RGB2HEX(r, g, b) &#123;</span><br><span class="line">  r_ = Math.ceil(r).toString(16)</span><br><span class="line">  g_ = Math.ceil(g).toString(16)</span><br><span class="line">  b_ = Math.ceil(b).toString(16)</span><br><span class="line">  h = r_.length &lt; 2 ? &quot;0&quot; + r_ : r_</span><br><span class="line">  e = g_.length &lt; 2 ? &quot;0&quot; + g_ : g_</span><br><span class="line">  x = b_.length &lt; 2 ? &quot;0&quot; + b_ : b_</span><br><span class="line"></span><br><span class="line">  HEX = (h.toUpperCase() + e.toUpperCase() + x.toUpperCase())</span><br><span class="line">  return HEX</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h1><p>实时计算颜色数值后，我们只需要在画布上添加一个渐变的图层<code>gradient</code>。</p>
-<p>然后写入渐变层的<code>colors</code>即可。</p>
-<p>附上测试脚本：<br><a href="https://raw.githubusercontent.com/ZiGmaX809/JsBoxLib/master/Other/Gradient/%E6%B8%90%E5%8F%98.js" target="_blank" rel="noopener">渐变Demo</a></p>
+<p>然后写入渐变层的<code>colors</code>。</p>
+<p>最后再在最上面覆盖一层PS制作的镂空字体层即可。</p>
+<p>附上测试脚本：</p>
+<p><a href="https://raw.githubusercontent.com/ZiGmaX809/JsBoxLib/master/Other/Gradient/%E6%B8%90%E5%8F%98.js" target="_blank" rel="noopener">渐变Demo</a></p>
 <h1 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h1><p>最后贴一个效果图</p>
 <p><img src="http://zigma.qiniudn.com//animation/1.gif" alt="gif"></p>
 
@@ -572,7 +574,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#动画原理"><span class="toc-number">2.</span> <span class="toc-text">动画原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#渐变原理"><span class="toc-number">3.</span> <span class="toc-text">渐变原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Coding"><span class="toc-number">4.</span> <span class="toc-text">Coding</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#效果"><span class="toc-number">5.</span> <span class="toc-text">效果</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#动画原理"><span class="toc-number">2.</span> <span class="toc-text">动画原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#渐变原理"><span class="toc-number">3.</span> <span class="toc-text">渐变原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#RGB方式"><span class="toc-number">3.1.</span> <span class="toc-text">RGB方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HSV方式"><span class="toc-number">3.2.</span> <span class="toc-text">HSV方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Coding"><span class="toc-number">4.</span> <span class="toc-text">Coding</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#效果"><span class="toc-number">5.</span> <span class="toc-text">效果</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -585,6 +587,8 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
     
     
     
@@ -921,12 +925,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】超轻量级Aria2客户端/" >【JsBox】超轻量级Aria2客户端</a>
+            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】Palette-调色板/" >【JsBox】Palette 调色板</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】Palette-调色板/" >【JsBox】Palette 调色板</a>
+            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】超轻量级Aria2客户端/" >【JsBox】超轻量级Aria2客户端</a>
         </li>
     
     
@@ -1023,17 +1027,17 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
+        <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
     
         <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
     
+        <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
+    
         <span class="sidebar-tag-name" data-tags="搬瓦工"><span class="iconfont-archer">&#xe606;</span>搬瓦工</span>
     
-        <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
+        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
         <span class="sidebar-tag-name" data-tags="JsBox"><span class="iconfont-archer">&#xe606;</span>JsBox</span>
-    
-        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
         <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
     
@@ -1088,9 +1092,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="VPS"><span class="iconfont-archer">&#xe60a;</span>VPS</span>
     
-        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
-    
         <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
+    
+        <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
     
         <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
     
