@@ -354,6 +354,48 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2018/08/24/【JsBox】多图层制作渐变动画/" >
+            
+                <span>【JsBox】多图层制作渐变动画</span>
+        </a>
+        <div class="abstract-content">
+            前言在制作Light Store的过程中发现了很多有意思的想法。
+也制作了几个比较有意思的动画，虽然很多人会以为里面的动画是GIF。
+所以这里就把动画原理和实现方式整理一下，顺便做个记录。
+动画原理思路很简单，因为JsBox不支持字体渐变，只提供了一个矩形渐变接口，所以需要一共两层图层来完成动画。
+
+上层为镂空字体层
+下层为动画渐变层
+
+
+接下来就是利用JsBox将动画渐变层的渐变颜色动起来。
+渐变原理JsBox之中设置颜色有HEX值和RGB值两种方式，但是归根结底HEX只不过是RGB的十六进制显示方式。
+由于RGB是利用的是一个三维坐标。
+
+如果利用RGB来动态变更颜色的话，需要平滑地...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/24</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JsBox">JsBox</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/07/23/【iOS】百度输入法GBoad自用皮肤/" >
             
                 <span>【iOS】百度输入法GBoad自用皮肤</span>
@@ -472,9 +514,9 @@ Hexo环境搭建个人博客
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "VPS">VPS</a>
-    
         <a class="post-tag" href="javascript:void(0);" data-tags = "Hexo">Hexo</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "VPS">VPS</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "搬瓦工">搬瓦工</a>
     
@@ -697,39 +739,6 @@ Ari2设置  Aria2常规设置，如果没有速度则添加额外以下Tracker�
             <div class= abstract-tags >
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "瞎折腾">瞎折腾</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/04/29/【JsBox】利用JSBox在朋友圈斗图（二）/" >
-            
-                <span>【JsBox】利用JSBox在朋友圈斗图（二）</span>
-        </a>
-        <div class="abstract-content">
-            前言最近继续在研究JSBox，并且发现微信似乎不屏蔽七牛云的链接了，所以将之前图片评论的js移植到了七牛云。七牛云上传是要上传凭证的，怎么计算Token花费不少时间，之前做的方案代码过多，运行效率不高，参考了RYAN大的QiniuManager后成功移植。
-安装链接
-安装链接
-
-详细代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879cons...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/29</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JsBox">JsBox</a>
     
 </div>
             
@@ -1165,9 +1174,44 @@ Ari2设置  Aria2常规设置，如果没有速度则添加额外以下Tracker�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 21
+        Total : 22
         </div>
         <!-- search  -->
         
@@ -1180,6 +1224,11 @@ Ari2设置  Aria2常规设置，如果没有速度则添加额外以下Tracker�
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/24</span><a class="archive-post-title" href= "/2018/08/24/【JsBox】多图层制作渐变动画/" >【JsBox】多图层制作渐变动画</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1198,12 +1247,12 @@ Ari2设置  Aria2常规设置，如果没有速度则添加额外以下Tracker�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】Palette-调色板/" >【JsBox】Palette 调色板</a>
+            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】超轻量级Aria2客户端/" >【JsBox】超轻量级Aria2客户端</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】超轻量级Aria2客户端/" >【JsBox】超轻量级Aria2客户端</a>
+            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JsBox】Palette-调色板/" >【JsBox】Palette 调色板</a>
         </li>
     
     
@@ -1302,23 +1351,23 @@ Ari2设置  Aria2常规设置，如果没有速度则添加额外以下Tracker�
     
         <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
-        <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
-    
-        <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
-    
         <span class="sidebar-tag-name" data-tags="JsBox"><span class="iconfont-archer">&#xe606;</span>JsBox</span>
     
         <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
     
+        <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
+    
         <span class="sidebar-tag-name" data-tags="搬瓦工"><span class="iconfont-archer">&#xe606;</span>搬瓦工</span>
     
-        <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
+        <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
     
-        <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
+        <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
     
         <span class="sidebar-tag-name" data-tags="皮肤"><span class="iconfont-archer">&#xe606;</span>皮肤</span>
     
         <span class="sidebar-tag-name" data-tags="iOS"><span class="iconfont-archer">&#xe606;</span>iOS</span>
+    
+        <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
         <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
     
@@ -1365,9 +1414,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
     
-        <span class="sidebar-category-name" data-categories="VPS"><span class="iconfont-archer">&#xe60a;</span>VPS</span>
-    
         <span class="sidebar-category-name" data-categories="JsBox"><span class="iconfont-archer">&#xe60a;</span>JsBox</span>
+    
+        <span class="sidebar-category-name" data-categories="VPS"><span class="iconfont-archer">&#xe60a;</span>VPS</span>
     
         <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
     

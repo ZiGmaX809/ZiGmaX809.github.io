@@ -339,73 +339,36 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2018/06/27/【Hexo】从Wordpress转Hexo的那些深坑/" >
+        <a class="abstract-title" href = "/2018/08/24/【JsBox】多图层制作渐变动画/" >
             
-                <span>【Hexo】从Wordpress转Hexo的那些深坑</span>
+                <span>【JsBox】多图层制作渐变动画</span>
         </a>
         <div class="abstract-content">
-            前言昨天作死开始了从wp到Hexo的迁移之旅，网上大部分Hexo搭建教程都还停留在2017年甚至2016年，所以整个迁移过程历尽深坑不断。
-因此我觉得有必要记录一下自己所踩过的那些深坑。
-具体有以下几点：
+            前言在制作Light Store的过程中发现了很多有意思的想法。
+也制作了几个比较有意思的动画，虽然很多人会以为里面的动画是GIF。
+所以这里就把动画原理和实现方式整理一下，顺便做个记录。
+动画原理思路很简单，因为JsBox不支持字体渐变，只提供了一个矩形渐变接口，所以需要一共两层图层来完成动画。
 
-搬瓦工ssh端口；
-ssh公钥和秘钥问题；
-VPS文件/文件夹权限问题；
-post-receive钩子无法正常执行的问题；
+上层为镂空字体层
+下层为动画渐变层
 
-主要参考：
-Hexo环境搭建个人博客
-使用 Git Hook 自动部署 Hexo 到个人 VPS 
-填坑开始Hexo的基本运行逻辑就是本地编写Markdown文档——利用Git生成html页面——利用Git推送到VPS——VPS再通过Git钩子发布到Nignx...
+
+接下来就是利用JsBox将动画渐变层的渐变颜色动起来。
+渐变原理JsBox之中设置颜色有HEX值和RGB值两种方式，但是归根结底HEX只不过是RGB的十六进制显示方式。
+由于RGB是利用的是一个三维坐标。
+
+如果利用RGB来动态变更颜色的话，需要平滑地...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/06/27</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/24</span>
             </div>
             <!-- tags  -->
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Hexo">Hexo</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "VPS">VPS</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "搬瓦工">搬瓦工</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/08/15/CentOS监控进程状态并自动重启/" >
-            
-                <span>CentOS监控进程状态并自动重启</span>
-        </a>
-        <div class="abstract-content">
-            在CentOS系统中利用Crontab监控进程是否被结束并自动重启。 附加每天凌晨4点自动重启服务器。
-1. 编辑Crontab1crontab -e
-2. 按i进行编辑12*/1 * * * * /root/monitor.sh     # 每分钟运行一遍monitor.sh脚本0 5 * * * /sbin/reboot           # 每天凌晨5点自动重启服务器
-3. root文件夹下创建monitor.sh脚本1234567891011121314151617181920212223242526#! /bin/shhost_dir=`echo ~`            ...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/08/15</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "VPS">VPS</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CentOS">CentOS</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JsBox">JsBox</a>
     
 </div>
             
