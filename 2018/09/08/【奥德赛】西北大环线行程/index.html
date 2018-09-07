@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="Cache-Control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>ZiGma</title>
+    <title>【奥德赛】西北大环线行程 · ZiGma</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -70,6 +70,8 @@
 
     <link rel="preload" href= /css/style.css?v=201807017_1502 as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <link rel="stylesheet" href= /css/mobile.css?v=20180709 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
@@ -194,12 +196,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >ZiGma</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">【奥德赛】西北大环线行程</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>ZiGma</a>
 </header>
@@ -213,24 +226,76 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            【奥德赛】西北大环线行程
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "旅行">旅行</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "行程">行程</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">1,687</span> / Reading time: <span class="post-count">6 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/09/08</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -331,261 +396,243 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/24/【JSBox】多图层制作渐变动画/" >
-            
-                <span>【JSBox】多图层制作渐变动画</span>
-        </a>
-        <div class="abstract-content">
-            前言在制作Light Store的过程中萌发了很多有意思的想法。
-也制作了几个比较有意思的动画，虽然很多人会以为里面的动画是GIF。
-所以这里就把动画原理和实现方式整理一下，顺便做个记录。
-动画原理思路很简单，因为JSBox不支持字体渐变，只提供了一个矩形渐变接口，所以需要一共两层图层来完成动画。
-
-上层为镂空字体层
-下层为动画渐变层
-
-
-接下来就是利用JSBox将动画渐变层的渐变颜色动起来。
-渐变原理JSBox之中设置颜色有HEX值和RGB值两种方式，但是归根结底HEX只不过是RGB的十六进制显示方式。
-RGB方式由于RGB(Red, Green, Blue)是利用的是一个三维坐标。
-...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/24</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JSBox">JSBox</a>
-    
-</div>
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="主要行程"><a href="#主要行程" class="headerlink" title="主要行程"></a>主要行程</h1><h2 id="DAY1"><a href="#DAY1" class="headerlink" title="DAY1"></a>DAY1</h2><p><strong>9月27日，日落：19:03:09 </strong></p>
+<p>TEAM A小分钟队从萧山机场出发，12点到达西宁机场，办理租车手续，在 西宁站午餐后前往黑马河，随开随停抓牛羊玩青海湖，傍晚到达黑马河欣赏夕阳住宿晚餐，汽车加油。</p>
+<p><strong>行程：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">西宁—（3小时50分钟）—&gt; 黑马河</span><br></pre></td></tr></table></figure>
+<p><strong>景点：</strong></p>
+<ul>
+<li><p>青海湖</p>
+</li>
+<li><p>牛羊宝宝</p>
+</li>
+</ul>
+<p><strong>餐饮：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">市区购买牛羊肉，自助火锅，自助饭，酸奶</span><br></pre></td></tr></table></figure>
+<p><strong>住宿：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">共和县黑马河驿路港湾假日酒店</span><br></pre></td></tr></table></figure>
+<p><strong>公共交通：</strong></p>
+<ul>
+<li>TEAM A：东方航空MU9941  <code>08:55（杭州）——&gt; 12:00（西宁）</code></li>
+</ul>
+<h2 id="DAY2"><a href="#DAY2" class="headerlink" title="DAY2"></a>DAY2</h2><p><strong>9月28日 ，日出：07:05:30 ，日落：19:27:49</strong></p>
+<p>清晨欣赏青海湖日出，吃早餐睡回笼觉后离开黑马河（9:30）， 途径茶卡汽车站午餐 （10:50），午餐后稍作休息出发前往大柴旦翡翠湖（16:30），伊布拉晚餐（17:00）可能需要排队，入驻酒店泡温泉休息。</p>
+<p><strong>行程：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">黑马河  —（1小时20分钟）— &gt; 茶卡 —（4小时45分钟）— &gt; 大柴旦 —（22分钟）— &gt;翡翠湖 —（48分钟）—&gt; 大柴旦雪山温泉</span><br></pre></td></tr></table></figure>
+<p><strong>景点：</strong></p>
+<ul>
+<li><p>翡翠湖</p>
+</li>
+<li><p>大柴旦雪山温泉</p>
+</li>
+</ul>
+<p><strong>餐饮：</strong> </p>
+<ul>
+<li><p>午餐：青原耗牛大骨汤（茶卡）</p>
+</li>
+<li><p>晚餐：伊布拉特色炕锅（大柴旦）</p>
+</li>
+</ul>
+<p><strong>住宿：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">大柴旦温泉假日酒店（含温泉票）</span><br></pre></td></tr></table></figure>
+<p><strong>公共交通：</strong></p>
+<ul>
+<li>TEAM B：西藏航空TV6026   <code>21:35（杭州）——&gt; 00:30（兰州）</code></li>
+</ul>
+<h2 id="DAY3"><a href="#DAY3" class="headerlink" title="DAY3"></a>DAY3</h2><p><strong>9月29日，日出：07:35:34 ，日落：19:27:49</strong> </p>
+<p>在柴旦木进行午餐准备后，离开大柴旦前往雅丹魔鬼城(8：30)，游玩魔鬼城(9：30)一路向南到达敦煌（14：00），在敦煌午餐休息后前往敦煌汽车站接上TEAM B小分钟队同学，前往鸣沙山，骑骆驼游览月牙泉（17：00），在鸣沙山背面露营，拍摄星空休息。 </p>
+<p><strong>行程：</strong></p>
+<p>TEAM A</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">大柴旦 —（55分钟）—&gt; 雅丹魔鬼城 —（4小时28分钟）—&gt; 敦煌 —（1小55分钟）—&gt; 敦煌汽车站 —（9分钟）—&gt; 鸣沙山；</span><br></pre></td></tr></table></figure>
+<p>TEAM B</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">兰州西 —（6时26分钟）—&gt; 柳园 —（1小时53分钟）—&gt;敦煌汽车站 —（9分钟）—&gt; 鸣沙山</span><br></pre></td></tr></table></figure>
+<p><strong>景点：</strong></p>
+<ul>
+<li><p>鸣沙山：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">购买门票后，直接在门口那里录入指纹信息，凭借票和指纹可在3天内多次进入。进入后需排队骑骆驼，骑骆驼一圈耗时约1.5小时，费用100元/人。鸣沙山景区背面露营，清晨可爬到沙峰上去看日出。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 开放时间：5:00-20:30</p>
+</blockquote>
+<blockquote>
+<p>门票价格：120元/人</p>
+</blockquote>
+<blockquote>
+<p>月牙泉：月牙泉南北长近100米，东西宽约25米，泉水东深西浅，最深处约5米，弯曲如新月，因而得名，晚上20：00左右开始亮灯。</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>餐饮：</strong> </p>
+<ul>
+<li><p>午餐： 德克士</p>
+</li>
+<li><p>晚餐：（露营含餐） ，也可去沙洲夜市逛一逛再返回营地</p>
+</li>
+</ul>
+<p><strong>住宿：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">敦煌露营</span><br></pre></td></tr></table></figure>
+<p><strong>公共交通：</strong> </p>
+<ul>
+<li>TEAM B：动车D2701次  <code>07:50（兰州西） ——&gt; 14:16（柳园）</code></li>
+</ul>
+<h2 id="DAY4"><a href="#DAY4" class="headerlink" title="DAY4"></a>DAY4</h2><p><strong>9月30日，日出：07:36:33 ，日落：19:11:47</strong> </p>
+<p>早餐吃饱后前往莫高窟（10:30），由于提前订票排队时间少。取提前取票（10:10），超过5分钟即作废，游览约2-3小时；游览莫高窟后回到市区午餐（13:00），驱车前往嘉峪关（17:00） </p>
+<p><strong>行程：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">酒店 —（40分钟）—&gt; 莫高窟 —（40分钟）—&gt; 敦煌市 —（40分钟）—&gt; 反弹琵琶雕像 —（4小时）—&gt;嘉峪关</span><br></pre></td></tr></table></figure>
+<p><strong>景点：</strong></p>
+<ul>
+<li><p>莫高窟：</p>
+<blockquote>
+<p>开放时间：8:00-18:00</p>
+</blockquote>
+<blockquote>
+<p>门票价格：200元/人 </p>
+</blockquote>
+</li>
+</ul>
+<p><strong>餐饮：</strong></p>
+<ul>
+<li><p>午餐：靖远尕六美味羊羔肉（错开高峰避免排队）（敦煌）</p>
+</li>
+<li><p>晚餐：小党烤肉（嘉峪关）</p>
+</li>
+</ul>
+<p><strong>住宿：</strong></p>
+<p>（嘉峪关）</p>
+<h2 id="DAY5"><a href="#DAY5" class="headerlink" title="DAY5"></a>DAY5</h2><p><strong>10月1日，日出：07:22:54 ，日落：19:01:48</strong></p>
+<p>酒店出发，游玩嘉峪关关城景点 （9:00）；结束游玩后在嘉峪关市区午餐休息(11:30)，前往金塔胡杨林游玩（1400），自由拍照欣赏胡杨林；1600出发前往张掖市区，由于晚餐时间在路上需要备点干粮，到达张掖市区后夜宵大餐（20:00）</p>
+<p><strong>行程：</strong></p>
+<pre><code>酒店 —（30分钟）—&gt; 嘉峪关关城 —（1小时50分钟）—&gt;金塔胡杨林 —（3小时24分钟）—&gt;张掖市 
+</code></pre><p><strong>景点：</strong></p>
+<ul>
+<li><p>嘉峪关关城：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">大门步行5分钟从门口走到关城（无需租车或乘坐观光车），游览时长2小时。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>开放时间：8:00-18:00 </p>
+</blockquote>
+<blockquote>
+<p>门票价格：120元/人，学生票60元</p>
+</blockquote>
+</li>
+<li><p>金塔胡杨林：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">位于古丝绸之路中段北侧、甘肃省金塔县城西北8公里处，游览时长2小时。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>开放时间：7:00-19:00</p>
+</blockquote>
+<blockquote>
+<p>门票价格：65元/人，学生票30元 </p>
+</blockquote>
+</li>
+</ul>
+<p><strong>餐饮：</strong></p>
+<ul>
+<li><p>午餐：大碗小面抿节面馆（嘉峪关）</p>
+</li>
+<li><p>晚餐： 甘州名吃（张掖）</p>
+</li>
+</ul>
+<p><strong>住宿：</strong></p>
+<p>（张掖） </p>
+<h2 id="DAY6"><a href="#DAY6" class="headerlink" title="DAY6"></a>DAY6</h2><p><strong>10月2日，日出：07:14:55 ，日落：18:55:44</strong></p>
+<p>7：20酒店出发，自驾前往张掖丹霞地质公园（8:00），到达公园后乘坐观光车前往4个观赏台，游览后回附近午餐休息（11:00），前往祁连山草原（16:00），欣赏雪山（草原无草欣赏被冻黄了），与祁连山草原石头合影后启程西宁入驻酒店休息(20:00)。 </p>
+<p><strong>行程：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">酒店 —（40分钟）—&gt; 丹霞地质公园 —（3小时8分钟）—&gt; 祁连山草原 —（3小时47分钟）—&gt; 西宁</span><br></pre></td></tr></table></figure>
+<p><strong>景点：</strong></p>
+<ul>
+<li><p>张掖丹霞地质公园：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">七彩云海台（1号）、七彩仙缘台（2号）、七彩锦绣台（3号）、七彩虹霞台（4号），4号观景台最美。在公园内可搭乘热气球，乘坐8-10分钟，收费200元/人，从西门进入预计游览时间3小时。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>开放时间：05:30-19:00</p>
+</blockquote>
+<blockquote>
+<p>门票价格：72元/人（含观光车） </p>
+</blockquote>
+</li>
+</ul>
+<p><strong>餐饮：</strong></p>
+<ul>
+<li><p>午餐：清真伊亲阁餐厅（张掖）</p>
+</li>
+<li><p>晚餐：清真伊兰轩青海特色美食（西宁） </p>
+</li>
+</ul>
+<p><strong>住宿：</strong><br>（西宁）待定 </p>
+<h2 id="DAY7"><a href="#DAY7" class="headerlink" title="DAY7"></a>DAY7</h2><p><strong>10月3日，日出：07:09:39</strong></p>
+<p>酒店出发前往塔尔寺游览，门口照相由于时间原因进行地点打卡（8:00），回到西宁市打包西宁特色小吃（可真空包装），回到酒店取行李西宁站（10:00），附近吃碗兰州拉面，前往机场归还汽车（11:00），11:30过安检候机。</p>
+<p><strong>行程：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">酒店 —（30分钟）—&gt; 塔尔寺 —（30分钟）—&gt; 酒店 —（X分钟）—（60分钟）—&gt; 曹家堡机场</span><br></pre></td></tr></table></figure>
+<p><strong>景点：</strong></p>
+<ul>
+<li><p>塔尔寺：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">酥油花、壁画和堆绣被誉为“塔尔寺艺术三绝”，另外寺内还珍藏了许多佛教典籍和历史、文学、哲学、医药、立法等方面的学术专著。由于塔尔寺内部禁止拍摄，参观时间至少1-3个小时以上。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>公共交通：</strong></p>
+<ul>
+<li>长龙航空GJ8790   <code>12:45(西宁) ——&gt; 15:40（杭州）</code></li>
+</ul>
+<h3 id="结束大西北旅程，👋"><a href="#结束大西北旅程，👋" class="headerlink" title="结束大西北旅程，👋"></a><strong><em>结束大西北旅程，👋</em></strong></h3><h1 id="物品清单"><a href="#物品清单" class="headerlink" title="物品清单"></a>物品清单</h1>
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/06/26/【JSBox】超轻量级Aria2客户端/" >
-            
-                <span>【JSBox】超轻量级Aria2客户端</span>
-        </a>
-        <div class="abstract-content">
-            前言说是客户端，其实只有添加任务的功能。不过即使是网页客户端，设置后重启也会重置，所以Aria2设置还是编辑conf文件比较妥当。之前通过AriaNG提供的api写过一个类似脚本，但是没有设置界面，每次添加会有网页弹窗。所以这次利用jsonrpc重写了一个。
-说明
-主应用界面是设置，填入rpc地址与token，完成后可以激活测试连接是否正确。
-分享面板和启动器均是添加任务。分享面板会直接添加选取的链接，为了保证进入主界面是设置界面，所以将粘贴板链接读取放在了启动器中。
-如何添加和设置Aria2下载端请Google，梅林可以参考我的另一篇博文【瞎折腾】梅林固件利用entware环境安装Ar...
+        <div class="license-wrapper">
+            <p>原文作者: <a href="http://www.zigma.cc">ZiGma</a>
+            <p>原文链接: <a href="http://www.zigma.cc/2018/09/08/【奥德赛】西北大环线行程/">http://www.zigma.cc/2018/09/08/【奥德赛】西北大环线行程/</a>
+            <p>发表日期: <a href="http://www.zigma.cc/2018/09/08/【奥德赛】西北大环线行程/">September 8th 2018, 12:03:17 am</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/06/26</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JSBox">JSBox</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/06/26/【JSBox】Palette-调色板/" >
-            
-                <span>【JSBox】Palette 调色板</span>
-        </a>
-        <div class="abstract-content">
-            前言之前写Days Pro时想要找几个配色，在App Store找了一圈相关的App，但是这类工具数量少的可怜，并且交互十分不友好，比如无法复制HEX、RGB值，再或者界面并未适配7P。
-所以就按照其中比较好的一款写了个脚本，并且支持了直接复制颜色值，之前设计是想要支持查看历史记录的，但是在实际实现过程中，发现这个功能并不常用。而且如果实现这个比较鸡肋的功能，还要增加大量计算，权衡之下放弃了这个功能，当然也有可能是我水平不够，数据传导结构没做好。按照目前来看，现有日常使用已经绰绰有余。
-选取图片颜色因为JsBox现在暂时还不支持触摸的动作，本人能力也有限，所以本项目不在考虑范围内。
-使用...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/06/26</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JSBox">JSBox</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/06/22/【JSBox】Days Pro/" >
-            
-                <span>【JSBox】Days Pro</span>
-        </a>
-        <div class="abstract-content">
-            前言之前想填的倒数日的坑终于填了。 仿自”倒数日 Days”。  
-理论可以计算到无限天数，但是超过5位数的天数背景会错乱（懒得适配）。 
-
-支持主题选择。 
-主应用运行是设置，小组件运行是倒数界面。
-
-截图 
-安装链接Days_Pro
-更新记录#2018/6/5 
-V 1.0.2 增加节假日模式、多色彩主题自定义； Bug修复。 
-#2018/6/12 
-V 1.0.3 调整对emoji字符长度识别以优化长度限制； 调整主题选择； 调整到达事件当天显示方式。 
-#2018/6/22 
-V 1.0.4 修正节假日模式到达假日当天显示方式。
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/06/22</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JSBox">JSBox</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/05/26/【JSBox】SysInfo Pro/" >
-            
-                <span>【JSBox】SysInfo Pro</span>
-        </a>
-        <div class="abstract-content">
-            前言根据之前TG群的Netspeed（找不到作者了）和RYAN大佬的Progress按照App——SYS PRO制作。 
-可以查看当前网速、局域网外网IP、设备名称、iOS版本、磁盘剩余、内存占用等情况。 可以点击界面来切换显示的系统信息和网络信息。 
-目前已知的问题： 
-
-硬盘剩余与实际不符； 
-内存占用可能也存在同样的情况，但是总体差不多，没1那么夸张； 
-内存占用的百分比在某些情况下会出现N多位小数。
-
-说明（三条都不是我的锅），对不起第三条的确是我的锅。 1和2的问题，是JSBox的返回值就是这样，可以自行利用
-1$ui.alert($device.space)
-查看。 
-3的问...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/26</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JSBox">JSBox</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/04/29/【JSBox】利用JSBox在朋友圈斗图（二）/" >
-            
-                <span>【JSBox】利用JSBox在朋友圈斗图（二）</span>
-        </a>
-        <div class="abstract-content">
-            前言最近继续在研究JSBox，并且发现微信似乎不屏蔽七牛云的链接了，所以将之前图片评论的js移植到了七牛云。七牛云上传是要上传凭证的，怎么计算Token花费不少时间，之前做的方案代码过多，运行效率不高，参考了RYAN大的QiniuManager后成功移植。
-安装链接
-安装链接
-
-详细代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879cons...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/29</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JSBox">JSBox</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/02/01/【JSBox】利用JSBox在朋友圈斗图（一）/" >
-            
-                <span>【JSBox】利用JSBox在朋友圈斗图（一）</span>
-        </a>
-        <div class="abstract-content">
-            刷惯了微博，总是想在微信朋友圈里面用因缺思厅的（贱贱的）表情包评论，亦或者在发完朋友圈之后再在评论里面Po出后续。 想了一下，思路不难，只需要将图片通过API接口上传到图床后再通过短链形式发出去即可。 先用了Workflow试水一波，但是自从Workflow被苹果收购以后不得不吐槽一下下降的厉害的软件质量。Get Contents of URL里面填写多个Body值，不是这个无法显示就是那个无法编辑，再加上流程过长修改十分不便，差不多要放弃这个工具App了。 好在之前低价购买了JSBox，虽然还有些功能不是很完善，例如类似Workflow里面的Overlay Image的功能暂时缺失，但...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/02/01</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JSBox">JSBox</a>
-    
-</div>
-            
-        </div>
-    </article>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/09/08/西北·奥德赛 行程/" title= 西北·奥德赛 行程 >
+                    <div class="nextTitle">西北·奥德赛 行程</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/08/25/【杂物】旧物储藏间/" title= 【杂物】旧物储藏间 >
+                    <div class="prevTitle">【杂物】旧物储藏间</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "e7JFHRNqX2T29ebmy4pVCidb-gzGzoHsz",
+        appKey: "Tnys9hubkApQHhifwvUptzdh",
+        placeholder: "",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -663,6 +710,24 @@ V 1.0.4 修正节假日模式到达假日当天显示方式。
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#主要行程"><span class="toc-number">1.</span> <span class="toc-text">主要行程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DAY1"><span class="toc-number">1.1.</span> <span class="toc-text">DAY1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DAY2"><span class="toc-number">1.2.</span> <span class="toc-text">DAY2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DAY3"><span class="toc-number">1.3.</span> <span class="toc-text">DAY3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DAY4"><span class="toc-number">1.4.</span> <span class="toc-text">DAY4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DAY5"><span class="toc-number">1.5.</span> <span class="toc-text">DAY5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DAY6"><span class="toc-number">1.6.</span> <span class="toc-text">DAY6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DAY7"><span class="toc-number">1.7.</span> <span class="toc-text">DAY7</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#结束大西北旅程，👋"><span class="toc-number">1.7.1.</span> <span class="toc-text">结束大西北旅程，👋</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#物品清单"><span class="toc-number">2.</span> <span class="toc-text">物品清单</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1289,6 +1354,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
