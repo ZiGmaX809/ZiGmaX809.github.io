@@ -404,16 +404,16 @@ height:50vh;
 <li>上层为镂空字体层</li>
 <li>下层为动画渐变层</li>
 </ul>
-<p><img src="http://zigma.qiniudn.com//animation/animation.png" alt="animation"></p>
+<p><img src="http://zigma-pic.test.upcdn.net/blog/sudden/animation.png" alt="animation"></p>
 <p>接下来就是利用JSBox将动画渐变层的渐变颜色动起来。</p>
 <h1 id="渐变原理"><a href="#渐变原理" class="headerlink" title="渐变原理"></a>渐变原理</h1><p>JSBox之中设置颜色有HEX值和RGB值两种方式，但是归根结底HEX只不过是RGB的十六进制显示方式。</p>
 <h2 id="RGB方式"><a href="#RGB方式" class="headerlink" title="RGB方式"></a>RGB方式</h2><p>由于RGB<code>(Red, Green, Blue)</code>是利用的是一个三维坐标。</p>
-<p><img src="http://zigma.qiniudn.com//animation/RGB.png" alt="RGB"></p>
+<p><img src="http://zigma-pic.test.upcdn.net/blog/sudden/RGB.png" alt="RGB"></p>
 <p>如果利用RGB来动态变更颜色的话，需要平滑地显示红橙黄绿蓝靛紫红一个周期则需要运用Sin函数。</p>
 <p>利用下面的Demo可以清楚看到颜色渐变过程，仅需改变<code>start</code>的值就可以改变起始颜色。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">$ui.render(&#123;</span><br><span class="line">    layout: $layout.fill,</span><br><span class="line">    props: &#123;</span><br><span class="line">        id: <span class="string">"1"</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> start = <span class="number">1</span></span><br><span class="line">$cache.set(<span class="string">"time"</span>, start)</span><br><span class="line">$timer.schedule(&#123;</span><br><span class="line">    interval: <span class="number">0.1</span>,</span><br><span class="line">    handler: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> i = $cache.get(<span class="string">"time"</span>)</span><br><span class="line">        <span class="keyword">let</span> a_ = i * <span class="number">2</span> * <span class="number">3.141592654</span> / <span class="number">1200</span></span><br><span class="line">        <span class="keyword">let</span> b_ = i * <span class="number">2</span> * <span class="number">3.141592654</span> / <span class="number">1200</span> + <span class="number">2.094395102</span></span><br><span class="line">        <span class="keyword">let</span> c_ = i * <span class="number">2</span> * <span class="number">3.141592654</span> / <span class="number">1200</span> - <span class="number">2.094395102</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> r = (<span class="number">255</span> * (<span class="built_in">Math</span>.sin(c_) + <span class="number">0.5</span>)) &lt; <span class="number">0</span> ? <span class="number">0</span> : ((<span class="number">255</span> * (<span class="built_in">Math</span>.sin(c_) + <span class="number">0.5</span>)) &gt; <span class="number">255</span> ? <span class="number">255</span> : (<span class="number">255</span> * (<span class="built_in">Math</span>.sin(c_) + <span class="number">0.5</span>)))</span><br><span class="line">        <span class="keyword">let</span> g = (<span class="number">255</span> * (<span class="built_in">Math</span>.sin(b_) + <span class="number">0.5</span>)) &lt; <span class="number">0</span> ? <span class="number">0</span> : ((<span class="number">255</span> * (<span class="built_in">Math</span>.sin(b_) + <span class="number">0.5</span>)) &gt; <span class="number">255</span> ? <span class="number">255</span> : (<span class="number">255</span> * (<span class="built_in">Math</span>.sin(b_) + <span class="number">0.5</span>)))</span><br><span class="line">        <span class="keyword">let</span> b = (<span class="number">255</span> * (<span class="built_in">Math</span>.sin(a_) + <span class="number">0.5</span>)) &lt; <span class="number">0</span> ? <span class="number">0</span> : ((<span class="number">255</span> * (<span class="built_in">Math</span>.sin(a_) + <span class="number">0.5</span>)) &gt; <span class="number">255</span> ? <span class="number">255</span> : (<span class="number">255</span> * (<span class="built_in">Math</span>.sin(a_) + <span class="number">0.5</span>)))</span><br><span class="line"></span><br><span class="line">        $(<span class="string">"1"</span>).bgcolor = $rgb(r,g,b)</span><br><span class="line">        <span class="built_in">console</span>.log(r,g,b)</span><br><span class="line">        $cache.set(<span class="string">"time"</span>, i + <span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <h2 id="HSV方式"><a href="#HSV方式" class="headerlink" title="HSV方式"></a>HSV方式</h2><p>相对于此，利用HSV值更加直观，唯一缺点就是需要重新将输出的HSV值转换为HEX值。</p>
-<p><img src="http://zigma.qiniudn.com//animation/HSV.jpg" alt="HSV"></p>
+<p><img src="http://zigma-pic.test.upcdn.net/blog/sudden//HSV.jpg" alt="HSV"></p>
 <p>在HSV<code>(Hue, Saturation, Lightness，即色相，饱和度，明度)</code>里，颜色变化更为直观，我们只需要变更H值即可，完成一个周期颜色变化，而且也更为强大。</p>
 <p>同样利用一个Demo，来看一下HSV变化。改变<code>hh</code>为起始颜色，改变<code>ss</code>则是统一饱和，<code>vv</code>则是统一明度。</p>
 <p>唯一缺点就是增加了HEX值封装函数，但是相对于上面的RGB方法，这里可以比较直观地控制饱和度和明度。</p>
@@ -898,6 +898,20 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 24
@@ -1072,6 +1086,8 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
+        <span class="sidebar-tag-name" data-tags="旅行"><span class="iconfont-archer">&#xe606;</span>旅行</span>
+    
         <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
     
         <span class="sidebar-tag-name" data-tags="合同"><span class="iconfont-archer">&#xe606;</span>合同</span>
@@ -1081,8 +1097,6 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
     
         <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
-    
-        <span class="sidebar-tag-name" data-tags="旅行"><span class="iconfont-archer">&#xe606;</span>旅行</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1127,13 +1141,13 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="瞎折腾"><span class="iconfont-archer">&#xe60a;</span>瞎折腾</span>
     
+        <span class="sidebar-category-name" data-categories="旅行"><span class="iconfont-archer">&#xe60a;</span>旅行</span>
+    
         <span class="sidebar-category-name" data-categories="工作"><span class="iconfont-archer">&#xe60a;</span>工作</span>
     
         <span class="sidebar-category-name" data-categories="Potplayer皮肤"><span class="iconfont-archer">&#xe60a;</span>Potplayer皮肤</span>
     
         <span class="sidebar-category-name" data-categories="App"><span class="iconfont-archer">&#xe60a;</span>App</span>
-    
-        <span class="sidebar-category-name" data-categories="旅行"><span class="iconfont-archer">&#xe60a;</span>旅行</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>

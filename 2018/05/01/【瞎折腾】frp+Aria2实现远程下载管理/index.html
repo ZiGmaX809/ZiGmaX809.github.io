@@ -400,10 +400,10 @@ height:50vh;
 <h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><ol>
 <li>华硕路由搭建Aria2下载环境和frp穿透客户端；</li>
 <li>远程VPS搭建frp穿透服务端；</li>
-<li>顺便搭建AriaNG网页服务端（可选）。<br><img src="http://zigma.qiniudn.com/aria2_frp/4.png" alt="网络拓补" title="网络拓补"></li>
+<li>顺便搭建AriaNG网页服务端（可选）。<br><img src="http://zigma-pic.test.upcdn.net/blog/frparia2/1_1.jpg" alt="网络拓补" title="网络拓补"></li>
 </ol>
 <h2 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h2><p>华硕路由刷第三方梅林固件，这里使用小宝固件，并在软件中心安装Aria2和frp客户端。</p>
-<h3 id="Ari2设置"><a href="#Ari2设置" class="headerlink" title="Ari2设置"></a>Ari2设置</h3><p><img src="http://zigma.qiniudn.com/aria2_frp/1_1.jpg" alt="Aria2设置" title="Aria2设置1"> <img src="http://zigma.qiniudn.com/aria2_frp/2.jpg" alt="Aria2设置2" title="Aria2设置2"> Aria2常规设置，如果没有速度则添加额外以下Tracker，基本种子都有速度，而且连接速度越来越快了。</p>
+<h3 id="Ari2设置"><a href="#Ari2设置" class="headerlink" title="Ari2设置"></a>Ari2设置</h3><p><img src="http://zigma-pic.test.upcdn.net/blog/frparia2/1.jpg" alt="Aria2设置" title="Aria2设置1"> <img src="http://zigma-pic.test.upcdn.net/blog/frparia2/2.jpg" alt="Aria2设置2" title="Aria2设置2"> Aria2常规设置，如果没有速度则添加额外以下Tracker，基本种子都有速度，而且连接速度越来越快了。</p>
 <blockquote>
 <p>udp://9.rarbg.com:2790/announce,udp://9.rarbg.to:2790/announce,udp://inferno.demonoid.pw:3418/announce,udp://bt.aoeex.com:8000/announce,udp://tracker.internetwarriors.net:1337/announce,udp://tracker.swateam.org.uk:2710/announce,udp://tracker.zer0day.to:1337/announce,udp://p4p.arenabg.com:1337/announce,<a href="https://open.kickasstracker.com:443/announce,udp://tracker.coppersurfer.tk:6969,http://torrentsmd.com:8080/announce,udp://tracker.pirateparty.gr:6969/announce,udp://tracker.coppersurfer.tk:6969/announce,udp://tracker4.itzmx.com:2710/announce,udp://tracker.uw0.xyz:6969/announce,udp://tracker.cypherpunks.ru:6969/announce,udp://open.stealth.si:80/announce,http://retracker.telecom.by:80/announce,udp://191.96.249.23:6969/announce,udp://78.142.19.42:1337/announce,udp://123.249.16.65:2710/announce,udp://185.82.217.160:1337/announce,udp://163.172.81.35:1337/announce,https://zer0day.000webhostapp.com:443/announce,udp://public.popcorn-tracker.org:6969/announce,https://linetorrent.xyz:443/announce,udp://tracker.leechers-paradise.org:6969/announce,https://open.acgnxtracker.com:443/announce,http://bt2.54new.com:8080/announce,http://bt1.54new.com:65533/announce,http://ipv6.54new.com:8080/announce,http://tracker.trackerfix.com/announce,udp://tracker.trackerfix.com:80/announce" target="_blank" rel="noopener">https://open.kickasstracker.com:443/announce,udp://tracker.coppersurfer.tk:6969,http://torrentsmd.com:8080/announce,udp://tracker.pirateparty.gr:6969/announce,udp://tracker.coppersurfer.tk:6969/announce,udp://tracker4.itzmx.com:2710/announce,udp://tracker.uw0.xyz:6969/announce,udp://tracker.cypherpunks.ru:6969/announce,udp://open.stealth.si:80/announce,http://retracker.telecom.by:80/announce,udp://191.96.249.23:6969/announce,udp://78.142.19.42:1337/announce,udp://123.249.16.65:2710/announce,udp://185.82.217.160:1337/announce,udp://163.172.81.35:1337/announce,https://zer0day.000webhostapp.com:443/announce,udp://public.popcorn-tracker.org:6969/announce,https://linetorrent.xyz:443/announce,udp://tracker.leechers-paradise.org:6969/announce,https://open.acgnxtracker.com:443/announce,http://bt2.54new.com:8080/announce,http://bt1.54new.com:65533/announce,http://ipv6.54new.com:8080/announce,http://tracker.trackerfix.com/announce,udp://tracker.trackerfix.com:80/announce</a></p>
 </blockquote>
@@ -414,7 +414,7 @@ height:50vh;
 <p>Token——搭建服务端时所填写的Token；</p>
 <p>HTTP/HTTPS——如果像我一样在服务端还搭建了网页，就需要更改成其他端口；</p>
 <p>Frpc用户名称——登录frp面板的用户名； </p>
-<p>穿透服务协议——需要在域名解析中新增二级域名，比如test.zigma.cc对应远程主机端口就是上面的HTTP端口8001，192.168.2.1和6800则是本地路由地址和Aria2端口。 <img src="http://zigma.qiniudn.com/aria2_frp/3.jpg" alt="frp设置" title="frp设置"></p>
+<p>穿透服务协议——需要在域名解析中新增二级域名，比如test.zigma.cc对应远程主机端口就是上面的HTTP端口8001，192.168.2.1和6800则是本地路由地址和Aria2端口。<br><img src="http://zigma-pic.test.upcdn.net/blog/frparia2/3.jpg" alt="frp设置" title="frp设置"></p>
 <h2 id="服务端配额制"><a href="#服务端配额制" class="headerlink" title="服务端配额制"></a>服务端配额制</h2><p>利用Koolshare社区提供的一键安装包进行安装，安装过程均有提示，这里就不重复造轮子了。 <a href="http://koolshare.cn/thread-65379-1-1.html" title="具体教程链接" target="_blank" rel="noopener">具体教程链接</a></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://raw.githubusercontent.com/clangcn/onekey-install-shell/master/frps/install-frps.sh -O ./install-frps.sh</span><br><span class="line">chmod 700 ./install-frps.sh</span><br><span class="line">./install-frps.sh install</span><br></pre></td></tr></table></figure>
 <h2 id="配置AriaNG服务端"><a href="#配置AriaNG服务端" class="headerlink" title="配置AriaNG服务端"></a>配置AriaNG服务端</h2><p>其实这个就是个静态网页，网上的资源还是挺多的，不过自己还有个64M小鸡闲着也是闲着，挂这个UI刚好，配置Nginx后将AriaNG的<a href="https://github.com/mayswind/AriaNg" title="Github项目" target="_blank" rel="noopener">Github项目</a>内容上传到服务器，而且这个项目都是基本请求一次后一直可以在本地缓存中使用，对于Aria2下载状态也是增量请求数据，因此带宽使用很少。 然后在AriaNG设置界面添加RPC地址为解析的二级域名test.zigma.cc，端口对应8001，填写完Token即可，AriaNG自适应移动端，界面友好，在手机端也可以很方便地管理。</p>
@@ -585,6 +585,20 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -1065,6 +1079,8 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
+        <span class="sidebar-tag-name" data-tags="旅行"><span class="iconfont-archer">&#xe606;</span>旅行</span>
+    
         <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
     
         <span class="sidebar-tag-name" data-tags="合同"><span class="iconfont-archer">&#xe606;</span>合同</span>
@@ -1074,8 +1090,6 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
     
         <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
-    
-        <span class="sidebar-tag-name" data-tags="旅行"><span class="iconfont-archer">&#xe606;</span>旅行</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1120,13 +1134,13 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="瞎折腾"><span class="iconfont-archer">&#xe60a;</span>瞎折腾</span>
     
+        <span class="sidebar-category-name" data-categories="旅行"><span class="iconfont-archer">&#xe60a;</span>旅行</span>
+    
         <span class="sidebar-category-name" data-categories="工作"><span class="iconfont-archer">&#xe60a;</span>工作</span>
     
         <span class="sidebar-category-name" data-categories="Potplayer皮肤"><span class="iconfont-archer">&#xe60a;</span>Potplayer皮肤</span>
     
         <span class="sidebar-category-name" data-categories="App"><span class="iconfont-archer">&#xe60a;</span>App</span>
-    
-        <span class="sidebar-category-name" data-categories="旅行"><span class="iconfont-archer">&#xe60a;</span>旅行</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
