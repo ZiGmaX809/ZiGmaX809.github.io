@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="Cache-Control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>ZiGma</title>
+    <title>【瞎折腾】frp+Aria2实现远程下载管理 · ZiGma</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -70,6 +70,8 @@
 
     <link rel="preload" href= /css/style.css?v=201807017_1502 as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <link rel="stylesheet" href= /css/mobile.css?v=20180709 media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
@@ -194,12 +196,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >ZiGma</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">【瞎折腾】frp+Aria2实现远程下载管理</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>ZiGma</a>
 </header>
@@ -213,24 +226,74 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            【瞎折腾】frp+Aria2实现远程下载管理
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "瞎折腾">瞎折腾</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count">329</span> / Reading time: <span class="post-count">1 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/11/09</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -331,50 +394,81 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/08/25/【杂物】旧物储藏间/" >
-            
-                <span>【杂物】旧物储藏间</span>
-        </a>
-        <div class="abstract-content">
-            前言翻以前的旧物时候，发现了以前还是有很多有意思的东西。
-而且，偶尔出去玩拍的照片一些还是比较适合做壁纸的，但是单独作为一个博文似乎内容又太少。
-PS练手
-
-
-壁纸
-
-
-壁纸打包地址壁纸
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/08/25</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "杂物">杂物</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "照片">照片</a>
-    
-</div>
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>没有更新博客了，一方面是工作忙，另一方面还是懒，没啥动力更新，虽然欠着一堆东西，大西北的视频剪了一半，找不到好的BGM索性一直扔在那边，JSBox好几个脚本在烂尾或者已经难产。</p>
+<p>顺便吐槽一下七牛云，回收了测试域名还不能打包下载素材。</p>
+<p>前几天，大概也有几周了，被橘年大佬安利了一下树莓派，讲道理其他的功能并不吸引我，但是还算便宜，所以入了一个作为了下载机使用。</p>
+<h1 id="几个坑"><a href="#几个坑" class="headerlink" title="几个坑"></a>几个坑</h1><ol>
+<li>利用Aria2作为下载程序。</li>
+<li>利用Samba共享协议将内容共享给局域网访问。</li>
+<li>开机挂载NTFS格式硬盘。</li>
+<li>路由器frp穿透，增加外网控制。</li>
+</ol>
+<h1 id="安装Aria2"><a href="#安装Aria2" class="headerlink" title="安装Aria2"></a>安装Aria2</h1><p>树莓派系统安装以及配置在此不赘，直接从安装Aria2开始。</p>
+<p>相比于早期需要编译安装Aria2，现在安装方便许多。</p>
+<p>只需要用Aria2一键安装脚本即可安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/aria2.sh &amp;&amp; chmod +x aria2.sh &amp;&amp; bash aria2.sh</span><br></pre></td></tr></table></figure>
+<p>原帖地址：</p>
+<blockquote>
+<p><a href="https://doub.io/shell-jc4/comment-page-1/#comments" target="_blank" rel="noopener">逗比根据地 » 『原创』BT/种子/磁力链接下载工具 —— Aria2 一键安装管理脚本</a></p>
+</blockquote>
+<h1 id="安装Samba"><a href="#安装Samba" class="headerlink" title="安装Samba"></a>安装Samba</h1>
     </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者: <a href="http://www.zigma.cc">ZiGma</a>
+            <p>原文链接: <a href="http://www.zigma.cc/2018/11/09/【瞎折腾】树莓派-闲置移动硬盘搭建简易媒体中心/">http://www.zigma.cc/2018/11/09/【瞎折腾】树莓派-闲置移动硬盘搭建简易媒体中心/</a>
+            <p>发表日期: <a href="http://www.zigma.cc/2018/11/09/【瞎折腾】树莓派-闲置移动硬盘搭建简易媒体中心/">November 9th 2018, 8:19:34 pm</a>
+            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/09/08/【奥德赛】西北大环线行程/" title= 【奥德赛】西北大环线行程 >
+                    <div class="prevTitle">【奥德赛】西北大环线行程</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!--PC和WAP自适应版-->
+
+    <!--PC版-->
+
+
+    
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+    new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: "e7JFHRNqX2T29ebmy4pVCidb-gzGzoHsz",
+        appKey: "Tnys9hubkApQHhifwvUptzdh",
+        placeholder: "",
+        path:window.location.pathname, 
+        avatar:'mm' 
+    });
+    </script>
+
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -452,6 +546,24 @@ PS练手
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#几个坑"><span class="toc-number">2.</span> <span class="toc-text">几个坑</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装Aria2"><span class="toc-number">3.</span> <span class="toc-text">安装Aria2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装Samba"><span class="toc-number">4.</span> <span class="toc-text">安装Samba</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1070,6 +1182,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
