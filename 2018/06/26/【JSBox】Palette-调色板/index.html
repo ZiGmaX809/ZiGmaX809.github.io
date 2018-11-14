@@ -1,6 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="">
     <!-- title -->
+
+
+
+
+<!-- keywords -->
 
 
 
@@ -11,9 +16,11 @@
     <meta name="author" content="ZiGma">
     <meta name="renderer" content="webkit">
     <meta name="copyright" content="ZiGma">
-    <meta name="keywords" content="ZiGma | ZiGma">
+    
+    <meta name="keywords" content="ZiGma,ZiGma">
+    
     <meta name="description" content="">
-    <meta name="Cache-Control" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>【JSBox】Palette 调色板 · ZiGma</title>
     <style type="text/css">
@@ -54,7 +61,7 @@
         background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
         background-position: center center;
         transform: translate3d(-226px, 0, 0);
-        animation: gradient-move 2.5s ease-out 0s 1;
+        animation: gradient-move 2.5s ease-out 0s infinite;
     }
 
     @keyframes gradient-move {
@@ -68,8 +75,8 @@
 
 </style>
 
-    <link rel="preload" href= /css/style.css?v=201807017_1502 as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <link rel="stylesheet" href= /css/mobile.css?v=20180709 media="(max-width: 980px)">
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
     
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     
@@ -217,8 +224,7 @@
     <a class="home-link" href=/>ZiGma</a>
 </header>
     <div class="wrapper">
-        <div class="site-intro" style=
-
+        <div class="site-intro" style="
 
 
 
@@ -227,8 +233,7 @@
 
 
 height:50vh;
-
->
+">
     
     <!-- 主页  -->
     
@@ -267,7 +272,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count">321</span> / Reading time: <span class="post-count">1 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">321</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -408,10 +413,11 @@ height:50vh;
     <!-- license  -->
     
         <div class="license-wrapper">
-            <p>原文作者: <a href="http://www.zigma.cc">ZiGma</a>
-            <p>原文链接: <a href="http://www.zigma.cc/2018/06/26/【JSBox】Palette-调色板/">http://www.zigma.cc/2018/06/26/【JSBox】Palette-调色板/</a>
-            <p>发表日期: <a href="http://www.zigma.cc/2018/06/26/【JSBox】Palette-调色板/">June 26th 2018, 11:24:22 pm</a>
-            <p>版权声明: 本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+            <p>原文作者：<a href="http://www.zigma.cc">ZiGma</a>
+            <p>原文链接：<a href="http://www.zigma.cc/2018/06/26/【JSBox】Palette-调色板/">http://www.zigma.cc/2018/06/26/【JSBox】Palette-调色板/</a>
+            <p>发表日期：<a href="http://www.zigma.cc/2018/06/26/【JSBox】Palette-调色板/">June 26th 2018, 11:24:22 pm</a>
+            <p>更新日期：<a href="http://www.zigma.cc/2018/06/26/【JSBox】Palette-调色板/">November 9th 2018, 7:47:47 pm</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
     <!-- paginator  -->
@@ -419,7 +425,7 @@ height:50vh;
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href= "/2018/06/26/【JSBox】超轻量级Aria2客户端/" title= 【JSBox】超轻量级Aria2客户端 >
+                <a href= "/2018/06/26/【JSBox】超轻量级Aria2客户端/" title= "【JSBox】超轻量级Aria2客户端">
                     <div class="nextTitle">【JSBox】超轻量级Aria2客户端</div>
                 </a>
             
@@ -427,7 +433,7 @@ height:50vh;
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018/06/22/【JSBox】Days Pro/" title= 【JSBox】Days Pro >
+                <a href= "/2018/06/22/【JSBox】Days Pro/" title= "【JSBox】Days Pro">
                     <div class="prevTitle">【JSBox】Days Pro</div>
                 </a>
             
@@ -439,8 +445,7 @@ height:50vh;
 <!-- City版安装代码已完成 -->
     
     
-    <!--PC和WAP自适应版-->
-
+    <!-- partial('_partial/comment/changyan') -->
     <!--PC版-->
 
 
@@ -570,24 +575,6 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -1060,17 +1047,15 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
     
-        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
-    
         <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
     
         <span class="sidebar-tag-name" data-tags="搬瓦工"><span class="iconfont-archer">&#xe606;</span>搬瓦工</span>
     
         <span class="sidebar-tag-name" data-tags="JSBox"><span class="iconfont-archer">&#xe606;</span>JSBox</span>
     
-        <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
+        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
-        <span class="sidebar-tag-name" data-tags="旅行"><span class="iconfont-archer">&#xe606;</span>旅行</span>
+        <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
     
         <span class="sidebar-tag-name" data-tags="皮肤"><span class="iconfont-archer">&#xe606;</span>皮肤</span>
     
@@ -1080,6 +1065,8 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="照片"><span class="iconfont-archer">&#xe606;</span>照片</span>
     
+        <span class="sidebar-tag-name" data-tags="旅行"><span class="iconfont-archer">&#xe606;</span>旅行</span>
+    
         <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
         <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
@@ -1088,9 +1075,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="民间借贷"><span class="iconfont-archer">&#xe606;</span>民间借贷</span>
     
-        <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
-    
         <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
+    
+        <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1127,9 +1114,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="VPS"><span class="iconfont-archer">&#xe60a;</span>VPS</span>
     
-        <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
-    
         <span class="sidebar-category-name" data-categories="JSBox"><span class="iconfont-archer">&#xe60a;</span>JSBox</span>
+    
+        <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
     
         <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
     
@@ -1139,9 +1126,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="工作"><span class="iconfont-archer">&#xe60a;</span>工作</span>
     
-        <span class="sidebar-category-name" data-categories="Potplayer皮肤"><span class="iconfont-archer">&#xe60a;</span>Potplayer皮肤</span>
-    
         <span class="sidebar-category-name" data-categories="App"><span class="iconfont-archer">&#xe60a;</span>App</span>
+    
+        <span class="sidebar-category-name" data-categories="Potplayer皮肤"><span class="iconfont-archer">&#xe60a;</span>Potplayer皮肤</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
@@ -1169,7 +1156,7 @@ jsonContent:
     
     <!-- busuanzi  -->
     
-    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     
     <!-- CNZZ  -->
     
