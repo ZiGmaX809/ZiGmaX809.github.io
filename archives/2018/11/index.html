@@ -339,58 +339,33 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2017/12/09/一键移除Win10此电脑中多余文件夹/" >
+        <a class="abstract-title" href = "/2018/11/09/【瞎折腾】树莓派-闲置移动硬盘搭建简易媒体中心/" >
             
-                <span>一键移除Win10此电脑中多余文件夹</span>
+                <span>【瞎折腾】树莓派+闲置移动硬盘搭建简易媒体中心</span>
         </a>
         <div class="abstract-content">
-            Win10常年更新一些没什么卵用的功能，最近又有一次大更新。可气的是每次更新都会把一些设置重置。比如移除快捷方式的小箭头、已经移除的此电脑里面的各种文件夹。最近的更新还更新了一个3D图像文件夹，普通人肯定用不到，而且用惯了Win7的用户肯定也不习惯原本清爽的计算机里面出现这么多五花八门的文件夹，比如说我，在侧边栏出现那么多繁乱的文件夹都受不了，更何况在主界面。
-利用注册表来移除文件夹所幸能够通过修改注册表来移除这些文件夹，简单便捷无污染，唯一缺点就是每次更新后需要重新运行一次。 每次在注册表查找键值太麻烦，所以弄成了注册表注册文件。 新建记事本后复制粘贴以下代码，保存后将txt后缀改为r...
+            前言没有更新博客了，一方面是工作忙，另一方面还是懒，没啥动力更新，虽然欠着一堆东西，大西北的视频剪了一半，找不到好的BGM索性一直扔在那边，JSBox好几个脚本在烂尾或者已经难产。
+顺便吐槽一下七牛云，回收了测试域名还不能打包下载素材。
+前几天，大概也有几周了，被橘年大佬安利了一下树莓派，讲道理其他的功能并不吸引我，但是还算便宜，所以入了一个作为了下载机使用。
+几个坑
+利用Aria2作为下载程序。
+开机挂载NTFS格式硬盘。
+利用Samba共享协议将内容共享给局域网访问。
+路由器frp穿透，增加外网控制。
+
+安装Aria2树莓派系统安装以及配置在此不赘，直接从安装Aria2开始。
+相比于...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/09</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/09</span>
             </div>
             <!-- tags  -->
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "WIN10">WIN10</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/08/15/CentOS监控进程状态并自动重启/" >
-            
-                <span>CentOS监控进程状态并自动重启</span>
-        </a>
-        <div class="abstract-content">
-            在CentOS系统中利用Crontab监控进程是否被结束并自动重启。 附加每天凌晨4点自动重启服务器。
-1. 编辑Crontab1crontab -e
-2. 按i进行编辑12*/1 * * * * /root/monitor.sh     # 每分钟运行一遍monitor.sh脚本0 5 * * * /sbin/reboot           # 每天凌晨5点自动重启服务器
-3. root文件夹下创建monitor.sh脚本1234567891011121314151617181920212223242526#! /bin/shhost_dir=`echo ~`            ...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/08/15</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "CentOS">CentOS</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "VPS">VPS</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "瞎折腾">瞎折腾</a>
     
 </div>
             
