@@ -276,7 +276,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">1,625</span>阅读时长: <span class="post-count reading-time">7 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">2,146</span>阅读时长: <span class="post-count reading-time">10 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -438,6 +438,17 @@ height:50vh;
 <p>编辑<code>default.conf</code>文件，插入如下代码（需要自行更改<code>server_name example.com www.example.com;</code>，其他的路径可以不改动）</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80 ;</span><br><span class="line">    root /var/www/hexo; //这里可以改成你的网站目录地址，我将网站放在/var/www/hexo</span><br><span class="line">    server_name example.com www.example.com; //这里输入你的域名或IP地址</span><br><span class="line">    access_log  /var/log/nginx/hexo_access.log; //这里的log文件也可以根据自己网站名字替换</span><br><span class="line">    error_log   /var/log/nginx/hexo_error.log; //这里的log文件也可以根据自己网站名字替换</span><br><span class="line">    location ~* ^.+\.(ico|gif|jpg|jpeg|png)$ &#123;</span><br><span class="line">            root /var/www/hexo; //网站目录地址</span><br><span class="line">            access_log   off;</span><br><span class="line">            expires      1d;</span><br><span class="line">    &#125;</span><br><span class="line">    location ~* ^.+\.(css|js|txt|xml|swf|wav)$ &#123;</span><br><span class="line">        root /var/www/hexo; //网站目录地址</span><br><span class="line">        access_log   off;</span><br><span class="line">        expires      10m;</span><br><span class="line">    &#125;</span><br><span class="line">    location / &#123;</span><br><span class="line">        root /var/www/hexo; //网站目录地址</span><br><span class="line">        if (-f $request_filename) &#123;</span><br><span class="line">            rewrite ^/(.*)$  /$1 break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>然后利用<code>service nginx restart</code>重启Nginx服务。</p>
+<h4 id="·-设置Nginx开机自启"><a href="#·-设置Nginx开机自启" class="headerlink" title="· 设置Nginx开机自启"></a>· 设置Nginx开机自启</h4><p>像上面安装完以后Nginx并不会开机自动启动，手动启动就比较麻烦了，因此我们需要设置其开机自动启动。</p>
+<p>利用命令建立Nginx脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/init.d/nginx</span><br></pre></td></tr></table></figure>
+<p>然后添加命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">#</span><br><span class="line"># nginx - this script starts and stops the nginx daemon</span><br><span class="line">#</span><br><span class="line"># chkconfig:   - 85 15</span><br><span class="line"># description:  NGINX is an HTTP(S) server, HTTP(S) reverse \</span><br><span class="line">#               proxy and IMAP/POP3 proxy server</span><br><span class="line"># processname: nginx</span><br><span class="line"># config:      /etc/nginx/nginx.conf</span><br><span class="line"># config:      /etc/sysconfig/nginx</span><br><span class="line"># pidfile:     /var/run/nginx.pid</span><br><span class="line"># Source function library.</span><br><span class="line">. /etc/rc.d/init.d/functions</span><br><span class="line"># Source networking configuration.</span><br><span class="line">. /etc/sysconfig/network</span><br><span class="line"># Check that networking is up.</span><br><span class="line">[ &quot;$NETWORKING&quot; = &quot;no&quot; ] &amp;&amp; exit 0</span><br><span class="line">nginx=&quot;/usr/sbin/nginx&quot;</span><br><span class="line">prog=$(basename $nginx)</span><br><span class="line">NGINX_CONF_FILE=&quot;/etc/nginx/nginx.conf&quot;</span><br><span class="line">[ -f /etc/sysconfig/nginx ] &amp;&amp; . /etc/sysconfig/nginx</span><br><span class="line">lockfile=/var/lock/subsys/nginx</span><br><span class="line">make_dirs() &#123;</span><br><span class="line">   # make required directories</span><br><span class="line">   user=`$nginx -V 2&gt;&amp;1 | grep &quot;configure arguments:&quot; | sed &apos;s/[^*]*--user=\([^ ]*\).*/\1/g&apos; -`</span><br><span class="line">   if [ -z &quot;`grep $user /etc/passwd`&quot; ]; then</span><br><span class="line">       useradd -M -s /bin/nologin $user</span><br><span class="line">   fi</span><br><span class="line">   options=`$nginx -V 2&gt;&amp;1 | grep &apos;configure arguments:&apos;`</span><br><span class="line">   for opt in $options; do</span><br><span class="line">       if [ `echo $opt | grep &apos;.*-temp-path&apos;` ]; then</span><br><span class="line">           value=`echo $opt | cut -d &quot;=&quot; -f 2`</span><br><span class="line">           if [ ! -d &quot;$value&quot; ]; then</span><br><span class="line">               # echo &quot;creating&quot; $value</span><br><span class="line">               mkdir -p $value &amp;&amp; chown -R $user $value</span><br><span class="line">           fi</span><br><span class="line">       fi</span><br><span class="line">   done</span><br><span class="line">&#125;</span><br><span class="line">start() &#123;</span><br><span class="line">    [ -x $nginx ] || exit 5</span><br><span class="line">    [ -f $NGINX_CONF_FILE ] || exit 6</span><br><span class="line">    make_dirs</span><br><span class="line">    echo -n $&quot;Starting $prog: &quot;</span><br><span class="line">    daemon $nginx -c $NGINX_CONF_FILE</span><br><span class="line">    retval=$?</span><br><span class="line">    echo</span><br><span class="line">    [ $retval -eq 0 ] &amp;&amp; touch $lockfile</span><br><span class="line">    return $retval</span><br><span class="line">&#125;</span><br><span class="line">stop() &#123;</span><br><span class="line">    echo -n $&quot;Stopping $prog: &quot;</span><br><span class="line">    killproc $prog -QUIT</span><br><span class="line">    retval=$?</span><br><span class="line">    echo</span><br><span class="line">    [ $retval -eq 0 ] &amp;&amp; rm -f $lockfile</span><br><span class="line">    return $retval</span><br><span class="line">&#125;</span><br><span class="line">restart() &#123;</span><br><span class="line">    configtest || return $?</span><br><span class="line">    stop</span><br><span class="line">    sleep 1</span><br><span class="line">    start</span><br><span class="line">&#125;</span><br><span class="line">reload() &#123;</span><br><span class="line">    configtest || return $?</span><br><span class="line">    echo -n $&quot;Reloading $prog: &quot;</span><br><span class="line">    killproc $nginx -HUP</span><br><span class="line">    RETVAL=$?</span><br><span class="line">    echo</span><br><span class="line">&#125;</span><br><span class="line">force_reload() &#123;</span><br><span class="line">    restart</span><br><span class="line">&#125;</span><br><span class="line">configtest() &#123;</span><br><span class="line">  $nginx -t -c $NGINX_CONF_FILE</span><br><span class="line">&#125;</span><br><span class="line">rh_status() &#123;</span><br><span class="line">    status $prog</span><br><span class="line">&#125;</span><br><span class="line">rh_status_q() &#123;</span><br><span class="line">    rh_status &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">&#125;</span><br><span class="line">case &quot;$1&quot; in</span><br><span class="line">    start)</span><br><span class="line">        rh_status_q &amp;&amp; exit 0</span><br><span class="line">        $1</span><br><span class="line">        ;;</span><br><span class="line">    stop)</span><br><span class="line">        rh_status_q || exit 0</span><br><span class="line">        $1</span><br><span class="line">        ;;</span><br><span class="line">    restart|configtest)</span><br><span class="line">        $1</span><br><span class="line">        ;;</span><br><span class="line">    reload)</span><br><span class="line">        rh_status_q || exit 7</span><br><span class="line">        $1</span><br><span class="line">        ;;</span><br><span class="line">    force-reload)</span><br><span class="line">        force_reload</span><br><span class="line">        ;;</span><br><span class="line">    status)</span><br><span class="line">        rh_status</span><br><span class="line">        ;;</span><br><span class="line">    condrestart|try-restart)</span><br><span class="line">        rh_status_q || exit 0</span><br><span class="line">            ;;</span><br><span class="line">    *)</span><br><span class="line">        echo $&quot;Usage: $0 &#123;start|stop|status|restart|condrestart|try-restart|reload|force-reload|configtest&#125;&quot;</span><br><span class="line">        exit 2</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<p>保存后设置可执行权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a+x /etc/init.d/nginx</span><br></pre></td></tr></table></figure>
+<p>添加chkconfig控制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --add /etc/init.d/nginx</span><br></pre></td></tr></table></figure>
+<p>设置开机自启</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig nginx on</span><br></pre></td></tr></table></figure>
 <h3 id="2、安装Git"><a href="#2、安装Git" class="headerlink" title="2、安装Git"></a>2、安装Git</h3><p>利用以下代码安装Git</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update &amp;&amp; apt-get upgrade -y #更新内核</span><br><span class="line">yum install git-core</span><br></pre></td></tr></table></figure>
 <h3 id="3、新建git用户并添加sudo权限"><a href="#3、新建git用户并添加sudo权限" class="headerlink" title="3、新建git用户并添加sudo权限"></a>3、新建git用户并添加sudo权限</h3><p>分别利用以下命令新建git用户、给<code>sudoers</code>文件提权、编辑。</p>
@@ -490,7 +501,7 @@ height:50vh;
             <p>原文作者：<a href="http://www.zigma.cc">ZiGma</a>
             <p>原文链接：<a href="http://www.zigma.cc/2018/06/27/【Hexo】从Wordpress转Hexo的那些深坑/">http://www.zigma.cc/2018/06/27/【Hexo】从Wordpress转Hexo的那些深坑/</a>
             <p>发表日期：<a href="http://www.zigma.cc/2018/06/27/【Hexo】从Wordpress转Hexo的那些深坑/">June 27th 2018, 10:44:12 pm</a>
-            <p>更新日期：<a href="http://www.zigma.cc/2018/06/27/【Hexo】从Wordpress转Hexo的那些深坑/">June 28th 2018, 6:21:23 pm</a>
+            <p>更新日期：<a href="http://www.zigma.cc/2018/06/27/【Hexo】从Wordpress转Hexo的那些深坑/">November 21st 2018, 7:06:49 pm</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -636,7 +647,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#填坑开始"><span class="toc-number">2.</span> <span class="toc-text">填坑开始</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、本地环境搭建"><span class="toc-number">2.1.</span> <span class="toc-text">一、本地环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装node-js"><span class="toc-number">2.1.1.</span> <span class="toc-text">安装node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Git环境"><span class="toc-number">2.1.2.</span> <span class="toc-text">安装Git环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建本地目录"><span class="toc-number">2.1.3.</span> <span class="toc-text">创建本地目录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、VPS环境部署"><span class="toc-number">2.2.</span> <span class="toc-text">二、VPS环境部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、安装Nginx"><span class="toc-number">2.2.1.</span> <span class="toc-text">1、安装Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#·-添加Nginx到YUM源"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">· 添加Nginx到YUM源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#·-安装Nginx"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">· 安装Nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#·-配置Nginx"><span class="toc-number">2.2.1.3.</span> <span class="toc-text">· 配置Nginx</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、安装Git"><span class="toc-number">2.2.2.</span> <span class="toc-text">2、安装Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、新建git用户并添加sudo权限"><span class="toc-number">2.2.3.</span> <span class="toc-text">3、新建git用户并添加sudo权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、配置ssh登录"><span class="toc-number">2.2.4.</span> <span class="toc-text">4、配置ssh登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、初始化git仓库"><span class="toc-number">2.2.5.</span> <span class="toc-text">5、初始化git仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置Git-Hooks"><span class="toc-number">2.2.5.1.</span> <span class="toc-text">配置Git Hooks</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、Hexo配置"><span class="toc-number">2.3.</span> <span class="toc-text">三、Hexo配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结束语"><span class="toc-number">3.</span> <span class="toc-text">结束语</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#填坑开始"><span class="toc-number">2.</span> <span class="toc-text">填坑开始</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、本地环境搭建"><span class="toc-number">2.1.</span> <span class="toc-text">一、本地环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装node-js"><span class="toc-number">2.1.1.</span> <span class="toc-text">安装node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Git环境"><span class="toc-number">2.1.2.</span> <span class="toc-text">安装Git环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建本地目录"><span class="toc-number">2.1.3.</span> <span class="toc-text">创建本地目录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、VPS环境部署"><span class="toc-number">2.2.</span> <span class="toc-text">二、VPS环境部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、安装Nginx"><span class="toc-number">2.2.1.</span> <span class="toc-text">1、安装Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#·-添加Nginx到YUM源"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">· 添加Nginx到YUM源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#·-安装Nginx"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">· 安装Nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#·-配置Nginx"><span class="toc-number">2.2.1.3.</span> <span class="toc-text">· 配置Nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#·-设置Nginx开机自启"><span class="toc-number">2.2.1.4.</span> <span class="toc-text">· 设置Nginx开机自启</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、安装Git"><span class="toc-number">2.2.2.</span> <span class="toc-text">2、安装Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、新建git用户并添加sudo权限"><span class="toc-number">2.2.3.</span> <span class="toc-text">3、新建git用户并添加sudo权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、配置ssh登录"><span class="toc-number">2.2.4.</span> <span class="toc-text">4、配置ssh登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、初始化git仓库"><span class="toc-number">2.2.5.</span> <span class="toc-text">5、初始化git仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#配置Git-Hooks"><span class="toc-number">2.2.5.1.</span> <span class="toc-text">配置Git Hooks</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、Hexo配置"><span class="toc-number">2.3.</span> <span class="toc-text">三、Hexo配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结束语"><span class="toc-number">3.</span> <span class="toc-text">结束语</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -1003,12 +1014,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JSBox】Palette-调色板/" >【JSBox】Palette 调色板</a>
+            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JSBox】超轻量级Aria2客户端/" >【JSBox】超轻量级Aria2客户端</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JSBox】超轻量级Aria2客户端/" >【JSBox】超轻量级Aria2客户端</a>
+            <span class="archive-post-date">06/26</span><a class="archive-post-title" href= "/2018/06/26/【JSBox】Palette-调色板/" >【JSBox】Palette 调色板</a>
         </li>
     
     
@@ -1105,41 +1116,41 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
-    
-        <span class="sidebar-tag-name" data-tags="JSBox"><span class="iconfont-archer">&#xe606;</span>JSBox</span>
-    
         <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
     
         <span class="sidebar-tag-name" data-tags="VPS"><span class="iconfont-archer">&#xe606;</span>VPS</span>
     
-        <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
+        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
         <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
     
         <span class="sidebar-tag-name" data-tags="搬瓦工"><span class="iconfont-archer">&#xe606;</span>搬瓦工</span>
     
+        <span class="sidebar-tag-name" data-tags="JSBox"><span class="iconfont-archer">&#xe606;</span>JSBox</span>
+    
+        <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
+    
         <span class="sidebar-tag-name" data-tags="皮肤"><span class="iconfont-archer">&#xe606;</span>皮肤</span>
     
         <span class="sidebar-tag-name" data-tags="iOS"><span class="iconfont-archer">&#xe606;</span>iOS</span>
     
+        <span class="sidebar-tag-name" data-tags="旅行"><span class="iconfont-archer">&#xe606;</span>旅行</span>
+    
         <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
-        <span class="sidebar-tag-name" data-tags="旅行"><span class="iconfont-archer">&#xe606;</span>旅行</span>
+        <span class="sidebar-tag-name" data-tags="合同"><span class="iconfont-archer">&#xe606;</span>合同</span>
+    
+        <span class="sidebar-tag-name" data-tags="民间借贷"><span class="iconfont-archer">&#xe606;</span>民间借贷</span>
+    
+        <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
+    
+        <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
     
         <span class="sidebar-tag-name" data-tags="杂物"><span class="iconfont-archer">&#xe606;</span>杂物</span>
     
         <span class="sidebar-tag-name" data-tags="照片"><span class="iconfont-archer">&#xe606;</span>照片</span>
     
-        <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
-    
         <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
-    
-        <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
-    
-        <span class="sidebar-tag-name" data-tags="合同"><span class="iconfont-archer">&#xe606;</span>合同</span>
-    
-        <span class="sidebar-tag-name" data-tags="民间借贷"><span class="iconfont-archer">&#xe606;</span>民间借贷</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1174,17 +1185,17 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
+        <span class="sidebar-category-name" data-categories="VPS"><span class="iconfont-archer">&#xe60a;</span>VPS</span>
+    
         <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
     
         <span class="sidebar-category-name" data-categories="JSBox"><span class="iconfont-archer">&#xe60a;</span>JSBox</span>
     
-        <span class="sidebar-category-name" data-categories="VPS"><span class="iconfont-archer">&#xe60a;</span>VPS</span>
-    
         <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
     
-        <span class="sidebar-category-name" data-categories="瞎折腾"><span class="iconfont-archer">&#xe60a;</span>瞎折腾</span>
-    
         <span class="sidebar-category-name" data-categories="旅行"><span class="iconfont-archer">&#xe60a;</span>旅行</span>
+    
+        <span class="sidebar-category-name" data-categories="瞎折腾"><span class="iconfont-archer">&#xe60a;</span>瞎折腾</span>
     
         <span class="sidebar-category-name" data-categories="工作"><span class="iconfont-archer">&#xe60a;</span>工作</span>
     
