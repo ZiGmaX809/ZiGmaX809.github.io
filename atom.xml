@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.zigma.cc/"/>
-  <updated>2018-11-16T15:34:53.978Z</updated>
+  <updated>2018-12-16T07:43:16.043Z</updated>
   <id>http://www.zigma.cc/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【VBA】统计重复出现的姓名及出现次数</title>
+    <link href="http://www.zigma.cc/2018/12/16/%E3%80%90VBA%E3%80%91%E7%BB%9F%E8%AE%A1%E9%87%8D%E5%A4%8D%E5%87%BA%E7%8E%B0%E7%9A%84%E5%A7%93%E5%90%8D%E5%8F%8A%E5%87%BA%E7%8E%B0%E6%AC%A1%E6%95%B0/"/>
+    <id>http://www.zigma.cc/2018/12/16/【VBA】统计重复出现的姓名及出现次数/</id>
+    <published>2018-12-16T07:17:46.000Z</published>
+    <updated>2018-12-16T07:43:16.043Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>同事又来提需求了，几百人的名单需要统计出现过的人名，还需要统计出现过的次数。</p><p>如果依靠肉眼估计眼睛都瞎了，因此求助了我，昨天没电脑想网上看一下类似的功能的公式，但是几乎都是不尽人意。</p><p>而且利用<code>COUNTIF</code>公式还是需要先知道出现过那些人，<code>VLOOKUP</code>似乎也不能一步到位。排序+筛选是个办法，但是感觉有点曲线救国，会打乱顺序，所以依旧利用万能的VBA来处理。    </p><h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>利用VBA定位A列最后非空单元格，然后在B列利用嵌套循环匹配有无出现过该人，如果有则次数加1，如果没有则在B列最后添加该人姓名，并且定义出现次数为1。</p><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> test()</span><br><span class="line">    <span class="keyword">For</span> i = <span class="number">1</span> <span class="keyword">To</span> Range(<span class="string">"A100"</span>).<span class="keyword">End</span>(xlUp).Row</span><br><span class="line">        kim = <span class="number">0</span></span><br><span class="line">        <span class="keyword">For</span> j = <span class="number">2</span> <span class="keyword">To</span> Range(<span class="string">"B50"</span>).<span class="keyword">End</span>(xlUp).Row</span><br><span class="line">            <span class="keyword">If</span> Range(<span class="string">"A"</span> &amp; i) = Range(<span class="string">"B"</span> &amp; j) <span class="keyword">Then</span></span><br><span class="line">                Range(<span class="string">"C"</span> &amp; j) = Range(<span class="string">"C"</span> &amp; j) + <span class="number">1</span></span><br><span class="line">                kim = <span class="number">1</span></span><br><span class="line">            <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">        <span class="keyword">Next</span></span><br><span class="line">        <span class="keyword">If</span> kim = <span class="number">0</span> <span class="keyword">Then</span></span><br><span class="line">            max_r = Range(<span class="string">"B50"</span>).<span class="keyword">End</span>(xlUp).Row</span><br><span class="line">            Range(<span class="string">"B"</span> &amp; max_r + <span class="number">1</span>) = Range(<span class="string">"A"</span> &amp; i)</span><br><span class="line">            Range(<span class="string">"C"</span> &amp; max_r + <span class="number">1</span>) = <span class="number">1</span></span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>相对于使用公式和透视图，个人还是比较喜欢VBA，不需要其他填充之类操作，点击就能出来结果，不会污染源数据，更为方便的是可以另存为工具，在下次使用时将目标数据粘贴进来就完事了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h1&gt;&lt;p&gt;同事又来提需求了，几百人的名单需要统计出现过的人名，还需要统计出现过的次数。&lt;/p&gt;
+&lt;p&gt;如果依靠肉眼估计眼睛都瞎了，因此求助了我，昨天没
+      
+    
+    </summary>
+    
+      <category term="VBA" scheme="http://www.zigma.cc/categories/VBA/"/>
+    
+    
+      <category term="VBA" scheme="http://www.zigma.cc/tags/VBA/"/>
+    
+  </entry>
   
   <entry>
     <title>【瞎折腾】树莓派+Aria2搭建简易媒体中心</title>
@@ -494,32 +520,6 @@
     
     
       <category term="PotPlayer" scheme="http://www.zigma.cc/tags/PotPlayer/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>落格输入法配置相关</title>
-    <link href="http://www.zigma.cc/2017/10/28/%E8%90%BD%E6%A0%BC%E8%BE%93%E5%85%A5%E6%B3%95%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3/"/>
-    <id>http://www.zigma.cc/2017/10/28/落格输入法配置相关/</id>
-    <published>2017-10-28T09:11:26.000Z</published>
-    <updated>2018-11-09T12:00:36.271Z</updated>
-    
-    <content type="html"><![CDATA[<p>之前在少数派看了篇介绍双拼输入法的文章，觉得其中一句“学习双拼之前，会觉得卧槽竟然有傻逼用双拼；刚接触，会觉得卧槽还可以；熟悉以后，会觉得卧槽怎么会有傻逼用全拼”（差不多就这么个意思）高度概括了学习双拼前后的变化。</p><p> 说实话，学习双拼并没有想象中的那么难，在微信小程序里面有一个“双拼练习”的小程序可以帮助你快速熟悉音形码，PC上这类联系工具则更多了。基本一晚上就可以把音形码记得差不多，一周之后就可以熟练使用，而且没有全拼打字的肌肉酸胀感，之前开一天庭，最后手部肌肉会酸痛。 </p><p>虽然iOS11原生输入法支持了双拼，但是并不能更换双拼方案，而搜狗的空格键、中/英键和发送键挨的太近，导致空格键变短，很容易输入长句后，想要空格上屏却误触中/英切换，又要重新输入一遍。而且也无法像百度输入法一样可以自定义皮肤，这里还要再吐槽一下搜狗，之前做过一个仿锤子手机的键盘皮肤，做完发现上传审核后无法在iOS使用，只能在安卓安装，虽然iOS可以上架但是对于iOS皮肤的审核也是极其麻烦。 为什么不用百度？就是单纯地不想再用他家的任何产品~ 最后我选择了最为接近原生输入法的落格输入法。 </p><p>在Price Tag里面有一期送了落格输入法的兑换码，说实话个人对这个App主打的拒绝读取权限以保护隐私的宣传点并不是很感冒，因为App的易用性和用户隐私保护有时候在实现目的上还是挺对立的，需要预测输入习惯势必要依赖大数据，但是大数据又包含了你的点点滴滴。 但是，并没有十全十美的App，某些不知名的原因落格终止了和小鹤的合作，不再支持也不允许用户自定义上传小鹤的双拼方案（但是改个名字自定义还是可以的），所以在落格上面使用小鹤的双拼方案也是比较麻烦。 </p><p>因此写了这篇文章记录一下落格上面使用小鹤的方案。</p><h2 id="1、点划配置以及皮肤"><a href="#1、点划配置以及皮肤" class="headerlink" title="1、点划配置以及皮肤"></a>1、点划配置以及皮肤</h2><p><img src="http://zigma-pic.test.upcdn.net/blog/log/1.jpg" alt=""> 如图，上下划都可以进行操作，基本上向上是中文半角符号，向下是英文半角。 还有自带的宏，就用了中英切换、到行首、到行尾三个，所支持所有的宏<a href="https://v2mm.tech/topic/618/%E6%80%8E%E6%A0%B7%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8%E8%90%BD%E6%A0%BC%E8%BE%93%E5%85%A5%E6%B3%95%E7%9A%84%E7%82%B9%E5%88%92%E5%8A%9F%E8%83%BD" title="点击" target="_blank" rel="noopener">点击</a>。</p><h2 id="2、双拼方案"><a href="#2、双拼方案" class="headerlink" title="2、双拼方案"></a>2、双拼方案</h2><p>改了个名字而已，小鸡双拼，不然在App里面看不到。</p><h2 id="3、词库导入"><a href="#3、词库导入" class="headerlink" title="3、词库导入"></a>3、词库导入</h2><p>论坛有大佬分享词库转换导入的<a href="https://v2mm.tech/topic/1157/%E5%B0%8F%E5%B7%A5%E5%85%B7-%E6%B7%BB%E5%8A%A0%E6%90%9C%E7%8B%97%E7%BB%86%E8%83%9E%E8%AF%8D%E5%BA%93%E5%88%B0%E8%90%BD%E6%A0%BC" title="教程" target="_blank" rel="noopener">教程</a>和工具，但是没有提供小鹤的转换方案，所以一并备份了。</p><h2 id="4、小鸡辅码"><a href="#4、小鸡辅码" class="headerlink" title="4、小鸡辅码"></a>4、小鸡辅码</h2><p>从小鹤外挂词库中提取了单词辅码。</p><h2 id="5、下载地址"><a href="#5、下载地址" class="headerlink" title="5、下载地址"></a>5、下载地址</h2><p><a href="https://pan.baidu.com/s/1g0WJfIP3BfFvdSmzFwQbhg" title="百度网盘" target="_blank" rel="noopener">百度网盘</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;之前在少数派看了篇介绍双拼输入法的文章，觉得其中一句“学习双拼之前，会觉得卧槽竟然有傻逼用双拼；刚接触，会觉得卧槽还可以；熟悉以后，会觉得卧槽怎么会有傻逼用全拼”（差不多就这么个意思）高度概括了学习双拼前后的变化。&lt;/p&gt;
-&lt;p&gt; 说实话，学习双拼并没有想象中的那么难，在微
-      
-    
-    </summary>
-    
-      <category term="App" scheme="http://www.zigma.cc/categories/App/"/>
-    
-    
-      <category term="落格" scheme="http://www.zigma.cc/tags/%E8%90%BD%E6%A0%BC/"/>
     
   </entry>
   
