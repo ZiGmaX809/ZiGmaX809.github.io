@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.zigma.cc/"/>
-  <updated>2018-12-16T07:43:16.043Z</updated>
+  <updated>2019-03-09T03:33:37.627Z</updated>
   <id>http://www.zigma.cc/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【Python】建立自动签到签退工作流</title>
+    <link href="http://www.zigma.cc/2019/03/09/%E3%80%90Python%E3%80%91%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%88%B0%E7%AD%BE%E9%80%80%E5%B7%A5%E4%BD%9C%E6%B5%81/"/>
+    <id>http://www.zigma.cc/2019/03/09/【Python】建立自动签到签退工作流/</id>
+    <published>2019-03-09T03:20:00.000Z</published>
+    <updated>2019-03-09T03:33:37.627Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="问题提出"><a href="#问题提出" class="headerlink" title="问题提出"></a>问题提出</h1><p>又到了一年一度的三八国际妇女劳动节，作为单位部门里面唯三的男同志依旧坚守岗位，剩下的女同志全部去参加活动了。</p><p>结合之前食堂改造刷卡机一直没有着落，寻思着每天上班都能按时到，但是因为早餐的问题不得不先去行政楼打卡再去食堂或者找别人帮忙网页签到。</p><p>所以用大家都不在的时间研究了一下自动签退的脚本。</p><h1 id="问题梳理"><a href="#问题梳理" class="headerlink" title="问题梳理"></a>问题梳理</h1><p>最早的想法是利用按键精灵，网页打开后模拟按键进行操作，很早的时候就已经测试过，似乎不太可行，对于Click操作可能有点问题，因此被抛弃了。</p><p>后来的想法是做一个自动运行的油猴脚本，但是不能定时启动，这种事情无人值守才有意义不是？</p><p>Google了一下解决方案，大部分都是利用Python+selenium实现，因为是第一次接触Python，之前虽然有听过大名，但是一直没有实际需求去接触这块，所以把其他人的代码改了一下，实现了多人签到。</p><h1 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h1><p>基本的解决思路是：</p><p>​    设置电脑自动开机→Win自带的计划任务→执行Pyhthon脚本签到</p><p>Python解决思路：</p><p>​    利用selenium，打开签到网页，读取json文件后模拟登陆、签到、退出等一系列操作，实现多人签到。</p><h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> time </span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.keys <span class="keyword">import</span> Keys</span><br><span class="line"> </span><br><span class="line">username=[]</span><br><span class="line">passwd=[]</span><br><span class="line"> </span><br><span class="line">driver = webdriver.Chrome() <span class="comment">#模拟浏览器打开网站</span></span><br><span class="line">driver.get(<span class="string">"http://203.128.0.140:9090/lemis/"</span>)</span><br><span class="line"><span class="comment">#driver.maximize_window() #将窗口最大化</span></span><br><span class="line"></span><br><span class="line">f = open(<span class="string">"info.json"</span>,encoding=<span class="string">'utf-8'</span>)</span><br><span class="line">setting = json.load(f)</span><br><span class="line">useraccount = setting[<span class="string">'useraccount'</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(useraccount)):</span><br><span class="line">username=useraccount[i][<span class="string">'username'</span>]</span><br><span class="line">passwd=useraccount[i][<span class="string">'passwd'</span>]</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line"> time.sleep(<span class="number">2</span>) <span class="comment">#延时加载</span></span><br><span class="line"> <span class="comment">#找到登录框，输入账号密码</span></span><br><span class="line"> now_handle = driver.current_window_handle</span><br><span class="line"> driver.switch_to_window(now_handle)</span><br><span class="line"> driver.find_element_by_name(<span class="string">"bsc011"</span>).clear()</span><br><span class="line"> time.sleep(<span class="number">1</span>)</span><br><span class="line"> driver.find_element_by_name(<span class="string">"bsc011"</span>).send_keys(username)</span><br><span class="line"> driver.find_element_by_name(<span class="string">"bsc013"</span>).send_keys(passwd)</span><br><span class="line">  </span><br><span class="line"> <span class="comment">#模拟点击登录</span></span><br><span class="line"> driver.find_element_by_id(<span class="string">"hhh"</span>).click()</span><br><span class="line"> time.sleep(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"> <span class="keyword">if</span> int(time.strftime(<span class="string">"%H"</span>,time.localtime())) &lt; <span class="number">9</span>:</span><br><span class="line"> <span class="comment">#模拟点击签到</span></span><br><span class="line"> driver.find_element_by_id(<span class="string">"registration"</span>).click()</span><br><span class="line"> print(username+<span class="string">"签到成功"</span>)</span><br><span class="line"> time.sleep(<span class="number">2</span>)</span><br><span class="line"> <span class="keyword">else</span>:</span><br><span class="line"> <span class="comment">#模拟点击签退</span></span><br><span class="line"> driver.find_element_by_id(<span class="string">"signout"</span>).click()</span><br><span class="line"> print(username+<span class="string">"签退成功"</span>)</span><br><span class="line"> time.sleep(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"> <span class="comment">#关闭签到提示</span></span><br><span class="line"> driver.find_element_by_id(<span class="string">"0"</span>).click()</span><br><span class="line"> time.sleep(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"> <span class="comment">#模拟退出</span></span><br><span class="line"> driver.find_element_by_xpath(<span class="string">"//*[@class='mini-layout-region-body']/div[2]/ul[2]/li[1]/a"</span>).click()</span><br><span class="line"> time.sleep(<span class="number">2</span>)</span><br><span class="line"> <span class="comment">#点击确定按钮</span></span><br><span class="line"> driver.switch_to_alert().accept()</span><br><span class="line"> time.sleep(<span class="number">2</span>)</span><br><span class="line"> print(username+<span class="string">"登出成功"</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line"> print(username+<span class="string">"签退失败"</span>)</span><br><span class="line"> </span><br><span class="line">driver.quit <span class="comment">#退出程序</span></span><br></pre></td></tr></table></figure><h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><p>因为内外网分离，所以无法在执行完后获取结果。后续可以利用内外网文件交换系统，在执行完后将Log文件上传，以便于人在外面时了解执行情况。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;问题提出&quot;&gt;&lt;a href=&quot;#问题提出&quot; class=&quot;headerlink&quot; title=&quot;问题提出&quot;&gt;&lt;/a&gt;问题提出&lt;/h1&gt;&lt;p&gt;又到了一年一度的三八国际妇女劳动节，作为单位部门里面唯三的男同志依旧坚守岗位，剩下的女同志全部去参加活动了。&lt;/p&gt;
+&lt;p&gt;
+      
+    
+    </summary>
+    
+      <category term="Python" scheme="http://www.zigma.cc/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="http://www.zigma.cc/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>【VBA】统计重复出现的姓名及出现次数</title>
@@ -494,32 +520,6 @@
     
     
       <category term="VBA" scheme="http://www.zigma.cc/tags/VBA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>自制Potplayer皮肤两例</title>
-    <link href="http://www.zigma.cc/2017/11/07/%E8%87%AA%E5%88%B6Potplayer%E7%9A%AE%E8%82%A4%E4%B8%A4%E4%BE%8B/"/>
-    <id>http://www.zigma.cc/2017/11/07/自制Potplayer皮肤两例/</id>
-    <published>2017-11-07T11:15:45.000Z</published>
-    <updated>2018-11-09T12:00:15.761Z</updated>
-    
-    <content type="html"><![CDATA[<p>以前留存的两例Potplayer皮肤，仅仅是简单的外观，不支持复杂功能（因为会有BUG，又懒得改）。</p><h2 id="1-Ti"><a href="#1-Ti" class="headerlink" title="1.Ti"></a>1.Ti</h2><p><img src="http://zigma-pic.test.upcdn.net/blog/potplayer/Ti.jpg" alt="Ti" title="Ti"></p><h2 id="2-BotPlayer"><a href="#2-BotPlayer" class="headerlink" title="2.BotPlayer"></a>2.BotPlayer</h2><p>素材提取自iOS应用TweetBot。 </p><p><img src="http://zigma-pic.test.upcdn.net/blog/potplayer/BotPlayer1.jpg" alt="BotPlayer1" title="BotPlayer1"></p><p><img src="http://zigma-pic.test.upcdn.net/blog/potplayer/BotPlayer2.jpg" alt="BotPlayer2" title="BotPlayer2"></p><h2 id="3-下载"><a href="#3-下载" class="headerlink" title="3.下载"></a>3.下载</h2><p><a href="https://pan.baidu.com/s/1dDoxoa9" title="Ti" target="_blank" rel="noopener">Ti</a></p><p><a href="https://pan.baidu.com/s/1eQcPZ4Q" title="Botplayer" target="_blank" rel="noopener">Botplayer</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;以前留存的两例Potplayer皮肤，仅仅是简单的外观，不支持复杂功能（因为会有BUG，又懒得改）。&lt;/p&gt;
-&lt;h2 id=&quot;1-Ti&quot;&gt;&lt;a href=&quot;#1-Ti&quot; class=&quot;headerlink&quot; title=&quot;1.Ti&quot;&gt;&lt;/a&gt;1.Ti&lt;/h2&gt;&lt;p&gt;&lt;img
-      
-    
-    </summary>
-    
-      <category term="Potplayer皮肤" scheme="http://www.zigma.cc/categories/Potplayer%E7%9A%AE%E8%82%A4/"/>
-    
-    
-      <category term="PotPlayer" scheme="http://www.zigma.cc/tags/PotPlayer/"/>
     
   </entry>
   
