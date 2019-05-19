@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.zigma.cc/"/>
-  <updated>2019-03-11T15:54:26.821Z</updated>
+  <updated>2019-05-19T12:28:43.372Z</updated>
   <id>http://www.zigma.cc/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>【JSBox】Patterns-能自定义花样文字的键盘脚本</title>
+    <link href="http://www.zigma.cc/2019/05/19/%E3%80%90JSBox%E3%80%91Patterns-%E8%83%BD%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8A%B1%E6%A0%B7%E6%96%87%E5%AD%97%E7%9A%84%E9%94%AE%E7%9B%98%E8%84%9A%E6%9C%AC/"/>
+    <id>http://www.zigma.cc/2019/05/19/【JSBox】Patterns-能自定义花样文字的键盘脚本/</id>
+    <published>2019-05-19T04:00:00.000Z</published>
+    <updated>2019-05-19T12:28:43.372Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="失踪人员回归"><a href="#失踪人员回归" class="headerlink" title="失踪人员回归"></a>失踪人员回归</h1><p>回来冒泡，终于下定决心把新脚本写完了，至于以前的那些坑……Emmmmmmmmm……</p><p>先说说Light Store吧，自从后台小哥去考研了，就没更新过，过段时间<strong>可能</strong>会更新一下后台数据，但也仅仅是更新后台数据。还有一个未公开过的Color Picker的坑，弄到一半跑路了，可能会重新捡起来。至于SysInfo Pro的重构和Days Pro老提起的多事件支持，优先级还是要再往后放放。</p><h1 id="新脚本"><a href="#新脚本" class="headerlink" title="新脚本"></a>新脚本</h1><p>新脚本是一个功能类似于花样文字的脚本。可以转换，也可以当成键盘直接输入，还有每日一句的图片生成和分享。</p><p>这个脚本的原理就是将英文字母逐个转换为Unicode字符，并且已经将样式文件以及颜色文件托管在了Github，后续如果高兴地话不需要更新脚本就能增加样式。</p><p>因为Unicode本身属于图案一类，所以我给它取名为Patterns，意思为图案。</p><p><img src="http://zigma-pic.test.upcdn.net/blog/patterns/loading.jpg" alt="启动界面"></p><p>启动页面加入了Lottie动画，老机型也不用像Light Store加载界面那样用过多的技能渲染动画而造成卡顿。</p><p>​    <img src="http://zigma-pic.test.upcdn.net/blog/patterns/1.png" alt="主界面"></p><p>主界面的颜色跟随了JSBox主程序，主界面右下两个按钮分别是将剪贴板文字转化为花样文字，以及手动输入转换，而点击列表内容将复制到剪贴板。</p><p><img src="http://zigma-pic.test.upcdn.net/blog/patterns/3.jpg" alt="手气不错"></p><p>之前一直不懂谷歌的手气不错的用处，后来才知道是谷歌Geeker灵魂的存在。所以我想既然这个脚本只能用于英文，那为什么不再加一点关于英文的功能。因此制作了这个界面，打开脚本将默认抓取金山词霸开放的每日一句api内容，后续点击手气不错将在个人Lean Cloud的5421句经典英语电影台词数据库中随机抓取一条展示，并且渐变色背景会随机变换。当然上述的内容你都可以自己输入，不过需要注意的是水印的改变是需要先署名再选择样式，为了保证标题、主文显示协调性，只有水印是由Unicode字符显示。</p><p>改变完之后，点击上面的卡牌即能分享或保存到相册。</p><p><img src="http://zigma-pic.test.upcdn.net/blog/patterns/2.png" alt="每日一句"></p><p>当然你要是乐意，还能加个做成这样</p><p><img src="http://zigma-pic.test.upcdn.net/blog/patterns/4.jpg" alt="Apple Card"></p><p>另外就是设置界面，这个等一下讲，先讲键盘。</p><p><img src="http://zigma-pic.test.upcdn.net/blog/patterns/5.jpg" alt="键盘"></p><p>键盘的样式参考了搜狗手机输入法的一款皮肤，但是相对于搜狗，这个炫彩键盘的颜色是随机出现的，同时可以自定义大小写、数字样式。而由于JSBox的原因，键盘默认设置高度为267，不能继续缩小，所以可能小屏手机上面使用起来会遮挡大半屏幕。另外键盘是适配X系列的手机的，XR是通过测试，X系列将会自动隐藏上图的地球。</p><p>由于不懂Runtime，求助开发者钟大以后才有连续删除功能，而连续输入功能是不存在的。但是作为一款不是主力键盘，应该也够用了。</p><p><img src="http://zigma-pic.test.upcdn.net/blog/patterns/6.jpg" alt="设置"></p><p>关于设置界面基本都是键盘的设置，也比较简单，可以设置前述键盘的大小写样式和数字样式，这个大小写样式亦能够作用于主界面第一个样式，不过还是需要先设置样式再更改内容。缓存是为了减少服务器压力，设置后台更新样式的间隔时间，默认就行。</p><p>最后，这个脚本也同时支持多语言以及静默更新。</p><p><img src="http://zigma-pic.test.upcdn.net/blog/patterns/7.jpg" alt="多语言"></p><h1 id="需要注意"><a href="#需要注意" class="headerlink" title="需要注意"></a>需要注意</h1><p>需要注意的是，JSBox在软件左上角齿轮—键盘脚本—选择本脚本，并在设置—通用—键盘中加入JSBox才可使用。并且在第一次开启键盘脚本时，需要点击键盘上的“图钉”符号并再次打开后才会正常显示。</p><h1 id="安装连接"><a href="#安装连接" class="headerlink" title="安装连接"></a>安装连接</h1><p><a href="https://xteko.com/redir?name=Patterns&amp;url=http%3A%2F%2Fzigma.juniancc.top%2FPatterns.box" target="_blank" rel="noopener">安装链接</a></p><p><a href="https://mp.weixin.qq.com/s?__biz=MzU3NzE2MzI2MA==&amp;mid=100000038&amp;idx=1&amp;sn=d931c08c59e6e8fc7ae62deeef02b60f&amp;chksm=7d099bb54a7e12a325d55d721ce098bdcf3f02e1608e25c8f1fcf0c77bae44f21167512a0627#rdZiGma" target="_blank" rel="noopener">公众号文章</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;失踪人员回归&quot;&gt;&lt;a href=&quot;#失踪人员回归&quot; class=&quot;headerlink&quot; title=&quot;失踪人员回归&quot;&gt;&lt;/a&gt;失踪人员回归&lt;/h1&gt;&lt;p&gt;回来冒泡，终于下定决心把新脚本写完了，至于以前的那些坑……Emmmmmmmmm……&lt;/p&gt;
+&lt;p&gt;先说说Li
+      
+    
+    </summary>
+    
+      <category term="JSBox" scheme="http://www.zigma.cc/categories/JSBox/"/>
+    
+    
+      <category term="JSBox" scheme="http://www.zigma.cc/tags/JSBox/"/>
+    
+  </entry>
   
   <entry>
     <title>【Python】建立自动签到签退工作流</title>
@@ -495,31 +521,6 @@
     
     
       <category term="WIN10" scheme="http://www.zigma.cc/tags/WIN10/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【VBA】利用VBA提取词库重复值</title>
-    <link href="http://www.zigma.cc/2017/11/09/%E3%80%90VBA%E3%80%91%E5%88%A9%E7%94%A8VBA%E6%8F%90%E5%8F%96%E8%AF%8D%E5%BA%93%E9%87%8D%E5%A4%8D%E5%80%BC/"/>
-    <id>http://www.zigma.cc/2017/11/09/【VBA】利用VBA提取词库重复值/</id>
-    <published>2017-11-09T14:27:05.000Z</published>
-    <updated>2018-06-26T14:00:02.568Z</updated>
-    
-    <content type="html"><![CDATA[<p>之前提取过一个小鹤的辅码表，但是在使用过程中很容易和词库的常用词撞车，为了输入效率只能在自定义编码中固定常用词的候选次序，所以想从主码表内提取容易和常用词重复的辅码，并且固定辅码位置，虽然最后发现了辅码表内并不能设置辅码的位置，只能将自定义编码内的词往前移，顶掉辅码。 主码表内有56000多条记录，手动操作标记肯定是不可能的，边用边在App中自定义编码标记虽然可行，但是效率太低，而且有时候多打几个字就会忘了哪个词需要标记，所以还是用手头的Excel来提取数据。</p><h2 id="Excel自带的标记重复值"><a href="#Excel自带的标记重复值" class="headerlink" title="Excel自带的标记重复值"></a>Excel自带的标记重复值</h2><p>虽然EXCEL有标记重复值的功能，但是也仅仅是标记，并不会写到数据里面。 比如说自定义标记重复值的背景为红色，但是利用Get.Cell公式读取还是原来的背景色。所以想要利用标记重复值，再进行VBA通过背景色删除是无法实现的。</p><h2 id="VBA提取"><a href="#VBA提取" class="headerlink" title="VBA提取"></a>VBA提取</h2><p>绕了太远果然容易扯着蛋，转念一想利用一个简简单单的For循环和If条件判断就实现了。 逐个匹配判断与下一个的值，重复则输出本行与下一行，再利用代码删除未输出的行，即判断输出列的单元格是否是空白，是则删除整行即可。</p><figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Sub</span> Test()</span><br><span class="line">    <span class="keyword">With</span> Sheet1</span><br><span class="line">    <span class="keyword">For</span> i = <span class="number">1</span> <span class="keyword">to</span> <span class="number">45000</span></span><br><span class="line">        <span class="keyword">If</span> .Range(<span class="string">"A"</span>&amp;i) = .Range(<span class="string">"A"</span>&amp;i+<span class="number">1</span>) <span class="keyword">Then</span></span><br><span class="line">            .Range(<span class="string">"B"</span>&amp;i)=.Range(<span class="string">"A"</span>&amp;i)</span><br><span class="line">            .Range(<span class="string">"B"</span>&amp;i+<span class="number">1</span>)=.Range(<span class="string">"A"</span>&amp;i+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">    <span class="keyword">Next</span></span><br><span class="line">    .Range(<span class="string">"B:B"</span>).SpecialCells(xlCellTypeBlanks).EntireRow.Delete</span><br><span class="line">    <span class="keyword">End</span> <span class="keyword">With</span></span><br><span class="line"><span class="keyword">End</span> <span class="keyword">Sub</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;之前提取过一个小鹤的辅码表，但是在使用过程中很容易和词库的常用词撞车，为了输入效率只能在自定义编码中固定常用词的候选次序，所以想从主码表内提取容易和常用词重复的辅码，并且固定辅码位置，虽然最后发现了辅码表内并不能设置辅码的位置，只能将自定义编码内的词往前移，顶掉辅码。 主码
-      
-    
-    </summary>
-    
-      <category term="VBA" scheme="http://www.zigma.cc/categories/VBA/"/>
-    
-    
-      <category term="VBA" scheme="http://www.zigma.cc/tags/VBA/"/>
     
   </entry>
   
