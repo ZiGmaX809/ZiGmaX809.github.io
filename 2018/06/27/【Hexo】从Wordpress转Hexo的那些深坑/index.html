@@ -454,7 +454,7 @@ height:50vh;
 <h3 id="3、新建git用户并添加sudo权限"><a href="#3、新建git用户并添加sudo权限" class="headerlink" title="3、新建git用户并添加sudo权限"></a>3、新建git用户并添加sudo权限</h3><p>分别利用以下命令新建git用户、给<code>sudoers</code>文件提权、编辑。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adduser git</span><br><span class="line">chmod 740 /etc/sudoers #改变权限值用于读写</span><br><span class="line">vi /etc/sudoers</span><br></pre></td></tr></table></figure>
 <p>找到</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Allow root to run any commands anywhere</span></span></span><br><span class="line">root   ALL=(ALL)   ALL</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span># Allow root to run any commands anywhere</span><br><span class="line">root   ALL=(ALL)   ALL</span><br></pre></td></tr></table></figure>
 <p>后在之后添加以下代码并保存。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git    ALL=(ALL)   ALL</span><br></pre></td></tr></table></figure>
 <p>随后再将<code>sudoers</code>文件改回原来的权限</p>
@@ -1015,18 +1015,6 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 29
@@ -1228,33 +1216,33 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="JSBox"><span class="iconfont-archer">&#xe606;</span>JSBox</span>
     
+        <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
+    
+        <span class="sidebar-tag-name" data-tags="搬瓦工"><span class="iconfont-archer">&#xe606;</span>搬瓦工</span>
+    
         <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
-    
-        <span class="sidebar-tag-name" data-tags="杂物"><span class="iconfont-archer">&#xe606;</span>杂物</span>
-    
-        <span class="sidebar-tag-name" data-tags="照片"><span class="iconfont-archer">&#xe606;</span>照片</span>
     
         <span class="sidebar-tag-name" data-tags="皮肤"><span class="iconfont-archer">&#xe606;</span>皮肤</span>
     
         <span class="sidebar-tag-name" data-tags="iOS"><span class="iconfont-archer">&#xe606;</span>iOS</span>
     
-        <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
-    
         <span class="sidebar-tag-name" data-tags="旅行"><span class="iconfont-archer">&#xe606;</span>旅行</span>
     
-        <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
+        <span class="sidebar-tag-name" data-tags="杂物"><span class="iconfont-archer">&#xe606;</span>杂物</span>
     
-        <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
+        <span class="sidebar-tag-name" data-tags="照片"><span class="iconfont-archer">&#xe606;</span>照片</span>
+    
+        <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
+    
+        <span class="sidebar-tag-name" data-tags="WIN10"><span class="iconfont-archer">&#xe606;</span>WIN10</span>
     
         <span class="sidebar-tag-name" data-tags="合同"><span class="iconfont-archer">&#xe606;</span>合同</span>
     
         <span class="sidebar-tag-name" data-tags="民间借贷"><span class="iconfont-archer">&#xe606;</span>民间借贷</span>
     
-        <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
-    
-        <span class="sidebar-tag-name" data-tags="搬瓦工"><span class="iconfont-archer">&#xe606;</span>搬瓦工</span>
+        <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
     
         <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
     
@@ -1301,13 +1289,13 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
     
-        <span class="sidebar-category-name" data-categories="瞎折腾"><span class="iconfont-archer">&#xe60a;</span>瞎折腾</span>
-    
         <span class="sidebar-category-name" data-categories="旅行"><span class="iconfont-archer">&#xe60a;</span>旅行</span>
     
-        <span class="sidebar-category-name" data-categories="Potplayer皮肤"><span class="iconfont-archer">&#xe60a;</span>Potplayer皮肤</span>
+        <span class="sidebar-category-name" data-categories="瞎折腾"><span class="iconfont-archer">&#xe60a;</span>瞎折腾</span>
     
         <span class="sidebar-category-name" data-categories="工作"><span class="iconfont-archer">&#xe60a;</span>工作</span>
+    
+        <span class="sidebar-category-name" data-categories="Potplayer皮肤"><span class="iconfont-archer">&#xe60a;</span>Potplayer皮肤</span>
     
         <span class="sidebar-category-name" data-categories="App"><span class="iconfont-archer">&#xe60a;</span>App</span>
     
