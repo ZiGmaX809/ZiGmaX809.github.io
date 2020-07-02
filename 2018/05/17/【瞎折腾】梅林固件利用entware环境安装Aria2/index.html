@@ -435,7 +435,7 @@ height:50vh;
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkswap /tmp/mnt/sda1/swapfile</span><br></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapon /tmp/mnt/sda1/swapfile</span><br></pre></td></tr></table></figure>
 <p>创建启动脚本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">echo '</span><br><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line"><span class="meta">#</span> Turn On Usage Of Swapfile</span><br><span class="line">if [ -f "/tmp/mnt/sda1/swapfile" ];then</span><br><span class="line">swapon /tmp/mnt/sda1/swapfile</span><br><span class="line">echo "Turning Swapfile On"</span><br><span class="line">fi</span><br><span class="line">' &gt;&gt; /jffs/scripts/post-mount</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">echo '</span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Turn On Usage Of Swapfile</span></span><br><span class="line">if [ -f "/tmp/mnt/sda1/swapfile" ];then</span><br><span class="line">swapon /tmp/mnt/sda1/swapfile</span><br><span class="line">echo "Turning Swapfile On"</span><br><span class="line">fi</span><br><span class="line">' &gt;&gt; /jffs/scripts/post-mount</span><br></pre></td></tr></table></figure>
 <h2 id="安装Aria2"><a href="#安装Aria2" class="headerlink" title="安装Aria2"></a>安装Aria2</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install aria2</span><br></pre></td></tr></table></figure>
 <h2 id="配置conf文件"><a href="#配置conf文件" class="headerlink" title="配置conf文件"></a>配置conf文件</h2><p>可以直接用WinSCP直接修改/opt/etc/aria2.conf文件。 也可以直接用我的，需要自己修改下载路径和Token。 (dir=XXX/XXX 和 rpc-secret=XXXX) <a href="https://pan.baidu.com/s/1_xc2lHYIvN53jMRHc2KrHA" title="conf下载" target="_blank" rel="noopener">conf下载</a> 配置完后利用</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opt/etc/init.d/S81aria2 restart</span><br></pre></td></tr></table></figure>
@@ -451,7 +451,7 @@ height:50vh;
 <h2 id="添加开机启动"><a href="#添加开机启动" class="headerlink" title="添加开机启动"></a>添加开机启动</h2><p>在/jffs/scripts/post-mount文件最后添加</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/opt/etc/init.d/S81aria2 start</span><br><span class="line">cpulimit -P aria2c -l 30 -b</span><br></pre></td></tr></table></figure>
 <h2 id="添加自动更新Tracker脚本"><a href="#添加自动更新Tracker脚本" class="headerlink" title="添加自动更新Tracker脚本"></a>添加自动更新Tracker脚本</h2><p>（不建议添加自动更新，会导致Aria2进程莫名消失） 在/opt/var/aria2新建文件trackers-list-aria2.sh写入以下内容，将编码格式设置为UTF-8，并将权限设置为0755。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line">list=`wget -qO- https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt|awk NF|sed ":a;N;s/\n/,/g;ta"`</span><br><span class="line">if [ -z "`grep "bt-tracker" /opt/etc/aria2.conf`" ]; then</span><br><span class="line">    sed -i '$a bt-tracker='$&#123;list&#125; /opt/etc/aria2.conf</span><br><span class="line">    echo add......</span><br><span class="line">else</span><br><span class="line">    sed -i "s@bt-tracker.*@bt-tracker=$list@g" /opt/etc/aria2.conf</span><br><span class="line">    echo update......</span><br><span class="line">fi</span><br><span class="line">sleep 1</span><br><span class="line"></span><br><span class="line">/opt/etc/init.d/S81aria2 restart</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">list=`wget -qO- https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt|awk NF|sed ":a;N;s/\n/,/g;ta"`</span><br><span class="line">if [ -z "`grep "bt-tracker" /opt/etc/aria2.conf`" ]; then</span><br><span class="line">    sed -i '$a bt-tracker='$&#123;list&#125; /opt/etc/aria2.conf</span><br><span class="line">    echo add......</span><br><span class="line">else</span><br><span class="line">    sed -i "s@bt-tracker.*@bt-tracker=$list@g" /opt/etc/aria2.conf</span><br><span class="line">    echo update......</span><br><span class="line">fi</span><br><span class="line">sleep 1</span><br><span class="line"></span><br><span class="line">/opt/etc/init.d/S81aria2 restart</span><br></pre></td></tr></table></figure>
 <p>这里可以用</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/sh /opt/var/aria2/trackers-list-aria2.sh</span><br></pre></td></tr></table></figure>
 <p>测试一下这个脚本，如果报错显示</p>
@@ -984,8 +984,6 @@ top:50vh;
     
     
     
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 29
@@ -1161,12 +1159,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/WordPress升级优化/" >WordPress升级优化</a>
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/民事管辖案件中关于接受货币方的理解/" >民事管辖案件中关于接受货币方的理解</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/民事管辖案件中关于接受货币方的理解/" >民事管辖案件中关于接受货币方的理解</a>
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2017/08/16/WordPress升级优化/" >WordPress升级优化</a>
         </li>
     
     
@@ -1179,7 +1177,7 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
+        <span class="sidebar-tag-name" data-tags="JSBox"><span class="iconfont-archer">&#xe606;</span>JSBox</span>
     
         <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
     
@@ -1187,9 +1185,7 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="搬瓦工"><span class="iconfont-archer">&#xe606;</span>搬瓦工</span>
     
-        <span class="sidebar-tag-name" data-tags="JSBox"><span class="iconfont-archer">&#xe606;</span>JSBox</span>
-    
-        <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="VBA"><span class="iconfont-archer">&#xe606;</span>VBA</span>
     
@@ -1197,13 +1193,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="iOS"><span class="iconfont-archer">&#xe606;</span>iOS</span>
     
-        <span class="sidebar-tag-name" data-tags="旅行"><span class="iconfont-archer">&#xe606;</span>旅行</span>
-    
         <span class="sidebar-tag-name" data-tags="杂物"><span class="iconfont-archer">&#xe606;</span>杂物</span>
     
         <span class="sidebar-tag-name" data-tags="照片"><span class="iconfont-archer">&#xe606;</span>照片</span>
-    
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="瞎折腾"><span class="iconfont-archer">&#xe606;</span>瞎折腾</span>
     
@@ -1213,9 +1205,15 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="民间借贷"><span class="iconfont-archer">&#xe606;</span>民间借贷</span>
     
+        <span class="sidebar-tag-name" data-tags="旅行"><span class="iconfont-archer">&#xe606;</span>旅行</span>
+    
         <span class="sidebar-tag-name" data-tags="落格"><span class="iconfont-archer">&#xe606;</span>落格</span>
     
         <span class="sidebar-tag-name" data-tags="PotPlayer"><span class="iconfont-archer">&#xe606;</span>PotPlayer</span>
+    
+        <span class="sidebar-tag-name" data-tags="CentOS"><span class="iconfont-archer">&#xe606;</span>CentOS</span>
+    
+        <span class="sidebar-tag-name" data-tags="Wordpress"><span class="iconfont-archer">&#xe606;</span>Wordpress</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1250,25 +1248,25 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
-    
         <span class="sidebar-category-name" data-categories="JSBox"><span class="iconfont-archer">&#xe60a;</span>JSBox</span>
-    
-        <span class="sidebar-category-name" data-categories="VPS"><span class="iconfont-archer">&#xe60a;</span>VPS</span>
-    
-        <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
-    
-        <span class="sidebar-category-name" data-categories="旅行"><span class="iconfont-archer">&#xe60a;</span>旅行</span>
     
         <span class="sidebar-category-name" data-categories="Python"><span class="iconfont-archer">&#xe60a;</span>Python</span>
     
+        <span class="sidebar-category-name" data-categories="VBA"><span class="iconfont-archer">&#xe60a;</span>VBA</span>
+    
         <span class="sidebar-category-name" data-categories="瞎折腾"><span class="iconfont-archer">&#xe60a;</span>瞎折腾</span>
     
+        <span class="sidebar-category-name" data-categories="VPS"><span class="iconfont-archer">&#xe60a;</span>VPS</span>
+    
         <span class="sidebar-category-name" data-categories="工作"><span class="iconfont-archer">&#xe60a;</span>工作</span>
+    
+        <span class="sidebar-category-name" data-categories="旅行"><span class="iconfont-archer">&#xe60a;</span>旅行</span>
     
         <span class="sidebar-category-name" data-categories="App"><span class="iconfont-archer">&#xe60a;</span>App</span>
     
         <span class="sidebar-category-name" data-categories="Potplayer皮肤"><span class="iconfont-archer">&#xe60a;</span>Potplayer皮肤</span>
+    
+        <span class="sidebar-category-name" data-categories="Wordpress"><span class="iconfont-archer">&#xe60a;</span>Wordpress</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
