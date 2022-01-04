@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="ZiGma">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="ZiGma">
+    
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog,ZiGma">
+    
+    <meta name="description" content="">
+    <meta name="description" content="前言昨天作死开始了从wp到Hexo的迁移之旅，网上大部分Hexo搭建教程都还停留在2017年甚至2016年，所以整个迁移过程历尽深坑不断。 因此我觉得有必要记录一下自己所踩过的那些深坑。 具体有以下几点：  搬瓦工ssh端口； ssh公钥和秘钥问题； VPS文件&#x2F;文件夹权限问题； post-receive钩子无法正常执行的问题；  主要参考： Hexo环境搭建个人博客 使用 Git Hook 自动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Hexo】从Wordpress转Hexo的那些深坑">
+<meta property="og:url" content="http://www.zigma.cc/2018/06/27/%E3%80%90Hexo%E3%80%91%E4%BB%8EWordpress%E8%BD%ACHexo%E7%9A%84%E9%82%A3%E4%BA%9B%E6%B7%B1%E5%9D%91/index.html">
+<meta property="og:site_name" content="ZiGma">
+<meta property="og:description" content="前言昨天作死开始了从wp到Hexo的迁移之旅，网上大部分Hexo搭建教程都还停留在2017年甚至2016年，所以整个迁移过程历尽深坑不断。 因此我觉得有必要记录一下自己所踩过的那些深坑。 具体有以下几点：  搬瓦工ssh端口； ssh公钥和秘钥问题； VPS文件&#x2F;文件夹权限问题； post-receive钩子无法正常执行的问题；  主要参考： Hexo环境搭建个人博客 使用 Git Hook 自动">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-06-27T14:44:12.000Z">
+<meta property="article:modified_time" content="2020-05-31T14:34:26.395Z">
+<meta property="article:author" content="ZiGma">
+<meta property="article:tag" content="VPS">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="搬瓦工">
+<meta name="twitter:card" content="summary">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/favicon.ico">
+    
+    <title>【Hexo】从Wordpress转Hexo的那些深坑 · ZiGma</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20211217" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=20211217" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=20211217" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=20211217" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=20211217" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="ZiGma" type="application/atom+xml">
+</head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>ZiGma</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">ZiGma</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">【Hexo】从Wordpress转Hexo的那些深坑</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                【Hexo】从Wordpress转Hexo的那些深坑
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="VPS">VPS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="Hexo">Hexo</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="搬瓦工">搬瓦工</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">2k</span>阅读时长: <span class="post-count reading-time">9 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2018/06/27</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>昨天作死开始了从wp到Hexo的迁移之旅，网上大部分Hexo搭建教程都还停留在2017年甚至2016年，所以整个迁移过程历尽深坑不断。</p>
+<p>因此我觉得有必要记录一下自己所踩过的那些深坑。</p>
+<p>具体有以下几点：</p>
+<ul>
+<li>搬瓦工ssh端口；</li>
+<li>ssh公钥和秘钥问题；</li>
+<li>VPS文件/文件夹权限问题；</li>
+<li>post-receive钩子无法正常执行的问题；</li>
+</ul>
+<p>主要参考：</p>
+<p><a target="_blank" rel="noopener" href="http://skyhacks.org/2017/07/21/UseHexoToBuildBlog/">Hexo环境搭建个人博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://calton007.github.io/2018/05/08/n-deploy-vps/">使用 Git Hook 自动部署 Hexo 到个人 VPS </a></p>
+<h1 id="填坑开始"><a href="#填坑开始" class="headerlink" title="填坑开始"></a>填坑开始</h1><p>Hexo的基本运行逻辑就是本地编写Markdown文档——利用Git生成html页面——利用Git推送到VPS——VPS再通过Git钩子发布到Nignx配置文件夹发布。</p>
+<h2 id="一、本地环境搭建"><a href="#一、本地环境搭建" class="headerlink" title="一、本地环境搭建"></a>一、本地环境搭建</h2><h3 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3><p>在<a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">Node.js</a>官网下载对应版本一路next安装即可。</p>
+<h3 id="安装Git环境"><a href="#安装Git环境" class="headerlink" title="安装Git环境"></a>安装Git环境</h3><p>同样在<a target="_blank" rel="noopener" href="https://git-scm.com/download/win">Git For Windows</a>下载后一路next安装。</p>
+<p>根据前述参考文章是需要<a target="_blank" rel="noopener" href="http://www.brafox.com/post/2015/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/git-%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE.html">配置环境变量</a>的，但是我本地的Git是因为VS Code才安装的，并没有设置环境变量。虽然也能用但是无法排除本文所提的深坑是因此而出现，所以还是建议配置一下。</p>
+<p>安装完Git，需要生成ssh密钥，但是我们先要设置Git用户名，从开始菜单中运行Git Bash。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;你的用户名&quot;</span><br><span class="line">git config --global user.email &quot;你的邮箱地址&quot;</span><br></pre></td></tr></table></figure>
+
+<p>设置完成后继续生成ssh密钥</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;你的邮箱地址&quot;</span><br></pre></td></tr></table></figure>
+
+<p>完成后打开目录<code>C:\Users\XXX\.ssh\ </code>内的<code>id_rsa.pub </code>文件备用。</p>
+<h3 id="创建本地目录"><a href="#创建本地目录" class="headerlink" title="创建本地目录"></a>创建本地目录</h3><p>在电脑任意位置创建文件夹作为本地目录用以写作，例如我就是以<code>D:\Hexo\</code>为本地目录。</p>
+<p>在此目录下右键点击<code>Git Bash Here</code>后<strong>分别执行</strong>以下命令以安装Hexo：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line">hexo init</span><br><span class="line">npm install</span><br><span class="line">hexo d -fg</span><br></pre></td></tr></table></figure>
+
+<p>完成后可以在<code>D:\Hexo\</code>目录下看到已有本地文件生成，继续在Git命令窗口输入<code>hexo s</code>运行本地服务器，看到提示有<code>http://localhost:4000 </code>后在浏览器打开该地址已验证本地是否部署成功。</p>
+<h2 id="二、VPS环境部署"><a href="#二、VPS环境部署" class="headerlink" title="二、VPS环境部署"></a>二、VPS环境部署</h2><p>VPS系统我选择的是Centos 7，因为发现Centos 6安装Nginx十分复杂。</p>
+<h3 id="1、安装Nginx"><a href="#1、安装Nginx" class="headerlink" title="1、安装Nginx"></a>1、安装Nginx</h3><h4 id="·-添加Nginx到YUM源"><a href="#·-添加Nginx到YUM源" class="headerlink" title="· 添加Nginx到YUM源"></a>· 添加Nginx到YUM源</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<h4 id="·-安装Nginx"><a href="#·-安装Nginx" class="headerlink" title="· 安装Nginx"></a>· 安装Nginx</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y nginx</span><br></pre></td></tr></table></figure>
+
+<h4 id="·-配置Nginx"><a href="#·-配置Nginx" class="headerlink" title="· 配置Nginx"></a>· 配置Nginx</h4><p>利用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/nginx/conf.d/default.conf</span><br></pre></td></tr></table></figure>
+
+<p>编辑<code>default.conf</code>文件，插入如下代码（需要自行更改<code>server_name example.com www.example.com;</code>，其他的路径可以不改动）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80 ;</span><br><span class="line">    root /var/www/hexo; //这里可以改成你的网站目录地址，我将网站放在/var/www/hexo</span><br><span class="line">    server_name example.com www.example.com; //这里输入你的域名或IP地址</span><br><span class="line">    access_log  /var/log/nginx/hexo_access.log; //这里的log文件也可以根据自己网站名字替换</span><br><span class="line">    error_log   /var/log/nginx/hexo_error.log; //这里的log文件也可以根据自己网站名字替换</span><br><span class="line">    location ~* ^.+\.(ico|gif|jpg|jpeg|png)$ &#123;</span><br><span class="line">            root /var/www/hexo; //网站目录地址</span><br><span class="line">            access_log   off;</span><br><span class="line">            expires      1d;</span><br><span class="line">    &#125;</span><br><span class="line">    location ~* ^.+\.(css|js|txt|xml|swf|wav)$ &#123;</span><br><span class="line">        root /var/www/hexo; //网站目录地址</span><br><span class="line">        access_log   off;</span><br><span class="line">        expires      10m;</span><br><span class="line">    &#125;</span><br><span class="line">    location / &#123;</span><br><span class="line">        root /var/www/hexo; //网站目录地址</span><br><span class="line">        if (-f $request_filename) &#123;</span><br><span class="line">            rewrite ^/(.*)$  /$1 break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后利用<code>service nginx restart </code>重启Nginx服务。</p>
+<h4 id="·-设置Nginx开机自启"><a href="#·-设置Nginx开机自启" class="headerlink" title="· 设置Nginx开机自启"></a>· 设置Nginx开机自启</h4><p>像上面安装完以后Nginx并不会开机自动启动，手动启动就比较麻烦了，因此我们需要设置其开机自动启动。</p>
+<p>利用命令建立Nginx脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/init.d/nginx</span><br></pre></td></tr></table></figure>
+
+<p>然后添加命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">#</span><br><span class="line"># nginx - this script starts and stops the nginx daemon</span><br><span class="line">#</span><br><span class="line"># chkconfig:   - 85 15</span><br><span class="line"># description:  NGINX is an HTTP(S) server, HTTP(S) reverse \</span><br><span class="line">#               proxy and IMAP/POP3 proxy server</span><br><span class="line"># processname: nginx</span><br><span class="line"># config:      /etc/nginx/nginx.conf</span><br><span class="line"># config:      /etc/sysconfig/nginx</span><br><span class="line"># pidfile:     /var/run/nginx.pid</span><br><span class="line"># Source function library.</span><br><span class="line">. /etc/rc.d/init.d/functions</span><br><span class="line"># Source networking configuration.</span><br><span class="line">. /etc/sysconfig/network</span><br><span class="line"># Check that networking is up.</span><br><span class="line">[ &quot;$NETWORKING&quot; = &quot;no&quot; ] &amp;&amp; exit 0</span><br><span class="line">nginx=&quot;/usr/sbin/nginx&quot;</span><br><span class="line">prog=$(basename $nginx)</span><br><span class="line">NGINX_CONF_FILE=&quot;/etc/nginx/nginx.conf&quot;</span><br><span class="line">[ -f /etc/sysconfig/nginx ] &amp;&amp; . /etc/sysconfig/nginx</span><br><span class="line">lockfile=/var/lock/subsys/nginx</span><br><span class="line">make_dirs() &#123;</span><br><span class="line">   # make required directories</span><br><span class="line">   user=`$nginx -V 2&gt;&amp;1 | grep &quot;configure arguments:&quot; | sed &#x27;s/[^*]*--user=\([^ ]*\).*/\1/g&#x27; -`</span><br><span class="line">   if [ -z &quot;`grep $user /etc/passwd`&quot; ]; then</span><br><span class="line">       useradd -M -s /bin/nologin $user</span><br><span class="line">   fi</span><br><span class="line">   options=`$nginx -V 2&gt;&amp;1 | grep &#x27;configure arguments:&#x27;`</span><br><span class="line">   for opt in $options; do</span><br><span class="line">       if [ `echo $opt | grep &#x27;.*-temp-path&#x27;` ]; then</span><br><span class="line">           value=`echo $opt | cut -d &quot;=&quot; -f 2`</span><br><span class="line">           if [ ! -d &quot;$value&quot; ]; then</span><br><span class="line">               # echo &quot;creating&quot; $value</span><br><span class="line">               mkdir -p $value &amp;&amp; chown -R $user $value</span><br><span class="line">           fi</span><br><span class="line">       fi</span><br><span class="line">   done</span><br><span class="line">&#125;</span><br><span class="line">start() &#123;</span><br><span class="line">    [ -x $nginx ] || exit 5</span><br><span class="line">    [ -f $NGINX_CONF_FILE ] || exit 6</span><br><span class="line">    make_dirs</span><br><span class="line">    echo -n $&quot;Starting $prog: &quot;</span><br><span class="line">    daemon $nginx -c $NGINX_CONF_FILE</span><br><span class="line">    retval=$?</span><br><span class="line">    echo</span><br><span class="line">    [ $retval -eq 0 ] &amp;&amp; touch $lockfile</span><br><span class="line">    return $retval</span><br><span class="line">&#125;</span><br><span class="line">stop() &#123;</span><br><span class="line">    echo -n $&quot;Stopping $prog: &quot;</span><br><span class="line">    killproc $prog -QUIT</span><br><span class="line">    retval=$?</span><br><span class="line">    echo</span><br><span class="line">    [ $retval -eq 0 ] &amp;&amp; rm -f $lockfile</span><br><span class="line">    return $retval</span><br><span class="line">&#125;</span><br><span class="line">restart() &#123;</span><br><span class="line">    configtest || return $?</span><br><span class="line">    stop</span><br><span class="line">    sleep 1</span><br><span class="line">    start</span><br><span class="line">&#125;</span><br><span class="line">reload() &#123;</span><br><span class="line">    configtest || return $?</span><br><span class="line">    echo -n $&quot;Reloading $prog: &quot;</span><br><span class="line">    killproc $nginx -HUP</span><br><span class="line">    RETVAL=$?</span><br><span class="line">    echo</span><br><span class="line">&#125;</span><br><span class="line">force_reload() &#123;</span><br><span class="line">    restart</span><br><span class="line">&#125;</span><br><span class="line">configtest() &#123;</span><br><span class="line">  $nginx -t -c $NGINX_CONF_FILE</span><br><span class="line">&#125;</span><br><span class="line">rh_status() &#123;</span><br><span class="line">    status $prog</span><br><span class="line">&#125;</span><br><span class="line">rh_status_q() &#123;</span><br><span class="line">    rh_status &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">&#125;</span><br><span class="line">case &quot;$1&quot; in</span><br><span class="line">    start)</span><br><span class="line">        rh_status_q &amp;&amp; exit 0</span><br><span class="line">        $1</span><br><span class="line">        ;;</span><br><span class="line">    stop)</span><br><span class="line">        rh_status_q || exit 0</span><br><span class="line">        $1</span><br><span class="line">        ;;</span><br><span class="line">    restart|configtest)</span><br><span class="line">        $1</span><br><span class="line">        ;;</span><br><span class="line">    reload)</span><br><span class="line">        rh_status_q || exit 7</span><br><span class="line">        $1</span><br><span class="line">        ;;</span><br><span class="line">    force-reload)</span><br><span class="line">        force_reload</span><br><span class="line">        ;;</span><br><span class="line">    status)</span><br><span class="line">        rh_status</span><br><span class="line">        ;;</span><br><span class="line">    condrestart|try-restart)</span><br><span class="line">        rh_status_q || exit 0</span><br><span class="line">            ;;</span><br><span class="line">    *)</span><br><span class="line">        echo $&quot;Usage: $0 &#123;start|stop|status|restart|condrestart|try-restart|reload|force-reload|configtest&#125;&quot;</span><br><span class="line">        exit 2</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<p>保存后设置可执行权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a+x /etc/init.d/nginx</span><br></pre></td></tr></table></figure>
+
+<p>添加chkconfig控制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --add /etc/init.d/nginx</span><br></pre></td></tr></table></figure>
+
+<p>设置开机自启</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig nginx on</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、安装Git"><a href="#2、安装Git" class="headerlink" title="2、安装Git"></a>2、安装Git</h3><p>利用以下代码安装Git</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update &amp;&amp; apt-get upgrade -y #更新内核</span><br><span class="line">yum install git-core</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、新建git用户并添加sudo权限"><a href="#3、新建git用户并添加sudo权限" class="headerlink" title="3、新建git用户并添加sudo权限"></a>3、新建git用户并添加sudo权限</h3><p>分别利用以下命令新建git用户、给<code>sudoers</code>文件提权、编辑。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adduser git</span><br><span class="line">chmod 740 /etc/sudoers #改变权限值用于读写</span><br><span class="line">vi /etc/sudoers</span><br></pre></td></tr></table></figure>
+
+<p>找到</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># Allow root to run any commands anywhere</span></span></span><br><span class="line">root   ALL=(ALL)   ALL</span><br></pre></td></tr></table></figure>
+
+<p>后在之后添加以下代码并保存。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git    ALL=(ALL)   ALL</span><br></pre></td></tr></table></figure>
+
+<p>随后再将<code>sudoers</code>文件改回原来的权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 440 /etc/sudoers</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、配置ssh登录"><a href="#4、配置ssh登录" class="headerlink" title="4、配置ssh登录"></a>4、配置ssh登录</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su git</span><br></pre></td></tr></table></figure>
+
+<p>切换为git用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">mkdir .ssh &amp;&amp; cd .ssh</span><br><span class="line">touch authorized_keys</span><br><span class="line">vi authorized_keys // 在这个文件中粘贴进刚刚Winodws下申请的key（在id_rsa.pub文件中）</span><br></pre></td></tr></table></figure>
+
+<p>因为搬瓦工的ssh端口是随机的，但是git默认使用22端口，我测试在本地修改config文件更换git通讯端口，但是效果并不好，所以我们需要将搬瓦工的ssh端口改回22，并且打开免密登录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<p>找到以下代码前的#并删除。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RSAAuthentication yes</span><br><span class="line">PubkeyAuthentication yes</span><br></pre></td></tr></table></figure>
+
+<p>并将最后的<code>Port xxxxx</code>改为<code>Port 22</code>。</p>
+<p>最后！！！</p>
+<p>需要设置.ssh文件夹和authorized_keys文件的权限，分别设置为700和600，不然永远无法push代码到服务器，这个坑足足坑了我一天。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">chmod 700 .ssh</span><br><span class="line">cd .ssh</span><br><span class="line">chmod 600 authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>现在你可以在Git Bash使用<code>ssh git@你的VPS IP地址</code>测试能否登录，如果可以则代表前三个坑已经填完。</p>
+<h3 id="5、初始化git仓库"><a href="#5、初始化git仓库" class="headerlink" title="5、初始化git仓库"></a>5、初始化git仓库</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">mkdir hexo.git &amp;&amp; cd hexo.git</span><br><span class="line">git init --bare</span><br></pre></td></tr></table></figure>
+
+<p>等待初始化完毕后，再创建网站目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /var/www</span><br><span class="line">mkdir hexo</span><br><span class="line">chown git:git -R /var/www/hexo</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置Git-Hooks"><a href="#配置Git-Hooks" class="headerlink" title="配置Git Hooks"></a>配置Git Hooks</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su git</span><br><span class="line">cd /home/git/hexo.git/hooks # 如果没有hooks目录,就mkdir hooks 自己建一个目录</span><br><span class="line">vi post-receive</span><br></pre></td></tr></table></figure>
+
+<p>输入以下代码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --work-tree=/var/www/hexo --git-dir=/home/git/hexo.git checkout -f</span><br></pre></td></tr></table></figure>
+
+<p>这里是最后一个坑，因为Hexo版本的更新，旧版的<code>post-receive</code>无效，所以需要用新方法。</p>
+<p>然后赋予<code>post-receive</code>文件执行权限。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x post-receive</span><br></pre></td></tr></table></figure>
+
+<p>最后将<code>hexo.git目录</code>所有权设置为git。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/git</span><br><span class="line">chown -R git:git hexo.git</span><br></pre></td></tr></table></figure>
+
+<p>至此服务端配置完毕。</p>
+<h2 id="三、Hexo配置"><a href="#三、Hexo配置" class="headerlink" title="三、Hexo配置"></a>三、Hexo配置</h2><p>修改 hexo 目录下的 <code>_config.yml</code> 文件，找到 <code>[deploy]</code> 条目，并修改为 </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">      type: git</span><br><span class="line">      repo: git@服务器地址:/home/git/hexo.git</span><br><span class="line">      branch: master</span><br></pre></td></tr></table></figure>
+
+<p>至此，Hexo配置完毕，最后在本地<code>D:\Hexo</code>文件夹右键<code>Git Bash Here</code>运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>安装git的push插件，完成后再利用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+
+<p>将本地目录生成静态网页并推送到VPS。</p>
+<p>齐活。</p>
+<h1 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h1><p>鉴于本文并不是在解决问题时撰写，而是成功后根据回忆和参考教程所写，因此在实际操作过程中会有一定出入，如有错误欢迎指正。</p>
+<p>希望本文给折腾的你提供些许参考，而不是重复造轮子。</p>
+
+    </article>
+    <!-- license -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://www.zigma.cc">ZiGma</a>
+            <p>原文链接：<a href="http://www.zigma.cc/2018/06/27/%E3%80%90Hexo%E3%80%91%E4%BB%8EWordpress%E8%BD%ACHexo%E7%9A%84%E9%82%A3%E4%BA%9B%E6%B7%B1%E5%9D%91/">http://www.zigma.cc/2018/06/27/%E3%80%90Hexo%E3%80%91%E4%BB%8EWordpress%E8%BD%ACHexo%E7%9A%84%E9%82%A3%E4%BA%9B%E6%B7%B1%E5%9D%91/</a>
+            <p>发表日期：<a href="http://www.zigma.cc/2018/06/27/%E3%80%90Hexo%E3%80%91%E4%BB%8EWordpress%E8%BD%ACHexo%E7%9A%84%E9%82%A3%E4%BA%9B%E6%B7%B1%E5%9D%91/">June 27th 2018, 10:44:12 pm</a>
+            <p>更新日期：<a href="http://www.zigma.cc/2018/06/27/%E3%80%90Hexo%E3%80%91%E4%BB%8EWordpress%E8%BD%ACHexo%E7%9A%84%E9%82%A3%E4%BA%9B%E6%B7%B1%E5%9D%91/">May 31st 2020, 10:34:26 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2018/07/21/%E3%80%90JSBox%E3%80%91Light-Store%E7%AC%AC%E4%B8%89%E6%96%B9%E8%BD%BB%E9%87%8F%E5%95%86%E5%BA%97/" title="【JSBox】Light Store第三方轻量商店">
+                    <div class="nextTitle">【JSBox】Light Store第三方轻量商店</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2018/06/26/%E3%80%90JSBox%E3%80%91%E8%B6%85%E8%BD%BB%E9%87%8F%E7%BA%A7Aria2%E5%AE%A2%E6%88%B7%E7%AB%AF/" title="【JSBox】超轻量级Aria2客户端">
+                    <div class="prevTitle">【JSBox】超轻量级Aria2客户端</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+        new Valine({
+            el: '#comment',
+            notify:false,
+            verify:false,
+            appId: "e7JFHRNqX2T29ebmy4pVCidb-gzGzoHsz",
+            appKey: "Tnys9hubkApQHhifwvUptzdh",
+            placeholder: "",
+            path:window.location.pathname,
+            avatar:'mm'
+        });
+    </script>
+
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+            
+                <a href="mailto:pyrogas7@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/ZiGmaX809" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://weibo.com/u/2032971111" class="iconfont-archer weibo" target="_blank" title=weibo></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A1%AB%E5%9D%91%E5%BC%80%E5%A7%8B"><span class="toc-number">2.</span> <span class="toc-text">填坑开始</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%9C%AC%E5%9C%B0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">2.1.</span> <span class="toc-text">一、本地环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85node-js"><span class="toc-number">2.1.1.</span> <span class="toc-text">安装node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Git%E7%8E%AF%E5%A2%83"><span class="toc-number">2.1.2.</span> <span class="toc-text">安装Git环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%9C%AC%E5%9C%B0%E7%9B%AE%E5%BD%95"><span class="toc-number">2.1.3.</span> <span class="toc-text">创建本地目录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81VPS%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2"><span class="toc-number">2.2.</span> <span class="toc-text">二、VPS环境部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85Nginx"><span class="toc-number">2.2.1.</span> <span class="toc-text">1、安装Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%C2%B7-%E6%B7%BB%E5%8A%A0Nginx%E5%88%B0YUM%E6%BA%90"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">· 添加Nginx到YUM源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%C2%B7-%E5%AE%89%E8%A3%85Nginx"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">· 安装Nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%C2%B7-%E9%85%8D%E7%BD%AENginx"><span class="toc-number">2.2.1.3.</span> <span class="toc-text">· 配置Nginx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%C2%B7-%E8%AE%BE%E7%BD%AENginx%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF"><span class="toc-number">2.2.1.4.</span> <span class="toc-text">· 设置Nginx开机自启</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85Git"><span class="toc-number">2.2.2.</span> <span class="toc-text">2、安装Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E6%96%B0%E5%BB%BAgit%E7%94%A8%E6%88%B7%E5%B9%B6%E6%B7%BB%E5%8A%A0sudo%E6%9D%83%E9%99%90"><span class="toc-number">2.2.3.</span> <span class="toc-text">3、新建git用户并添加sudo权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E9%85%8D%E7%BD%AEssh%E7%99%BB%E5%BD%95"><span class="toc-number">2.2.4.</span> <span class="toc-text">4、配置ssh登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96git%E4%BB%93%E5%BA%93"><span class="toc-number">2.2.5.</span> <span class="toc-text">5、初始化git仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEGit-Hooks"><span class="toc-number">2.2.5.1.</span> <span class="toc-text">配置Git Hooks</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81Hexo%E9%85%8D%E7%BD%AE"><span class="toc-number">2.3.</span> <span class="toc-text">三、Hexo配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E6%9D%9F%E8%AF%AD"><span class="toc-number">3.</span> <span class="toc-text">结束语</span></a></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 29
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2020 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/09</span>
+            <a class="archive-post-title" href="/2020/05/09/%E3%80%90%E7%9E%8E%E6%8A%98%E8%85%BE%E3%80%91Clash%20For%20Merlin%E8%AE%B0%E5%BD%95/">【瞎折腾】Clash For Merlin记录</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2019 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/19</span>
+            <a class="archive-post-title" href="/2019/05/19/%E3%80%90JSBox%E3%80%91Patterns-%E8%83%BD%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8A%B1%E6%A0%B7%E6%96%87%E5%AD%97%E7%9A%84%E9%94%AE%E7%9B%98%E8%84%9A%E6%9C%AC/">【JSBox】Patterns-能自定义花样文字的键盘脚本</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span>
+            <a class="archive-post-title" href="/2019/03/09/%E3%80%90Python%E3%80%91%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%8A%A8%E7%AD%BE%E5%88%B0%E7%AD%BE%E9%80%80%E5%B7%A5%E4%BD%9C%E6%B5%81/">【Python】建立自动签到签退工作流</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2018 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/16</span>
+            <a class="archive-post-title" href="/2018/12/16/%E3%80%90VBA%E3%80%91%E7%BB%9F%E8%AE%A1%E9%87%8D%E5%A4%8D%E5%87%BA%E7%8E%B0%E7%9A%84%E5%A7%93%E5%90%8D%E5%8F%8A%E5%87%BA%E7%8E%B0%E6%AC%A1%E6%95%B0/">【VBA】统计重复出现的姓名及出现次数</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/09</span>
+            <a class="archive-post-title" href="/2018/11/09/%E3%80%90%E7%9E%8E%E6%8A%98%E8%85%BE%E3%80%91%E6%A0%91%E8%8E%93%E6%B4%BE+Aria2%E6%90%AD%E5%BB%BA%E7%AE%80%E6%98%93%E5%AA%92%E4%BD%93%E4%B8%AD%E5%BF%83/">【瞎折腾】树莓派+Aria2搭建简易媒体中心</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/08</span>
+            <a class="archive-post-title" href="/2018/09/08/%E3%80%90%E5%A5%A5%E5%BE%B7%E8%B5%9B%E3%80%91%E8%A5%BF%E5%8C%97%E5%A4%A7%E7%8E%AF%E7%BA%BF%E8%A1%8C%E7%A8%8B/">【奥德赛】西北大环线行程</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/25</span>
+            <a class="archive-post-title" href="/2018/08/25/%E3%80%90%E6%9D%82%E7%89%A9%E3%80%91%E6%97%A7%E7%89%A9%E5%82%A8%E8%97%8F%E9%97%B4/">【杂物】旧物储藏间</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/24</span>
+            <a class="archive-post-title" href="/2018/08/24/%E3%80%90JSBox%E3%80%91%E5%A4%9A%E5%9B%BE%E5%B1%82%E5%88%B6%E4%BD%9C%E6%B8%90%E5%8F%98%E5%8A%A8%E7%94%BB/">【JSBox】多图层制作渐变动画</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/23</span>
+            <a class="archive-post-title" href="/2018/07/23/%E3%80%90iOS%E3%80%91%E7%99%BE%E5%BA%A6%E8%BE%93%E5%85%A5%E6%B3%95GBoard%E8%87%AA%E7%94%A8%E7%9A%AE%E8%82%A4/">【iOS】百度输入法GBoard自用皮肤</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/21</span>
+            <a class="archive-post-title" href="/2018/07/21/%E3%80%90JSBox%E3%80%91Light-Store%E7%AC%AC%E4%B8%89%E6%96%B9%E8%BD%BB%E9%87%8F%E5%95%86%E5%BA%97/">【JSBox】Light Store第三方轻量商店</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/27</span>
+            <a class="archive-post-title" href="/2018/06/27/%E3%80%90Hexo%E3%80%91%E4%BB%8EWordpress%E8%BD%ACHexo%E7%9A%84%E9%82%A3%E4%BA%9B%E6%B7%B1%E5%9D%91/">【Hexo】从Wordpress转Hexo的那些深坑</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/26</span>
+            <a class="archive-post-title" href="/2018/06/26/%E3%80%90JSBox%E3%80%91Palette-%E8%B0%83%E8%89%B2%E6%9D%BF/">【JSBox】Palette 调色板</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/26</span>
+            <a class="archive-post-title" href="/2018/06/26/%E3%80%90JSBox%E3%80%91%E8%B6%85%E8%BD%BB%E9%87%8F%E7%BA%A7Aria2%E5%AE%A2%E6%88%B7%E7%AB%AF/">【JSBox】超轻量级Aria2客户端</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/22</span>
+            <a class="archive-post-title" href="/2018/06/22/%E3%80%90JSBox%E3%80%91Days%20Pro/">【JSBox】Days Pro</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/26</span>
+            <a class="archive-post-title" href="/2018/05/26/%E3%80%90JSBox%E3%80%91SysInfo%20Pro/">【JSBox】SysInfo Pro</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/17</span>
+            <a class="archive-post-title" href="/2018/05/17/%E3%80%90%E7%9E%8E%E6%8A%98%E8%85%BE%E3%80%91%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E5%88%A9%E7%94%A8entware%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85Aria2/">【瞎折腾】梅林固件利用entware环境安装Aria2</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/01</span>
+            <a class="archive-post-title" href="/2018/05/01/%E3%80%90%E7%9E%8E%E6%8A%98%E8%85%BE%E3%80%91frp+Aria2%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E4%B8%8B%E8%BD%BD%E7%AE%A1%E7%90%86/">【瞎折腾】frp+Aria2实现远程下载管理</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/29</span>
+            <a class="archive-post-title" href="/2018/04/29/%E3%80%90JSBox%E3%80%91%E5%88%A9%E7%94%A8JSBox%E5%9C%A8%E6%9C%8B%E5%8F%8B%E5%9C%88%E6%96%97%E5%9B%BE%EF%BC%88%E4%BA%8C%EF%BC%89/">【JSBox】利用JSBox在朋友圈斗图（二）</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/02</span>
+            <a class="archive-post-title" href="/2018/02/02/%E5%88%A9%E7%94%A8Documents%E7%AE%A1%E7%90%86%E4%BA%91%E7%9B%98%E6%96%87%E4%BB%B6/">利用Documents管理云盘文件</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span>
+            <a class="archive-post-title" href="/2018/02/01/%E3%80%90JSBox%E3%80%91%E5%88%A9%E7%94%A8JSBox%E5%9C%A8%E6%9C%8B%E5%8F%8B%E5%9C%88%E6%96%97%E5%9B%BE%EF%BC%88%E4%B8%80%EF%BC%89/">【JSBox】利用JSBox在朋友圈斗图（一）</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2017 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/09</span>
+            <a class="archive-post-title" href="/2017/12/09/%E4%B8%80%E9%94%AE%E7%A7%BB%E9%99%A4Win10%E6%AD%A4%E7%94%B5%E8%84%91%E4%B8%AD%E5%A4%9A%E4%BD%99%E6%96%87%E4%BB%B6%E5%A4%B9/">一键移除Win10此电脑中多余文件夹</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/09</span>
+            <a class="archive-post-title" href="/2017/11/09/%E3%80%90VBA%E3%80%91%E5%88%A9%E7%94%A8VBA%E6%8F%90%E5%8F%96%E8%AF%8D%E5%BA%93%E9%87%8D%E5%A4%8D%E5%80%BC/">【VBA】利用VBA提取词库重复值</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span>
+            <a class="archive-post-title" href="/2017/11/07/%E8%87%AA%E5%88%B6Potplayer%E7%9A%AE%E8%82%A4%E4%B8%A4%E4%BE%8B/">自制Potplayer皮肤两例</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/28</span>
+            <a class="archive-post-title" href="/2017/10/28/%E8%90%BD%E6%A0%BC%E8%BE%93%E5%85%A5%E6%B3%95%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3/">落格输入法配置相关</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span>
+            <a class="archive-post-title" href="/2017/09/27/%E3%80%90VBA%E3%80%91%E5%88%A9%E7%94%A8VBA%E6%8F%90%E5%8F%96%E5%86%85%E5%AE%B9%E5%B9%B6%E7%94%9F%E6%88%90%E6%96%B0%E6%96%87%E4%BB%B6/">【VBA】利用VBA提取内容并生成新文件</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/26</span>
+            <a class="archive-post-title" href="/2017/08/26/%E3%80%90VBA%E3%80%91VBA+%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%8F%90%E5%8F%96%E6%A0%87%E9%A2%98%E5%BF%AB%E9%80%9F%E4%BF%9D%E5%AD%98%E5%BD%92%E6%A1%A3/">【VBA】VBA+正则表达式提取标题快速保存归档</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/16</span>
+            <a class="archive-post-title" href="/2017/08/16/WordPress%E5%8D%87%E7%BA%A7%E4%BC%98%E5%8C%96/">WordPress升级优化</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/16</span>
+            <a class="archive-post-title" href="/2017/08/16/%E6%B0%91%E4%BA%8B%E7%AE%A1%E8%BE%96%E6%A1%88%E4%BB%B6%E4%B8%AD%E5%85%B3%E4%BA%8E%E6%8E%A5%E5%8F%97%E8%B4%A7%E5%B8%81%E6%96%B9%E7%9A%84%E7%90%86%E8%A7%A3/">民事管辖案件中关于接受货币方的理解</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/15</span>
+            <a class="archive-post-title" href="/2017/08/15/CentOS%E7%9B%91%E6%8E%A7%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E5%B9%B6%E8%87%AA%E5%8A%A8%E9%87%8D%E5%90%AF/">CentOS监控进程状态并自动重启</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="CentOS">
+                <span class="iconfont-archer">&#xe606;</span>
+                CentOS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="VPS">
+                <span class="iconfont-archer">&#xe606;</span>
+                VPS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Hexo">
+                <span class="iconfont-archer">&#xe606;</span>
+                Hexo
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="搬瓦工">
+                <span class="iconfont-archer">&#xe606;</span>
+                搬瓦工
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="JSBox">
+                <span class="iconfont-archer">&#xe606;</span>
+                JSBox
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Wordpress">
+                <span class="iconfont-archer">&#xe606;</span>
+                Wordpress
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="VBA">
+                <span class="iconfont-archer">&#xe606;</span>
+                VBA
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="Python">
+                <span class="iconfont-archer">&#xe606;</span>
+                Python
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="皮肤">
+                <span class="iconfont-archer">&#xe606;</span>
+                皮肤
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="iOS">
+                <span class="iconfont-archer">&#xe606;</span>
+                iOS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="旅行">
+                <span class="iconfont-archer">&#xe606;</span>
+                旅行
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="杂物">
+                <span class="iconfont-archer">&#xe606;</span>
+                杂物
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="照片">
+                <span class="iconfont-archer">&#xe606;</span>
+                照片
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="瞎折腾">
+                <span class="iconfont-archer">&#xe606;</span>
+                瞎折腾
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="WIN10">
+                <span class="iconfont-archer">&#xe606;</span>
+                WIN10
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="合同">
+                <span class="iconfont-archer">&#xe606;</span>
+                合同
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="民间借贷">
+                <span class="iconfont-archer">&#xe606;</span>
+                民间借贷
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="落格">
+                <span class="iconfont-archer">&#xe606;</span>
+                落格
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="PotPlayer">
+                <span class="iconfont-archer">&#xe606;</span>
+                PotPlayer
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="VPS">
+            <span class="iconfont-archer">&#xe60a;</span>
+            VPS
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="JSBox">
+            <span class="iconfont-archer">&#xe60a;</span>
+            JSBox
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Wordpress">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Wordpress
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="VBA">
+            <span class="iconfont-archer">&#xe60a;</span>
+            VBA
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Python">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Python
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="旅行">
+            <span class="iconfont-archer">&#xe60a;</span>
+            旅行
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="瞎折腾">
+            <span class="iconfont-archer">&#xe60a;</span>
+            瞎折腾
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="工作">
+            <span class="iconfont-archer">&#xe60a;</span>
+            工作
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="App">
+            <span class="iconfont-archer">&#xe60a;</span>
+            App
+        </span>
+    
+        <span class="sidebar-category-name" data-categories="Potplayer皮肤">
+            <span class="iconfont-archer">&#xe60a;</span>
+            Potplayer皮肤
+        </span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "http://www.zigma.cc",
+        root: siteMetaRoot,
+        author: "ZiGma"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v=20211217"></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v=20211217"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20211217" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>
