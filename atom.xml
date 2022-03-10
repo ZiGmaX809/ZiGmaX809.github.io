@@ -6,7 +6,7 @@
   <link href="http://www.zigma.cc/atom.xml" rel="self"/>
   
   <link href="http://www.zigma.cc/"/>
-  <updated>2022-01-05T00:46:39.484Z</updated>
+  <updated>2022-03-10T02:15:20.751Z</updated>
   <id>http://www.zigma.cc/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Tinymce 6.0.0 Not Found Models</title>
+    <link href="http://www.zigma.cc/2022/03/10/Models/"/>
+    <id>http://www.zigma.cc/2022/03/10/Models/</id>
+    <published>2022-03-10T01:58:34.000Z</published>
+    <updated>2022-03-10T02:15:20.751Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题出现"><a href="#问题出现" class="headerlink" title="问题出现"></a>问题出现</h2><p>最近在整活一个Electron+Vue3+Vite2+TypeScript的个人项目，其中需要使用Tinymce这款富文本编辑器。</p><p>Tintmce前几天推送了6.0.0版本，但是更新后一直报错：</p><blockquote><p>GET <a href="http://127.0.0.1:3344//models/dom/model.js">http://127.0.0.1:3344//models/dom/model.js</a> net::ERR_ABORTED 404 (Not Found)</p></blockquote><p><img src="https://raw.githubusercontent.com/ZiGmaX809/ZiGmaX809.github.io/pic/202203101001184.png"></p><p>但是删除<code>node_modules</code>文件夹后，回滚到5.10.3版本后又正常，推测是6.0.0增加了新的特性。</p><p>但是在<a href="https://www.tiny.cloud/docs/release-notes/6.0-upcoming-changes/">Tinymce Docs</a>中又完全没有提及<code>model</code>这个文件的问题。</p><p>所以就对比查看了一下<code>6.0.0</code>和<code>5.10.3</code>的<code>tinymce.js</code>文件。</p><h2 id="文件差别"><a href="#文件差别" class="headerlink" title="文件差别"></a>文件差别</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> loadTheme = <span class="function">(<span class="params">editor, suffix</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> theme = getTheme(editor);</span><br><span class="line">  <span class="keyword">if</span> (isString(theme) &amp;&amp; !hasSkipLoadPrefix(theme) &amp;&amp; !has$<span class="number">2</span>(ThemeManager.urls, theme)) &#123;</span><br><span class="line">    <span class="keyword">const</span> themeUrl = getThemeUrl(editor);</span><br><span class="line">    <span class="keyword">const</span> url = themeUrl ? editor.documentBaseURI.toAbsolute(themeUrl) : <span class="string">`themes/<span class="subst">$&#123; theme &#125;</span>/theme<span class="subst">$&#123; suffix &#125;</span>.js`</span>;</span><br><span class="line">    ThemeManager.load(theme, url).catch(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      themeLoadError(editor, url, theme);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> loadModel = <span class="function">(<span class="params">editor, suffix</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> model = getModel(editor);</span><br><span class="line">  <span class="keyword">if</span> (model !== <span class="string">&#x27;plugin&#x27;</span> &amp;&amp; !has$<span class="number">2</span>(ModelManager.urls, model)) &#123;</span><br><span class="line">    <span class="keyword">const</span> modelUrl = getModelUrl(editor);</span><br><span class="line">    <span class="keyword">const</span> url = isString(modelUrl) ? editor.documentBaseURI.toAbsolute(modelUrl) : <span class="string">`models/<span class="subst">$&#123; model &#125;</span>/model<span class="subst">$&#123; suffix &#125;</span>.js`</span>;</span><br><span class="line">    ModelManager.load(model, url).catch(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      modelLoadError(editor, url, model);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>发现<code>loadModel</code>是新增的，而且404的地址也是指向<code>node_modules/tinymce/models</code>文件夹。</p><p>所以就很好办了。</p><h2 id="修改Tinymce模板文件"><a href="#修改Tinymce模板文件" class="headerlink" title="修改Tinymce模板文件"></a>修改Tinymce模板文件</h2><p>仅需在Tinymce的vue文件中原来引入<code>Theme</code>的下方引入<code>model</code>即可。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &quot;tinymce/models/dom&quot;; </span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;问题出现&quot;&gt;&lt;a href=&quot;#问题出现&quot; class=&quot;headerlink&quot; title=&quot;问题出现&quot;&gt;&lt;/a&gt;问题出现&lt;/h2&gt;&lt;p&gt;最近在整活一个Electron+Vue3+Vite2+TypeScript的个人项目，其中需要使用Tinymce这款富文本编</summary>
+      
+    
+    
+    
+    
+    <category term="Vue3" scheme="http://www.zigma.cc/tags/Vue3/"/>
+    
+    <category term="TS" scheme="http://www.zigma.cc/tags/TS/"/>
+    
+    <category term="Tinymce" scheme="http://www.zigma.cc/tags/Tinymce/"/>
+    
+  </entry>
   
   <entry>
     <title>玩转Moon FM之自建播客</title>
@@ -464,28 +490,6 @@
     <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;之前折腾了一下小宝固件软件中心的Aria2，安装是方便了，但是问题也不少。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Bug不少，经常莫名其妙假死。&lt;</summary>
-      
-    
-    
-    
-    
-    <category term="瞎折腾" scheme="http://www.zigma.cc/tags/%E7%9E%8E%E6%8A%98%E8%85%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>frp+Aria2实现远程下载管理</title>
-    <link href="http://www.zigma.cc/2018/05/01/frp+Aria2%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E4%B8%8B%E8%BD%BD%E7%AE%A1%E7%90%86/"/>
-    <id>http://www.zigma.cc/2018/05/01/frp+Aria2%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E4%B8%8B%E8%BD%BD%E7%AE%A1%E7%90%86/</id>
-    <published>2018-05-01T03:14:24.000Z</published>
-    <updated>2022-01-04T03:11:58.022Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在捣鼓Aria2下载，恰值西部世界第二季开播，白天上班，无法在内网管理，所以开始折腾内网穿透的事情。 之前用的方案是华硕第三方梅林——小宝固件的DDNS穿透，但是最近一直不稳，而且已经好几天无法连接，所以自己在VPS搭建了frp穿透服务。</p><h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><ol><li> 华硕路由搭建Aria2下载环境和frp穿透客户端；</li><li> 远程VPS搭建frp穿透服务端；</li><li> 顺便搭建AriaNG网页服务端（可选）。<br><img src="http://zigma-pic.test.upcdn.net/blog/frparia2/1_1.jpg" alt="网络拓补" title="网络拓补"></li></ol><h2 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h2><p>华硕路由刷第三方梅林固件，这里使用小宝固件，并在软件中心安装Aria2和frp客户端。</p><h3 id="Ari2设置"><a href="#Ari2设置" class="headerlink" title="Ari2设置"></a>Ari2设置</h3><p><img src="http://zigma-pic.test.upcdn.net/blog/frparia2/1.jpg" alt="Aria2设置" title="Aria2设置1"> <img src="http://zigma-pic.test.upcdn.net/blog/frparia2/2.jpg" alt="Aria2设置2" title="Aria2设置2"> Aria2常规设置，如果没有速度则添加额外以下Tracker，基本种子都有速度，而且连接速度越来越快了。</p><blockquote><p><a href="https://open.kickasstracker.com/announce,udp://tracker.coppersurfer.tk:6969,http://torrentsmd.com:8080/announce,udp://tracker.pirateparty.gr:6969/announce,udp://tracker.coppersurfer.tk:6969/announce,udp://tracker4.itzmx.com:2710/announce,udp://tracker.uw0.xyz:6969/announce,udp://tracker.cypherpunks.ru:6969/announce,udp://open.stealth.si:80/announce,http://retracker.telecom.by:80/announce,udp://191.96.249.23:6969/announce,udp://78.142.19.42:1337/announce,udp://123.249.16.65:2710/announce,udp://185.82.217.160:1337/announce,udp://163.172.81.35:1337/announce,https://zer0day.000webhostapp.com:443/announce,udp://public.popcorn-tracker.org:6969/announce,https://linetorrent.xyz:443/announce,udp://tracker.leechers-paradise.org:6969/announce,https://open.acgnxtracker.com:443/announce,http://bt2.54new.com:8080/announce,http://bt1.54new.com:65533/announce,http://ipv6.54new.com:8080/announce,http://tracker.trackerfix.com/announce,udp://tracker.trackerfix.com:80/announce,udp://9.rarbg.com:2790/announce,udp://9.rarbg.to:2790/announce,udp://inferno.demonoid.pw:3418/announce,udp://bt.aoeex.com:8000/announce,udp://tracker.internetwarriors.net:1337/announce,udp://tracker.swateam.org.uk:2710/announce,udp://tracker.zer0day.to:1337/announce,udp://p4p.arenabg.com:1337/announce">https://open.kickasstracker.com:443/announce,udp://tracker.coppersurfer.tk:6969,http://torrentsmd.com:8080/announce,udp://tracker.pirateparty.gr:6969/announce,udp://tracker.coppersurfer.tk:6969/announce,udp://tracker4.itzmx.com:2710/announce,udp://tracker.uw0.xyz:6969/announce,udp://tracker.cypherpunks.ru:6969/announce,udp://open.stealth.si:80/announce,http://retracker.telecom.by:80/announce,udp://191.96.249.23:6969/announce,udp://78.142.19.42:1337/announce,udp://123.249.16.65:2710/announce,udp://185.82.217.160:1337/announce,udp://163.172.81.35:1337/announce,https://zer0day.000webhostapp.com:443/announce,udp://public.popcorn-tracker.org:6969/announce,https://linetorrent.xyz:443/announce,udp://tracker.leechers-paradise.org:6969/announce,https://open.acgnxtracker.com:443/announce,http://bt2.54new.com:8080/announce,http://bt1.54new.com:65533/announce,http://ipv6.54new.com:8080/announce,http://tracker.trackerfix.com/announce,udp://tracker.trackerfix.com:80/announce,udp://9.rarbg.com:2790/announce,udp://9.rarbg.to:2790/announce,udp://inferno.demonoid.pw:3418/announce,udp://bt.aoeex.com:8000/announce,udp://tracker.internetwarriors.net:1337/announce,udp://tracker.swateam.org.uk:2710/announce,udp://tracker.zer0day.to:1337/announce,udp://p4p.arenabg.com:1337/announce</a></p></blockquote><p>需要注意的是，BT下载还是勾选LDP和DHT以及勾去强制加密。关于PT下载，以我的理解，不混迹PT论坛、不下载PT资源、只下载热门资源是没有必要去伪装PT客户端的。勾去强制加密是为了提升下载速度。至于端口设置，默认的就行端口转发也没有必要，至少我两层路由下载也一直没有问题。</p><h3 id="frp客户端设置"><a href="#frp客户端设置" class="headerlink" title="frp客户端设置"></a>frp客户端设置</h3><p>按照道理是应该先配置服务端再配置客户端，为了排版好看先放在这里吧。 只列出需要修改的设置，其他均为默认设置。 </p><p>服务器——frp服务端的服务器地址； </p><p>端口——frp服务器监听frp服务的端口，并非访问frp面板的端口； </p><p>Token——搭建服务端时所填写的Token；</p><p>HTTP/HTTPS——如果像我一样在服务端还搭建了网页，就需要更改成其他端口；</p><p>Frpc用户名称——登录frp面板的用户名； </p><p>穿透服务协议——需要在域名解析中新增二级域名，比如test.zigma.cc对应远程主机端口就是上面的HTTP端口8001，192.168.2.1和6800则是本地路由地址和Aria2端口。<br><img src="http://zigma-pic.test.upcdn.net/blog/frparia2/3.jpg" alt="frp设置" title="frp设置"></p><h2 id="服务端配额制"><a href="#服务端配额制" class="headerlink" title="服务端配额制"></a>服务端配额制</h2><p>利用Koolshare社区提供的一键安装包进行安装，安装过程均有提示，这里就不重复造轮子了。 <a href="http://koolshare.cn/thread-65379-1-1.html" title="具体教程链接">具体教程链接</a></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://raw.githubusercontent.com/clangcn/onekey-install-shell/master/frps/install-frps.sh -O ./install-frps.sh</span><br><span class="line">chmod 700 ./install-frps.sh</span><br><span class="line">./install-frps.sh install</span><br></pre></td></tr></table></figure><h2 id="配置AriaNG服务端"><a href="#配置AriaNG服务端" class="headerlink" title="配置AriaNG服务端"></a>配置AriaNG服务端</h2><p>其实这个就是个静态网页，网上的资源还是挺多的，不过自己还有个64M小鸡闲着也是闲着，挂这个UI刚好，配置Nginx后将AriaNG的<a href="https://github.com/mayswind/AriaNg" title="Github项目">Github项目</a>内容上传到服务器，而且这个项目都是基本请求一次后一直可以在本地缓存中使用，对于Aria2下载状态也是增量请求数据，因此带宽使用很少。 然后在AriaNG设置界面添加RPC地址为解析的二级域名test.zigma.cc，端口对应8001，填写完Token即可，AriaNG自适应移动端，界面友好，在手机端也可以很方便地管理。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;最近在捣鼓Aria2下载，恰值西部世界第二季开播，白天上班，无法在内网管理，所以开始折腾内网穿透的事情。 之前用的方案是华硕第三方梅林——小</summary>
       
     
     
