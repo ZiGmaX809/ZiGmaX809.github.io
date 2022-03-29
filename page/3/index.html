@@ -444,53 +444,6 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/74647752b07b/">
-                
-                <span class="abstract-title-text">梅林固件利用entware环境安装Aria2</span>
-            </a>
-            <div class="abstract-content">
-                前言之前折腾了一下小宝固件软件中心的Aria2，安装是方便了，但是问题也不少。
-
-Bug不少，经常莫名其妙假死。
-
-添加设置需要在面板进行，如果是改conf文件，面板里面一提交，conf就会被重写。 
-
-第二点就导致了自动更新tarcker列表的脚本无法执行。 
-
-更新需要等待适配。
-
-
-今天看论坛有大佬编译了1.34的版本，所以就想舍弃软件中心版，直接自己安装。 虽然看不到了面板那么详细的数据，但是总体还不错。
-步骤自动挂载U盘因为之前直接安装Aria2到路由，运行一段时间重启后会导致opt文件夹软链丢失，造成Aria2无法启动和运行。所以想用其他方法，然后看到了这篇文章，将opt文件...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2022/01/04">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/05/17</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="瞎折腾">瞎折腾</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
             <a class="abstract-title" href="/521905fedbd5/">
                 
                 <span class="abstract-title-text">frp+Aria2实现远程下载管理</span>
@@ -670,42 +623,6 @@ Ari2设置  Aria2常规设置，如果没有速度则添加额外以下Tracker�
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/d0f4b49e53a8/">
-                
-                <span class="abstract-title-text">【VBA】利用VBA提取词库重复值</span>
-            </a>
-            <div class="abstract-content">
-                之前提取过一个小鹤的辅码表，但是在使用过程中很容易和词库的常用词撞车，为了输入效率只能在自定义编码中固定常用词的候选次序，所以想从主码表内提取容易和常用词重复的辅码，并且固定辅码位置，虽然最后发现了辅码表内并不能设置辅码的位置，只能将自定义编码内的词往前移，顶掉辅码。 主码表内有56000多条记录，手动操作标记肯定是不可能的，边用边在App中自定义编码标记虽然可行，但是效率太低，而且有时候多打几个字就会忘了哪个词需要标记，所以还是用手头的Excel来提取数据。
-Excel自带的标记重复值虽然EXCEL有标记重复值的功能，但是也仅仅是标记，并不会写到数据里面。 比如说自定义标记重复值的背景...
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2018/06/26">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/11/09</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="VBA">VBA</a>
-    
-</div>
-
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
             <a class="abstract-title" href="/bf29f1fd6ff6/">
                 
                 <span class="abstract-title-text">自制Potplayer皮肤两例</span>
@@ -785,29 +702,80 @@ Botplayer
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/eb4d9af35c6f/">
+            <a class="abstract-title" href="/0c38e77a4f20/">
                 
-                <span class="abstract-title-text">【VBA】利用VBA提取内容并生成新文件</span>
+                <span class="abstract-title-text">WordPress升级优化</span>
             </a>
             <div class="abstract-content">
-                前言工作中一直需要根据一个Word文件内的内容提取后放到其他Word模板中整合为一个新的文件，数量一多就很烦，所以利用VBA写了一个工具，利用正则表达式来提取指定文件的内容并根据既定的模板生成新文件。
-Excel各项目布局
-B列为正则表达式，根据不同的提取部位进行编辑。 C列为模板文档位置。 D列为需要提取文件的目录。 E、F、G、H、I列为提取的内容。
-代码如下：获取需要提取的文件路径123456789101112131415161718192021222324252627282930313233343536373839Sub getfile()    Dim Myname, Dic,...
+                1、禁用修订版本功能在wp-config.php中插入
+1define(&#x27;WP_POST_REVISIONS&#x27;,false);
+
+
+如果在最后插入是无效的。
+2、首页阅读全文功能编辑主题文件夹中index.php 将
+1&lt;?php the_content(); ?&gt;
+
+
+修改为
+12&lt;?php the_excerpt() ?&gt;&lt;a href=&quot;&lt;?php the_permalink(); ?&gt;&quot;&gt;阅读全文…&lt;/a&gt;
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2018/11/09">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/09/27</span>
+                <div class="abstract-date" title="Last updated: 2018/06/26">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/08/16</span>
                 </div>
                 <!-- tags -->
                 
                     <div class= abstract-tags >
     
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="VBA">VBA</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="Wordpress">Wordpress</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/609015a793fc/">
+                
+                <span class="abstract-title-text">CentOS监控进程状态并自动重启</span>
+            </a>
+            <div class="abstract-content">
+                在CentOS系统中利用Crontab监控进程是否被结束并自动重启。 附加每天凌晨4点自动重启服务器。
+1. 编辑Crontab1crontab -e
+
+
+2. 按i进行编辑12*/1 * * * * /root/monitor.sh     # 每分钟运行一遍monitor.sh脚本0 5 * * * /sbin/reboot           # 每天凌晨5点自动重启服务器
+
+
+3. root文件夹下创建monitor.sh脚本1234567891011121314151617181920212223242526#! /bin/shhost_dir=`echo ~`        ...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2018/06/26">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/08/15</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="CentOS">CentOS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="VPS">VPS</a>
     
 </div>
 
@@ -819,7 +787,7 @@ B列为正则表达式，根据不同的提取部位进行编辑。 C列为模�
     <!-- paginator  -->
     
         <nav class="page-nav">
-            <a class="extend prev" rel="prev" href="/page/2/">&lt; PREV</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">NEXT &gt;</a>
+            <a class="extend prev" rel="prev" href="/page/2/">&lt; PREV</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
         </nav>
     
 </main>
@@ -1143,88 +1111,7 @@ B列为正则表达式，根据不同的提取部位进行编辑。 C列为模�
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -1445,7 +1332,7 @@ B列为正则表达式，根据不同的提取部位进行编辑。 C列为模�
     
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 34
+        Total : 29
         </div>
         <!-- search  -->
         
@@ -1534,12 +1421,6 @@ B列为正则表达式，根据不同的提取部位进行编辑。 C列为模�
             <div class="archive-year"> 2018 </div>
             <ul class="year-list">
             
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/16</span>
-            <a class="archive-post-title" href="/d87dd8e7e22c/">【VBA】统计重复出现的姓名及出现次数</a>
-        </li>
-    
         
         <li class="archive-post-item">
             <span class="archive-post-date">11/09</span>
@@ -1653,12 +1534,6 @@ B列为正则表达式，根据不同的提取部位进行编辑。 C列为模�
     
         
         <li class="archive-post-item">
-            <span class="archive-post-date">11/09</span>
-            <a class="archive-post-title" href="/d0f4b49e53a8/">【VBA】利用VBA提取词库重复值</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
             <span class="archive-post-date">11/07</span>
             <a class="archive-post-title" href="/bf29f1fd6ff6/">自制Potplayer皮肤两例</a>
         </li>
@@ -1671,26 +1546,8 @@ B列为正则表达式，根据不同的提取部位进行编辑。 C列为模�
     
         
         <li class="archive-post-item">
-            <span class="archive-post-date">09/27</span>
-            <a class="archive-post-title" href="/eb4d9af35c6f/">【VBA】利用VBA提取内容并生成新文件</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/26</span>
-            <a class="archive-post-title" href="/967e649dc91a/">【VBA】VBA+正则表达式提取标题快速保存归档</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
             <span class="archive-post-date">08/16</span>
             <a class="archive-post-title" href="/0c38e77a4f20/">WordPress升级优化</a>
-        </li>
-    
-        
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/16</span>
-            <a class="archive-post-title" href="/2409f659ac10/">民事管辖案件中关于接受货币方的理解</a>
         </li>
     
         
@@ -1725,6 +1582,16 @@ B列为正则表达式，根据不同的提取部位进行编辑。 C列为模�
                 瞎折腾
             </span>
         
+            <span class="sidebar-tag-name" data-tags="Wordpress">
+                <span class="iconfont-archer">&#xe606;</span>
+                Wordpress
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="JSBox">
+                <span class="iconfont-archer">&#xe606;</span>
+                JSBox
+            </span>
+        
             <span class="sidebar-tag-name" data-tags="Vue3">
                 <span class="iconfont-archer">&#xe606;</span>
                 Vue3
@@ -1740,11 +1607,6 @@ B列为正则表达式，根据不同的提取部位进行编辑。 C列为模�
                 Tinymce
             </span>
         
-            <span class="sidebar-tag-name" data-tags="Wordpress">
-                <span class="iconfont-archer">&#xe606;</span>
-                Wordpress
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="Hexo">
                 <span class="iconfont-archer">&#xe606;</span>
                 Hexo
@@ -1753,16 +1615,6 @@ B列为正则表达式，根据不同的提取部位进行编辑。 C列为模�
             <span class="sidebar-tag-name" data-tags="搬瓦工">
                 <span class="iconfont-archer">&#xe606;</span>
                 搬瓦工
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="JSBox">
-                <span class="iconfont-archer">&#xe606;</span>
-                JSBox
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="VBA">
-                <span class="iconfont-archer">&#xe606;</span>
-                VBA
             </span>
         
             <span class="sidebar-tag-name" data-tags="Python">
@@ -1778,6 +1630,11 @@ B列为正则表达式，根据不同的提取部位进行编辑。 C列为模�
             <span class="sidebar-tag-name" data-tags="iOS">
                 <span class="iconfont-archer">&#xe606;</span>
                 iOS
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="WIN10">
+                <span class="iconfont-archer">&#xe606;</span>
+                WIN10
             </span>
         
             <span class="sidebar-tag-name" data-tags="TailwindCss">
@@ -1805,16 +1662,6 @@ B列为正则表达式，根据不同的提取部位进行编辑。 C列为模�
                 照片
             </span>
         
-            <span class="sidebar-tag-name" data-tags="合同">
-                <span class="iconfont-archer">&#xe606;</span>
-                合同
-            </span>
-        
-            <span class="sidebar-tag-name" data-tags="民间借贷">
-                <span class="iconfont-archer">&#xe606;</span>
-                民间借贷
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="Quantumult X">
                 <span class="iconfont-archer">&#xe606;</span>
                 Quantumult X
@@ -1825,19 +1672,14 @@ B列为正则表达式，根据不同的提取部位进行编辑。 C列为模�
                 PotPlayer
             </span>
         
-            <span class="sidebar-tag-name" data-tags="落格">
-                <span class="iconfont-archer">&#xe606;</span>
-                落格
-            </span>
-        
             <span class="sidebar-tag-name" data-tags="旅行">
                 <span class="iconfont-archer">&#xe606;</span>
                 旅行
             </span>
         
-            <span class="sidebar-tag-name" data-tags="WIN10">
+            <span class="sidebar-tag-name" data-tags="落格">
                 <span class="iconfont-archer">&#xe606;</span>
-                WIN10
+                落格
             </span>
         
     </div>
@@ -1864,11 +1706,6 @@ B列为正则表达式，根据不同的提取部位进行编辑。 C列为模�
         <span class="sidebar-category-name" data-categories="JSBox">
             <span class="iconfont-archer">&#xe60a;</span>
             JSBox
-        </span>
-    
-        <span class="sidebar-category-name" data-categories="VBA">
-            <span class="iconfont-archer">&#xe60a;</span>
-            VBA
         </span>
     
         <span class="sidebar-category-name" data-categories="Python">
