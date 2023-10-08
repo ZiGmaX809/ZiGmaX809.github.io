@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Native.js调用 Android 系统设置</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+				<style>
+			.mui-bar{ box-shadow: none; background: white; height:50px;}
+			.mui-bar .mui-icon{ margin-top:0px; font-size:32px; color: #2f2f2f; }
+			.mui-bar-nav.mui-bar .mui-icon{padding-left:5px;}
+			.mui-bar .mui-title{margin-top:6px;color: #2f2f2f; font-weight: normal;margin-left:20px; }
+			.more{ margin-top: 16px; margin-right: 5px;}
+			.mui-bar:after
+ {
+position: absolute;
+right: 0;
+ bottom: 0;
+left: 0;
+height: 1px;
+content: '';
+-webkit-transform: scaleY(.5);
+transform: scaleY(.5);
+background-color:#dadada; 	
+    		 }
+ body{ background: white;}
+ .mui-content .txt{ margin-top:20px; padding-left: 10px;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">Native.js调用 Android 系统设置</h1>
+			
+		</header>
+		<div class="mui-content">
+			<p class="txt">例举部分示例</p>
+			<ul id="list" class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell" data-type="ACTION_WIFI_SETTINGS">
+					<a class="mui-navigate-right" >
+						Wi – Fi配置
+					</a>
+				</li>
+				<li class="mui-table-view-cell" data-type="ACTION_NETWORK_OPERATOR_SETTINGS">
+					<a class="mui-navigate-right" >
+						网络运营商设置
+					</a>
+				</li>
+				<li class="mui-table-view-cell" data-type="ACTION_MANAGE_APPLICATIONS_SETTINGS">
+					<a class="mui-navigate-right" >
+						设置管理安装的应用程序
+					</a>
+				</li>
+				<li class="mui-table-view-cell" data-type="ACTION_DATA_ROAMING_SETTINGS">
+					<a class="mui-navigate-right" >
+						选择2G/3G/4G显示设置
+					</a>
+				</li>
+				<li class="mui-table-view-cell" data-type="ACTION_BLUETOOTH_SETTINGS">
+					<a class="mui-navigate-right" >
+						蓝牙配置
+					</a>
+				</li>
+				<li class="mui-table-view-cell" data-type="ACTION_AIRPLANE_MODE_SETTINGS">
+					<a class="mui-navigate-right" >
+						设置进入/退出飞行模式
+					</a>
+				</li>
+				<li class="mui-table-view-cell" data-type="ACTION_INPUT_METHOD_SETTINGS">
+					<a class="mui-navigate-right" >
+						配置的输入法
+					</a>
+				</li>
+				<li class="mui-table-view-cell" data-type="ACTION_SECURITY_SETTINGS">
+					<a class="mui-navigate-right" >
+						设置安全性和位置隐私
+					</a>
+				</li>
+				<li class="mui-table-view-cell" data-type="ACTION_DATE_SETTINGS">
+					<a class="mui-navigate-right" >
+						设置日期和时间
+					</a>
+				</li>
+				<li class="mui-table-view-cell" data-type="ACTION_LOCALE_SETTINGS">
+					<a class="mui-navigate-right" >
+						设置手机语言
+					</a>
+				</li>
+			 </ul>	
+		</div>
+		
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			
+			mui.plusReady(function()
+			{
+				//点击事件
+				mui("body").on("tap",".mui-table-view-cell",function()
+				{
+					var type=this.getAttribute("data-type");
+					    
+					    set(type);
+					 
+				});
+
+			});
+			
+		   function set(type)
+		   {
+		   	
+		var main = plus.android.runtimeMainActivity(); //获行当前的页面对象，activity 相当于一个页面
+		var Intent = plus.android.importClass('android.content.Intent'); //引入android.content.Intent，java 包,Intent 是一个意图，就是用它做些什么
+		var Settings = plus.android.importClass('android.provider.Settings'); //引用安卓系统设置包 Settings 	   
+		var seting;
+
+		    switch (type)
+		   	{
+		   		case "ACTION_WIFI_SETTINGS":  //wi-fi		
+		   		var intent = new Intent();// 打开WIFI设置界面我们用com.android.settings.wifi.WifiSettings 的方式
+			    intent.setClassName("com.android.settings", "com.android.settings.wifi.WifiSettings");
+			    main.startActivity(intent); 
+			    return;
+		   		break; 
+		   		case "ACTION_NETWORK_OPERATOR_SETTINGS": //网络设置
+		   		seting=Settings.ACTION_NETWORK_OPERATOR_SETTINGS;break; 
+		   		case "ACTION_MANAGE_APPLICATIONS_SETTINGS": //设置管理安装的应用程序
+		   		seting=Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS;break;
+		   		case "ACTION_DATA_ROAMING_SETTINGS": //2g,3g,4g设置
+		   		seting=Settings.ACTION_DATA_ROAMING_SETTINGS;break;
+		   		case "ACTION_BLUETOOTH_SETTINGS": // 蓝牙配置
+		   		seting=Settings.ACTION_BLUETOOTH_SETTINGS;break;
+		   		case "ACTION_AIRPLANE_MODE_SETTINGS": //设置进入/退出飞行模式
+		   		seting=Settings.ACTION_AIRPLANE_MODE_SETTINGS;break; 
+		   		case "ACTION_INPUT_METHOD_SETTINGS": //配置的输入法
+		   		seting=Settings.ACTION_INPUT_METHOD_SETTINGS;break; 
+		   		case "ACTION_SECURITY_SETTINGS": //设置安全性和位置隐私
+		   		seting=Settings.ACTION_SECURITY_SETTINGS;break;
+		   		case "ACTION_DATE_SETTINGS": //设置日期和时间
+		   		seting=Settings.ACTION_DATE_SETTINGS;break;//设置日期和时间
+		   		case "ACTION_LOCALE_SETTINGS": //设置手机语言
+		   		seting=Settings.ACTION_LOCALE_SETTINGS;break;//设置手机语言
+		   		default:break;
+		   	}
+		   	 
+			var intent = new Intent(seting);// 添加到Intent	
+			    main.startActivity(intent); //在activity 页面中启动一个 intent 意图，打开相关系统设置页面 
+		   }
+			
+		</script>
+	</body>
+
+</html>
